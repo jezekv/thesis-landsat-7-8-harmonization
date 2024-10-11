@@ -31,7 +31,7 @@ set heading(
   numbering: "1. ",
 )
 
-set block(spacing: 2.5em) // mezera mezi odstavci
+set block(spacing: 1.8em) // mezera mezi odstavci
 
 show figure.caption: emph // zkosení textu u figures
 

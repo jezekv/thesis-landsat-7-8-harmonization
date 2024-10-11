@@ -11,7 +11,7 @@ KATEDRA PROSTOROVÝCH VĚD\
 \
 \
 \
-
+\
 XXX NÁZEV PRÁCE XXX\
 DIPLOMOVÁ PRÁCE\
 \
@@ -26,11 +26,11 @@ Diplomant: Bc. Vít Ježek\
 
 // Prohlášení
 #set text(11pt)
-#set align(left)
+#set align(start)
 #set par(justify: true,
-   first-line-indent: 0em)
-*ČESTNÉ PROHLÁŠENÍ*
-
+         first-line-indent: 0em)
+         
+*ČESTNÉ PROHLÁŠENÍ*\
 Prohlašuji, že jsem diplomovou práci na téma:
 ……………...................................vypracoval samostatně a citoval jsem všechny informační
 zdroje, které jsem v práci použil a které jsem rovněž uvedl na konci práce v seznamu použitých
@@ -51,20 +51,19 @@ s údaji uvedenými v práci bylo nakládáno v souvislosti s GDPR.
 \
 V Praze dne xxx10 února 2025xxx
 \
-\
 #set align(right)
 ..............................................\
 (podpis autora práce)
 #pagebreak()
 
 // Poděování
-#set align(left)
+#set align(start)
 *PODĚKOVÁNÍ*\
 #lorem(30)
 #pagebreak()
 
 // Abstrakty
-#set align(top + left)
+#set align(start + top)
 *Abstrakt*\
 #lorem(50)
 
@@ -72,42 +71,205 @@ V Praze dne xxx10 února 2025xxx
 #lorem(50)
 #pagebreak()
 
+///////////
 // Obsah
 #outline()
 #pagebreak()
 
-////////////////////////////////
+////////////////////////////////////////
 // Text
-#import "template.typ": template
-#show: doc => template(doc)
+#set par(first-line-indent: 2em)
 #set page(numbering: "1") 
 
 = Úvod
-#lorem(100)
-
+   velmi stručný popis myšlenky zvyšování zelenosti pixelů: globální oteplování x nevhodně připravená data (lehká dostupnost x nedostatečná odbornost)
 = Cíle práce
-#lorem(1)@author2016book7
-#lorem(1)@author2017book4
-#lorem(1)@author2018book6
-#lorem(1)@author2019book2
-#lorem(1)@author2019book8
-#lorem(1)@author2020book10
-#lorem(1)@author2020book5
-#lorem(1)@author2021book1
-#lorem(1)@author2022book9
-#lorem(1)@author2023book3
-#lorem(1)@moudry2012influence
-#lorem(1)@example2024
-= Metodika
-= Literární rešerše
-= Charakteristika území
-= Výsledky
-= Diskuse
-= Závěr a přínos práce
-= Přehled literatury a použitých zdrojů
-#set par(first-line-indent: 0em, leading: 0.8em)
-#set block(spacing: 0.8em) // mezera mezi zdroji
-#bibliography("zdroje.bib", title: none, style: "citace_czu.csl")
+   podrobnější rozepsání viz zadání
+   výzkumné otázky? 
 
+= Literární rešerše
+   cca deset stran studie viz trello a zadání
+   krátce o misi landsat a popis obou senzorů (jejich spektrálním rozsahů - porovnání)
+
+= Charakteristika studijního území
+   něco o Léhu a typických znacích vysokohorského prostředí
+   obrázky scén landsat
+
+= Metodika
+== Charakteristika vstupních dat
+Pro potřeby této práce byly data z obou senzorů zpracovány v prostředí Google Earth Engine, který nabízí uživateli efektivní možnost cloudového zpracování velkého množství dat s využitím programovacího jazyku Java Script API. 
+
+Z důvodu jednoduché aplikace pro pozdější statistickou analýzu byly použity atmosféricky korigovaná data v označení _Level 2, Collection 2, Tier 1_ a to jak pro Landsat 7, tak i Landsat 8. V obou případech se zároveň jednalo o zpracování na úrovni _Surface Reflectance_. Kompletní předzpracování snímků provedla US. Geological Survey pomocí metod _Landsat Ecosystem Disturbance Adaptive Processing System (LEDAPS)_ pro Landsat 7 a _Land Surface Reflectance Code (LaSRC)_ pro Landsat 8 @usgs_sr.
+
+Základní myšlenkou modelu _LEDAPS_ je, v prvním kroku, kalibrace syrových dat na horní část atmosféry (TOA) a následně atmosferická korekce pomocí metody MODIS/6S @masek_2006. Metoda _LaSRC_ využívá pro výpočet aerosolové pásmo a pomocná klimatická data MODIS nebo VIIRS CMG společně s modelem radiačního přenosu @VERMOTE2016.
+
+== Filtrace oblačnosti a výpočet NDVI
+Prvním krokem předzpracování dat v GEE byla filtrace oblačosti s využitím QA_PIXEL. Pásmo Quality Assessment (QA) v sobě ukládá binární přepis informací o kvalitě jednotlivých pixelů v obraze a pomáhá tak identifikovat přítomnost oblaků, ledu, sněhu či vody ve snímku @usgs_qa. Na obrázku 1 je přiložen kód pro filtraci oblačnosti. Bity pro _Cloud Confidence_ i _Cloud Shadow Confidence_ byly filtrovány s intenzitou _.gte(2)_.
+
+#figure(
+block()[
+   #set par(first-line-indent: 0em, leading: 0.6em)
+#show raw.where(block: true): block.with(
+  fill: luma(240),
+  width: 100%,
+  inset: 10pt,
+  radius: 4pt,
+)
+```js
+var radix = 2; //filtr pro binary data
+
+// Funkce pro extrakci QA_PIXEL bitů
+var extractQABits = function(qaBand, bitStart, bitEnd) {
+  var numBits = bitEnd - bitStart + 1;
+  var qaBits = qaBand.rightShift(bitStart).mod(Math.pow(radix, numBits));
+  return qaBits;
+};
+
+// Funkce pro vytvoření masky pro QA_PIXEL bitovou kombinaci
+exports.createMask = function(image) {
+  var image_qa = image.select('QA_PIXEL');
+
+  // Výběr bitů "Cloud Confidence"
+  var bitStartCloudConfidence = 8;
+  var bitEndCloudConfidence = 9;
+  var qaBitsCloudConfidence = extractQABits(image_qa, bitStartCloudConfidence, bitEndCloudConfidence);
+  var testCloudConfidence = qaBitsCloudConfidence.gte(2);
+
+  // Výběr bitů "Cloud Shadow Confidence"
+  var bitStartShadowConfidence = 10;
+  var bitEndShadowConfidence = 11;
+  var qaBitsShadowConfidence = extractQABits(image_qa, bitStartShadowConfidence, bitEndShadowConfidence);
+  var testShadowConfidence = qaBitsShadowConfidence.gte(2);
+
+  var maskComposite = testCloudConfidence.or(testShadowConfidence).not();
+  return image.updateMask(maskComposite);
+};
+```
+],
+
+   kind: "img",
+   supplement: "obr.",
+   caption: "Funkce pro maskování oblačnosti",)
+
+Následně byl vypočítan normalizovaný vegetační index (NDVI). Jedná se o jeden z nejpoužívanějších vegetačních indexů pro sledování zdraví a hustoty vegetace @huang2021commentary. NDVI se získává dle vzorce: $ "NDVI"= ("NIR"-"RED")/("NIR"+"RED") $
+
+Hodnoty NDVI se pohybují od -1 do 1. Nízké hodnoty, kolem 0,1 nebo méně, obvykle ukazují na suché oblasti, jako jsou kamenné či písečné pouště. Hodnoty v rozmezí 0,2 až 0,3, charakterizují křoviny a pastviny. Vysoké hodnoty, pohybující se mezi 0,6 a 0,8, indikují husté vegetační porosty, včetně mírných a tropických deštných lesů @weier2000measuring. Na základě těchto informací byl práh v kódu na obrázku 2 nastaven na hodnotu _0.1_ a pixely s nižší hodnotou byly zamaskovány.
+
+
+#figure(
+block()[
+   #set par(first-line-indent: 0em, leading: 0.6em)
+#show raw.where(block: true): block.with(
+  fill: luma(240),
+  width: 100%,
+  inset: 10pt,
+  radius: 4pt,
+)
+```js
+"thresholdValue": 0.1 // práh NDVI
+
+// Funkce NDVI + threshold
+exports.computeNdvi = function(image) {
+  var ndvi = image.expression(
+    '((NIR - RED) / (NIR +  RED))',
+    {
+      'NIR': image.select('NIR'),
+      'RED': image.select('RED'),  
+    }
+  ).rename('NDVI');
+  var thresholdMask = ndvi.gt(thresholdValue);
+  var updatedMask = ndvi.updateMask(thresholdMask);
+  var addNDVI = image.addBands(updatedMask);
+  var maskedBands = updatedMask.mask();
+  return addNDVI.updateMask(maskedBands);
+};
+```
+],
+
+   kind: "img",
+   supplement: "obr.",
+   caption: "Funkce pro výpočet NDVI a threshold",)
+
+Zpracování dat popsané výše bylo společné pro obě následující kapitoly. Tedy jak pro porovnání celých sezón, tak i porovnání jednotlivých scén mezi sebou.
+
+== Porovnání sezón
+
+== Porovnání dvojic
+
+== Statistická analýza
+
+= Výsledky
+
+= Diskuse
+
+= Závěr a přínos práce
+
+= Přehled literatury a použitých zdrojů
+   #set par(first-line-indent: 0em, leading: 0.6em)
+   #set block(spacing: 0.6em)
+   #bibliography("zdroje.bib", title: none, style: "citace_czu.csl")
 
 = Přílohy
+   #set par(first-line-indent: 2em, leading: 1em)
+   #set block(spacing: 2.5em)
+
+== Test tabulky obrázky
+#figure(
+   table(
+   columns: (11),
+   inset: 5pt,
+   align: center + horizon,
+
+   [*Year*], [*L7 %*], [*L8 %*], [*Q25*], [*Q50*], [*Q75*], [*RMSE*], [*ME*], [*Slp.*], [*Int.*], [*R2*],
+   [2013], [12.40], [87.60], [0.018], [0.037], [0.062], [0.064], [0.039], [0.893], [0.066], [0.723],
+   [2014], [9.64], [90.36], [0.020], [0.040], [0.064], [0.065], [0.046], [0.904], [0.070], [0.781],
+   [2015], [4.34], [95.66], [0.033], [0.055], [0.084], [0.078], [0.062], [0.947], [0.075], [0.753],
+   [2016], [10.24], [89.76], [0.026], [0.053], [0.086], [0.080], [0.058], [0.958], [0.067], [0.687],
+   [2017], [26.76], [73.24], [-0.002], [0.023], [0.048], [0.052], [0.023], [0.894], [0.051], [0.763],
+   [2018], [31.72], [68.28], [-0.009], [0.020], [0.051], [0.069], [0.021], [0.702], [0.093], [0.552],
+   [2019], [8.80], [91.20], [0.027], [0.052], [0.081], [0.077], [0.058], [0.885], [0.085], [0.698],
+   [2020], [16.70], [83.30], [0.010], [0.030], [0.049], [0.051], [0.030], [0.941], [0.045], [0.817],
+   [2021], [10.24], [89.76], [0.023], [0.050], [0.089], [0.086], [0.061], [0.893], [0.086], [0.624]
+
+   ),
+   kind: "tab",
+   supplement: "tab.",
+   caption: "Výsledky analýzy sezón",
+)
+
+#lorem(100)
+
+#figure(
+   image("images/images.jpg", width: 60%),
+   kind: "img",
+   supplement: "obr.",
+   caption: " ježek",
+)
+
+#figure(
+   table(
+   columns: (6),
+   inset: 5pt,
+   align: center + horizon,
+
+[*Date*], [*Sensor*], [*Mean*], [*Median*], [*Q1*], [*Q3*],
+[2014-05-07], [Landsat 8], [0.168], [0.150], [0.126], [0.194],
+[2014-05-15], [Landsat 7], [0.160], [0.140], [0.117], [0.185],
+[2014-06-08], [Landsat 8], [0.244], [0.237], [0.187], [0.290],
+[2014-06-24], [Landsat 8], [0.281], [0.276], [0.208], [0.344],
+[2014-07-10], [Landsat 8], [0.295], [0.293], [0.214], [0.367],
+[2014-07-26], [Landsat 8], [0.303], [0.297], [0.220], [0.375],
+[2014-08-03], [Landsat 7], [0.265], [0.253], [0.184], [0.335],
+[2014-08-11], [Landsat 8], [0.289], [0.281], [0.208], [0.359],
+[2014-08-19], [Landsat 7], [0.252], [0.244], [0.177], [0.315],
+[2014-08-27], [Landsat 8], [0.249], [0.231], [0.181], [0.307],
+[2014-09-12], [Landsat 8], [0.226], [0.208], [0.174], [0.271],
+[2014-09-20], [Landsat 7], [0.212], [0.198], [0.153], [0.260]
+
+
+   ),
+   kind: "tab",
+   supplement: "tab.",
+   caption: "Cross Landsat 2014",
+)
+
