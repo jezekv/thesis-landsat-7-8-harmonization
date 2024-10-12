@@ -104,7 +104,7 @@ Z důvodu jednoduché aplikace pro pozdější statistickou analýzu byly použi
 Základní myšlenkou modelu _LEDAPS_ je, v prvním kroku, kalibrace syrových dat na horní část atmosféry (TOA) a následně atmosferická korekce pomocí metody MODIS/6S @masek_2006. Metoda _LaSRC_ využívá pro výpočet aerosolové pásmo a pomocná klimatická data MODIS nebo VIIRS CMG společně s modelem radiačního přenosu @VERMOTE2016.
 
 == Filtrace oblačnosti a výpočet NDVI
-Prvním krokem předzpracování dat v GEE byla filtrace oblačosti s využitím QA_PIXEL. Pásmo Quality Assessment (QA) v sobě ukládá binární přepis informací o kvalitě jednotlivých pixelů v obraze a pomáhá tak identifikovat přítomnost oblaků, ledu, sněhu či vody ve snímku @usgs_qa. Na obrázku 1 je přiložen kód pro filtraci oblačnosti. Bity pro _Cloud Confidence_ i _Cloud Shadow Confidence_ byly filtrovány s intenzitou _.gte(2)_.
+Prvním krokem předzpracování dat v GEE byla filtrace oblačosti s využitím QA_PIXEL. Pásmo Quality Assessment (QA) v sobě ukládá binární přepis informací o kvalitě jednotlivých pixelů v obraze a pomáhá tak identifikovat přítomnost oblaků, ledu, sněhu či vody ve snímku @usgs_qa. Na obrázku x je přiložen kód pro filtraci oblačnosti. Bity pro _Cloud Confidence_ i _Cloud Shadow Confidence_ byly filtrovány s intenzitou _.gte(2)_.
 
 #figure(
 block()[
@@ -126,7 +126,7 @@ var extractQABits = function(qaBand, bitStart, bitEnd) {
 };
 
 // Funkce pro vytvoření masky pro QA_PIXEL bitovou kombinaci
-exports.createMask = function(image) {
+var createMask = function(image) {
   var image_qa = image.select('QA_PIXEL');
 
   // Výběr bitů "Cloud Confidence"
@@ -153,7 +153,7 @@ exports.createMask = function(image) {
 
 Následně byl vypočítan normalizovaný vegetační index (NDVI). Jedná se o jeden z nejpoužívanějších vegetačních indexů pro sledování zdraví a hustoty vegetace @huang2021commentary. NDVI se získává dle vzorce: $ "NDVI"= ("NIR"-"RED")/("NIR"+"RED") $
 
-Hodnoty NDVI se pohybují od -1 do 1. Nízké hodnoty, kolem 0,1 nebo méně, obvykle ukazují na suché oblasti, jako jsou kamenné či písečné pouště. Hodnoty v rozmezí 0,2 až 0,3, charakterizují křoviny a pastviny. Vysoké hodnoty, pohybující se mezi 0,6 a 0,8, indikují husté vegetační porosty, včetně mírných a tropických deštných lesů @weier2000measuring. Na základě těchto informací byl práh v kódu na obrázku 2 nastaven na hodnotu _0.1_ a pixely s nižší hodnotou byly zamaskovány.
+Hodnoty NDVI se pohybují od -1 do 1. Nízké hodnoty, kolem 0,1 nebo méně, obvykle ukazují na suché oblasti, jako jsou kamenné či písečné pouště. Hodnoty v rozmezí 0,2 až 0,3, charakterizují křoviny a pastviny. Vysoké hodnoty, pohybující se mezi 0,6 a 0,8, indikují husté vegetační porosty, včetně mírných a tropických deštných lesů @weier2000measuring. Na základě těchto informací byl práh v kódu na obrázku x nastaven na hodnotu _0.1_ a pixely s nižší hodnotou byly zamaskovány.
 
 
 #figure(
@@ -169,7 +169,7 @@ block()[
 "thresholdValue": 0.1 // práh NDVI
 
 // Funkce NDVI + threshold
-exports.computeNdvi = function(image) {
+var computeNdvi = function(image) {
   var ndvi = image.expression(
     '((NIR - RED) / (NIR +  RED))',
     {
@@ -190,14 +190,137 @@ exports.computeNdvi = function(image) {
    supplement: "obr.",
    caption: "Funkce pro výpočet NDVI a threshold",)
 
-Zpracování dat popsané výše bylo společné pro obě následující kapitoly. Tedy jak pro porovnání celých sezón, tak i porovnání jednotlivých scén mezi sebou.
+Zpracování dat popsané výše bylo společné pro obě následující kapitoly. Tedy jak pro porovnání maximálních hodnot z celých sezón, tak i pro porovnání jednotlivých scén v sezóně mezi sebou.
 
-== Porovnání sezón
+== Porovnání maximálních hodnot NDVI z celé sezóny
+Cílem této části bylo vždy získání maximální hodnoty NDVI za celou sezónu, kdy sezóna byla časově definována na období mezi 1. květnem a 30. zářím, a tyto maxima pak srovnat s dalšími, stejně upravenými, sezónami. 
 
-== Porovnání dvojic
+Analýza proběhla v principu ve třech samostatných větvích, kdy v jedné byly zpracovávány pouze snímky z Landsat 7, v druhé pouze snímky z Landsat 8 a nakonec snímky z obou nosičů dohromady. Všechny dostupné snímky v každé větvi byly překryty přes sebe a byla z nich vyfiltrována maxima pomocí reduceru dle obrázku x.
+
+#figure(
+block()[
+   #set par(first-line-indent: 0em, leading: 0.6em)
+#show raw.where(block: true): block.with(
+  fill: luma(240),
+  width: 108%,
+  inset: 10pt,
+  radius: 4pt,
+)
+```js
+// Redukce pro získání maximálních hodnot pro každý pixel
+var maxCombination = imageCombination.reduce(ee.Reducer.max()).rename(startExport + '_comb');
+var maxL7 = imageL7.reduce(ee.Reducer.max()).rename(startExport + '_L7');
+var maxL8 = imageL8.reduce(ee.Reducer.max()).rename(startExport + '_L8');
+
+var finalCombination = finalCombination.addBands(maxCombination).select('20.*');
+var finalL7 = finalL7.addBands(maxL7).select('20.*');
+var finalL8 = finalL8.addBands(maxL8).select('20.*');
+```
+],
+
+   kind: "img",
+   supplement: "obr.",
+   caption: "Aplikace reduceru pro získání maximálních hodnot",)
+
+Celá filtrace proběhla ve for cyklu, který postup zopakoval pro celkem devět sezón za sebou (2013 až 2021). Výstupem byl tak pro každou větev image s devíti pásmy, kdy každé odpovídalo jedné sezóně. 
+
+Další fází této analýzy bylo získání společných pixelů pro celé sledované období, a to z důvodu možnosti porovnání sezón mezi sebou. K tomu byl použit for cyklus (obr. x), který pracoval na principu postupného přikládání snímků přes sebe a maskováním pixelů, které se nenacházely na scénách ze všech sezón. Výstupem bylo nové pásmo _mask_, které bylo později použito pro tvorbu stratifikovaných bodů. 
+
+#figure(
+block()[
+   #set par(first-line-indent: 0em, leading: 0.6em)
+#show raw.where(block: true): block.with(
+  fill: luma(240),
+  width: 100%,
+  inset: 10pt,
+  radius: 4pt,
+)
+```js
+// Výběr prvního pásma jako vstupu do for cyklu 
+var firstBand = finalCombination.select(0);
+
+// Maska
+for (var i = 1; i <= 8 ; i++) {
+  var currentBand = finalCombination.select(i);
+  firstBand = firstBand.add(currentBand);
+}
+
+var maskImage = firstBand.select(0).rename('mask');
+var maskImage = maskImage.select(0).multiply(0).int();
+```
+],
+
+   kind: "img",
+   supplement: "obr.",
+   caption: "For cyklus pro maskování pixelů",)
+
+Nakonec bylo pomocí fce _ee.Image.stratifiedSample_ vytvořeno 5000 společných bodů a ty byly následně vyexportovány do .csv tabulky. Ta obsahovala pro každý bod maximílní hodnotu NDVI pro všechny sezóny a větve zároveň.
+
+== Porovnání hodnot NDVI jednotlivých scén
+Tato část se zaměřovala na porovnání všech dostupných snímků v ramci jedné sezóny mezi sebou, kdy nebylo cílem porovnávat různé sezóny, ale primárně rozdíly mezi oběma senzory. Sezóna byla časově opět  definována na období mezi 1. květnem a 30. zářím. Zaroveň nebyla srovnávána maxima, ale přímo naměřené hodnoty NDVI.
+
+Celá analýza probíhala ve for cyklu, který byl časově omezený na zmiňované období. Každý rok (2013 až 2021) byl tak zpracováván nezávisle na ostatních. To v praxi znamená, že nezamaskované pixely byly pozičně shodné pouze v rámci jedné sezóny, ale nikoli mezi sezónami, jako tomu bylo v kapitole 5.3.. Tento fakt ale není pro potřeby porovnání jednotlivých scén omezující. Důvodem tohoto postupu byla oblačnost na snímcích a kvůli tomu nulová šance filtrovat shodné pixely na snímcích ve všech sezónách současně. Maskování probíhalo dle obrázku x. Princip byl stejný, jako v kapitole 5.3..
+
+#figure(
+block()[
+   #set par(first-line-indent: 0em, leading: 0.6em)
+#show raw.where(block: true): block.with(
+  fill: luma(240),
+  width: 100%,
+  inset: 10pt,
+  radius: 4pt,
+)
+```js
+var finalImage = finalL7Filtered.addBands(finalL8Filtered);
+
+var bandNames = finalImage.bandNames();
+var numBands = bandNames.length().subtract(1);
+
+// Výběr prvního pásma jako vstupu do for cyklu 
+var firstBand = finalImage.select(0);
+
+// Maska
+for (var i = 1; i <= numBands ; i++) {
+  var currentBand = finalImage.select(i);
+  firstBand = firstBand.add(currentBand);
+}
+
+var maskImage = firstBand.select(0).rename('mask');
+var maskImage = maskImage.select(0).multiply(0).int();
+```
+],
+
+   kind: "img",
+   supplement: "obr.",
+   caption: "For cyklus pro maskování pixelů",)
+
+Nově vytvořené pásmo _mask_, které definuje pozičně stejné pixely pro všechny snímky v sezóně bylo použito jako vstup do fce _ee.Image.stratifiedSample_ pro tvorbu stratifikovaných bodů. Jejich počet ale nebyl definován parametrem funkce, ale pomocí nastavení filtrovacího kritéria _'CLOUD_COVER'_ při importu snímků. Smyslem toho bylo nastavit filtr tak, aby bylo pro následný export do .csv tabulky získáno 5000 bodů a zároveň odfiltrováno co nejméně snímků s vyšší oblačností.
 
 == Statistická analýza
+Statistická část probíhala v prostředí R Studio (verze R 4.3.1). Importováno bylo celkem pět balíčků, a to _ggplot2, reshape2, gridExtra, dplyr_ a _tidyr_. Cílem bylo zpracovat .csv tabulky, statisticky je analyzovat a vytvořit vhodné výstupy v podobě grafů a tabulek. 
 
+=== Analýza maximálních hodnot NDVI z celé sezóny
+Po importu .csv tabulky byly jednotlivé sloupce rozděleny do vektorů, kde každý vektor obsahoval vždy tři sloupce z určité sezóny - Landsat 7, Landsat 8 a jejich kombinaci. 
+
+Poté byla vytvořena přehledová tabulka se základními metrikami, a to pro každý rok samostatně:
+- *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší hodnotu NDVI oproti druhému nosiči. 
+- *Kvartily:* Nejříve byly odečteny hodnoty NDVI Landsatu 7 od Landsatu 8 (L8 - L7). Nově získané hodnoty byly před výpočtem kvartilů sežazeny vzestupně.
+- *Hodnocení přesnosti:* V podobě _RMSE_ (Root Mean Square Error) a _ME_ (Mean Error) přímo mezi hodnotami bodů z obou senzorů.
+- *lineární regrese:* Přes všechny body byl spočítán lineární model. Do tabulky byly zahrnuty hodnoty _Slope_, _Intercept_ a _R2 - koeficient determinace_.
+
+Následovala tvorba grafů. 
+- *Density Plot:* Tento graf zobrazuje rozložení hodnot NDVI. Pro lepší orientaci byl graf doplněn o kolmice, které reprezentují průměrné hodnoty.
+- *Scatter Plot:* Bodový graf, který zahrnuje také křivku regresního modelu pro vizuální porovnání naměřených dat mezi senzory.
+
+=== Analýza hodnot NDVI jednotlivých scén
+Nejdříve byly hromadně načteny všechny .csv tabulky. Pokračovalo se tvorbou přehledových tabulek shrnující každý snímek v sezóně:
+- *Kvartily:* V tomto případě byly hodnoty zpracovány v neupravené podobě (na rozdíl od předchozí analýzy maximálních hodnot). 
+- *Pruměr:* Jako doplňující metrika ke kvartilům.
+
+Pro lepší porovnání jednotlivých scén v průběhu sezóny byl vytvořen následující graf:
+- *Box Plot:* Každý snímek z celé sezóny byl zobrazen formou Box Plotu na časové ose. Tento graf umožňuje nejen sledovat vývoj hodnot NDVI v průběhu vegetační sezóny, ale také porovnávat snímky z různých senzorů mezi sebou.
+
+Tato komplexní analýza poskytuje detailní pohled na vývoj a rozdíly v hodnotách NDVI mezi Landsatem 7 a Landsatem 8 v průběhu vegetačních sezón, a to jak na úrovni maximálních hodnot, tak i na úrovni jednotlivých scén.
 = Výsledky
 
 = Diskuse
