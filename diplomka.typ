@@ -88,8 +88,21 @@ V Praze dne xxx10 února 2025xxx
    výzkumné otázky? 
 
 = Literární rešerše
-   cca deset stran studie viz trello a zadání
-   krátce o misi landsat a popis obou senzorů (jejich spektrálním rozsahů - porovnání)
+== Mise Landsat
+Satelity Landsat snímají zemský povrch nepřetržitě již více než 50 let. Poskytují tak nejdélší časovou řadu pozorování ze všech globálních vesmírných misí @roy2014landsat. Již v prvních letech po zavedení programu začala vznikat nová metodika pro mapování změn krajiného pokryvu a vyhledávání přírodních zdroju @goward1997landsat. Většinu času však  bylo snímky možné získat pouze komerčně. Zlom nastal v roce 2008, kdy byla data poskytnuta zdarma online pro všechny uživatele. To způsobilo značné navýšení nejen v aplikační sféře, ale také ve vědeckém sektoru @wulder2012opening. Vzhledem k neustálemu rozšiřování mise se role Landsatu jako nástroje pro globální pozorování Země i nadále zvyšuje @zhu2019benefits. 
+
+Satelit Landsat 7 byl na oběžnou dráhu vypuštěn v roce 1999 jako nástupce Landsatu 5 a nesl s sebou několik vylepšení. Kromě zdokonaleného sensoru ETM+ i takzvaný _long-term acquisition plan (LTAP)_ a _image assessment system (IAS)_ @loveland2012landsat. Principem _LTAP_ bylo automatizovat výběr vhodných míst na Zemi pro pravidelnou aktualizaci globálního archivu bezoblačných a dobře osvětlených scén @arvidson2001landsat. Algoritmy metody _IAS_ zase vylepšily geometrickou a radiometrickou přesnost @basislandsat. V roce 2003 selhal na snímači _scan line corrector (SLC)_. Ten kompenzoval dopředný pohyb satelitu za účelem zpětného snímání sensoru. Z toho důvodu chybí na snímcích přibližně 22 % plochy ve formě pravidelných pruhů @scaramuzza2005landsat. Nominální mise Landsatu 7 byla ukončena v roce 2022 přechodem satelitu na nižší oběžnou dráhu @landsat7end.
+
+Landsat 8
+
+Aktuálně na oběžné dráze aktivně snímají pouze dva satelity, a to Landsat 8 a Landsat 9. Kolem roku 2030 by měla být zahájena mise Landsat-Next, která nabídné lepší prostorové rozlišení s více specificky zaměřenými pásmy a díky konstelaci třech satelitů i šestidenní interval snímání  @wulder2022fifty @landsatnext.
+
+
+== Charakteristika sensorů a jejich rozdíly
+
+== Vliv šířky spektrálních pásem
+
+== Shrnutí aktuálních studií 
 
 = Charakteristika studijního území
    něco o Léhu a typických znacích vysokohorského prostředí
@@ -104,7 +117,7 @@ Z důvodu jednoduché aplikace pro pozdější statistickou analýzu byly použi
 Základní myšlenkou modelu _LEDAPS_ je, v prvním kroku, kalibrace syrových dat na horní část atmosféry (TOA) a následně atmosferická korekce pomocí metody MODIS/6S @masek_2006. Metoda _LaSRC_ využívá pro výpočet aerosolové pásmo a pomocná klimatická data MODIS nebo VIIRS CMG společně s modelem radiačního přenosu @VERMOTE2016.
 
 == Kalibrace dat a filtrace oblačnosti
-Aby byly získány reálné informace o reflektanci, musela proběhnout kalibrace dat na základě přepočtu DN hodnot o scale factor a aditivní offset, a to u obou produktů z kolekce 2 @Gee_migration. Tento krok byl zásadním předpokladem pro spravnou aplikaci harmonizačních koeficientů a výpočtu NDVI. Průběh kalibrace optických pásem je zobrazen na obrázku x.
+Aby byly získány reálné informace o povrchové odrazivosti, musela proběhnout kalibrace dat na základě přepočtu DN hodnot o scale factor a aditivní offset, a to u obou produktů z kolekce 2 @Gee_migration. Tento krok byl zásadním předpokladem pro spravnou aplikaci harmonizačních koeficientů a výpočtu NDVI. Průběh kalibrace optických pásem je zobrazen na obrázku x.
 
 #figure(
 block()[
@@ -177,9 +190,9 @@ var createMask = function(image) {
    caption: "Funkce pro maskování oblačnosti",)
 
 ==  Aplikace harmonizačních koeficientů a výpočet NDVI
-Pro potřeby této práce byly použity koeficienty získáné metodou nejmenších čtverců (OLS) při přímém porovnání pásem ze snímků ze Severní Ameriky  @roy2016characterization. Na základě těchto výsledků byly harmonizovány i studie zabývající se analýzou vysokohorské vegetace @anderson2020vegetation + xxx.
+Pro potřeby této práce byly použity koeficienty získáné metodou nejmenších čtverců (OLS) při přímém porovnání pásem ze snímků ze Severní Ameriky  @roy2016characterization. Na základě těchto výsledků byly harmonizovány i studie zabývající se analýzou vysokohorské vegetace @anderson2020vegetation @fassnacht2019landsat @pastick2019spatiotemporal.
 
-Harmonizace byla provedena pouze na snímky ze sensoru OLI (Landsat 8), které byly sladěny s ETM + (Landsat 7). Důvodem bylo umožnit potenciálního rozšíření časové řady i o data z Landsatu 5 při aplikaci metodiky popsané v této práci. Použité koeficienty jsou zobrazeny v tabulce x a jejich použití v kódu je ilustrováno na obrázku x.
+Harmonizace byla provedena pouze na snímky ze sensoru OLI (Landsat 8), které byly sladěny s ETM + (Landsat 7). Důvodem bylo umožnit potenciální rozšíření časové řady i o data z Landsatu 5 při aplikaci metodiky popsané v této práci. Použité koeficienty jsou zobrazeny v tabulce x a jejich použití v kódu je ilustrováno na obrázku x.
 
 #figure(
    table(
@@ -197,17 +210,12 @@ Harmonizace byla provedena pouze na snímky ze sensoru OLI (Landsat 8), které b
    ),
    kind: "tab",
    supplement: "tab.",
-   caption: "Kalibrační koeficienty pro reflektanci (Roy et al. 2016)",
+   caption: "Harmonizační koeficienty pro reflektanci (Roy et al. 2016)",
 )
-
-
-
-
 
 Následně byl vypočítan normalizovaný vegetační index (NDVI). Jedná se o jeden z nejpoužívanějších vegetačních indexů pro sledování zdraví a hustoty vegetace @huang2021commentary. NDVI se získává dle vzorce: $ "NDVI"= ("NIR"-"RED")/("NIR"+"RED") $
 
 Hodnoty NDVI se pohybují od -1 do 1. Nízké hodnoty, kolem 0,1 nebo méně, obvykle ukazují na suché oblasti, jako jsou kamenné či písečné pouště. Hodnoty v rozmezí 0,2 až 0,3, charakterizují křoviny a pastviny. Vysoké hodnoty, pohybující se mezi 0,6 a 0,8, indikují husté vegetační porosty, včetně mírných a tropických deštných lesů @weier2000measuring. Z důvodu potenciální prostorové řídkosti vysokohorské vegetace je možné pro prahování použít i nižší hodnoty @anderson2020vegetation.  Na základě těchto informací byl práh v kódu na obrázku x nastaven na hodnotu _0.1_ a pixely s nižší hodnotou byly zamaskovány.
-
 
 #figure(
 block()[
@@ -246,9 +254,9 @@ function computeNdvi(image) {
 Zpracování dat popsané výše bylo společné pro obě následující kapitoly. Tedy jak pro porovnání maximálních hodnot z celých sezón, tak i pro porovnání jednotlivých scén v sezóně mezi sebou.
 
 == Porovnání maximálních hodnot NDVI z celé sezóny
-Cílem této části bylo získání maximální hodnoty NDVI pro každý pixel za celou sezónu, kdy sezóna byla časově definována na období mezi 1. květnem a 30. zářím, a tyto maxima pak srovnat s maximy z dalších sezón.
+Cílem této části bylo získání maximální hodnoty NDVI pro každý pixel za celou sezónu, kdy sezóna byla časově definována na období mezi 1. květnem a 30. zářím.
 
-Problematika zkreslení výsledku enviromentálních výzkumů při použití maximálních hodnot NDVI a návrhy její korekce byly již zkoumány @karlsen2018new @berner2020summer @wang2022off. Velmi málo studií se ale věnovalo greening trendu, a jeho ovlivnění právě touto metodikou, cíleně u vysokohorské vegetace @bayle2024landsat.
+Problematika zkreslení výsledku enviromentálních výzkumů při použití maximálních hodnot NDVI a návrhy její korekce byly již zkoumány @karlsen2018new @berner2020summer @wang2022off. Velmi málo studií se ale věnovalo greening trendu a jeho ovlivnění právě touto metodikou cíleně u vysokohorské vegetace @bayle2024landsat.
 
 Analýza proběhla v principu ve třech samostatných větvích, kdy v jedné byly zpracovávány pouze snímky z Landsatu 7, v druhé pouze snímky z Landsatu 8 a nakonec snímky z obou nosičů dohromady. U sensoru OLI (L8) byla, u pásem RED a NIR před výpočtem NDVI, provedena harmonizace na ETM+ (L7) @roy2016characterization. Všechny dostupné snímky v každé větvi byly překryty přes sebe a byla z nich vyfiltrována maxima pomocí reduceru dle obrázku x.
 
@@ -279,7 +287,7 @@ var finalL8 = finalL8.addBands(maxL8).select('20.*');
 
 Celá filtrace proběhla ve for cyklu, který postup zopakoval pro celkem devět sezón za sebou (2013 až 2021). Výstupem byl tak pro každou větev _image_ s devíti pásmy, kdy každé odpovídalo jedné sezóně. 
 
-Další fází této analýzy bylo získání společných pixelů pro celé sledované období, a to z důvodu možnosti porovnání sezón mezi sebou. K tomu byl použit for cyklus (obr. x), který pracoval na principu postupného přikládání snímků přes sebe a maskováním pixelů, které se nenacházely na scénách ze všech sezón. Výstupem bylo nové pásmo _mask_, které bylo později použito pro tvorbu stratifikovaných bodů. 
+Další fází této analýzy bylo získání společných pixelů pro celé sledované období z důvodu možnosti porovnání sezón mezi sebou. K tomu byl použit for cyklus (obr. x), který pracoval na principu postupného přikládání snímků přes sebe a maskováním pixelů, které se nenacházely na scénách ze všech sezón. Výstupem bylo nové pásmo _mask_, které bylo později použito pro tvorbu stratifikovaných bodů. 
 
 #figure(
 block()[
@@ -309,10 +317,10 @@ var maskImage = maskImage.select(0).multiply(0).int();
    supplement: "obr.",
    caption: "For cyklus pro maskování pixelů",)
 
-Nakonec bylo pomocí fce _ee.Image.stratifiedSample_ vytvořeno 5000 společných bodů a ty byly následně vyexportovány do .csv tabulky. Ta obsahovala pro každý bod maximílní hodnotu NDVI pro všechny sezóny a větve zároveň.
+Nakonec bylo pomocí fce _ee.Image.stratifiedSample_ vytvořeno 5000 společných bodů a ty byly následně vyexportovány do _.csv_ tabulky. Ta obsahovala pro každý bod maximílní hodnotu NDVI pro všechny sezóny a větve zároveň.
 
 == Porovnání hodnot NDVI jednotlivých scén
-Tato část se zaměřovala na porovnání všech dostupných snímků v ramci jedné sezóny mezi sebou, kdy nebylo cílem porovnávat hodnoty NDVI z různých sezón, ale primárně bezprostřední rozdíly v NDVI mezi oběma senzory s různou harmonizací @roy2016characterization. Sezóna byla časově opět  definována na období mezi 1. květnem a 30. zářím. Zaroveň nebyla srovnávána maxima, ale přímo naměřené hodnoty NDVI.  
+Tato část se zaměřovala na porovnání všech dostupných snímků v ramci jedné sezóny mezi sebou, kdy nebylo cílem porovnávat výsledky NDVI z různých sezón, ale primárně bezprostřední rozdíly v NDVI mezi oběma senzory s různou harmonizací @roy2016characterization. Sezóna byla časově opět  definována na období mezi 1. květnem a 30. zářím. Zaroveň nebyla srovnávána maxima, ale přímo naměřené hodnoty NDVI.  
 
 
 === Porovnání scén v rámci jedné sezóny
@@ -351,10 +359,10 @@ var maskImage = maskImage.select(0).multiply(0).int();
    supplement: "obr.",
    caption: "For cyklus pro maskování pixelů",)
 
-Nově vytvořené pásmo _mask_, které definuje pozičně stejné pixely pro všechny snímky v sezóně bylo použito jako vstup do fce _ee.Image.stratifiedSample_ pro tvorbu stratifikovaných bodů. Jejich počet ale nebyl definován parametrem funkce, ale pomocí nastavení filtrovacího kritéria _'CLOUD_COVER'_ při importu snímků. Smyslem toho bylo nastavit filtr tak, aby bylo pro následný export do .csv tabulky získáno 5000 bodů a zároveň odfiltrováno co nejméně snímků s vyšší oblačností.
+Nově vytvořené pásmo _mask_, které definuje pozičně stejné pixely pro všechny snímky v sezóně bylo použito jako vstup do fce _ee.Image.stratifiedSample_ pro tvorbu stratifikovaných bodů. Jejich počet ale nebyl definován parametrem funkce, ale pomocí nastavení filtrovacího kritéria _'CLOUD_COVER'_ při importu snímků. Smyslem toho bylo nastavit filtr tak, aby bylo pro následný export do _.csv_ tabulky získáno 5000 bodů a zároveň odfiltrováno co nejméně snímků s vyšší oblačností.
 
 === Hromadné porovnání dvojic
-Časové okno ve for cyklu bylo zkráceno na 16 dní, což odpovídá časovému rozlišení družice Landsat. Díky tomu byl do výběru zařazen pouze jeden snímek z každého senzoru. Pro tuto dvojici snímků byl následně vypočítán index NDVI ve třech různých variantách pro Landsat: bez harmonizace, s harmonizací pásem a s harmonizací samotného NDVI, jak je popsáno v práci @roy2016characterization. Po tomto kroku následovalo maskování společných pixelů, k čemuž byla využita funkce zobrazená na obrázku X. 
+Časové okno ve for cyklu bylo zkráceno na 16 dní, což odpovídá časovému rozlišení družic Landsat. Díky tomu byl do výběru zařazen pouze jeden snímek z každého senzoru. Pro tuto dvojici snímků byl následně vypočítán index NDVI ve třech různých variantách: bez harmonizace, s harmonizací pásem a s harmonizací samotného NDVI, jak je popsáno v práci @roy2016characterization. Po tomto kroku následovalo maskování společných pixelů, k čemuž byla využita funkce zobrazená na obrázku X. 
 
 #figure(
 block()[
@@ -379,34 +387,37 @@ function createMaskLandsat(imageCollection, l7, l8) {
    supplement: "obr.",
    caption: "Funkce pro maskování dvojic",)
 
-S využitím funkce _ee.Image.stratifiedSample_ bylo pro každou dvojici vygenerováno 5000 stratifikovaných bodů, které byly vyexportovány do .csv tabulky.
+S využitím funkce _ee.Image.stratifiedSample_ bylo pro každou dvojici vygenerováno 5000 stratifikovaných bodů, které byly vyexportovány do _.csv_ tabulky.
 
 == Statistická analýza
-Statistická část probíhala v prostředí R Studio (verze R 4.3.1). Importováno bylo celkem pět balíčků, a to _ggplot2, reshape2, gridExtra, dplyr_ a _tidyr_. Cílem bylo zpracovat .csv tabulky, statisticky je analyzovat a vytvořit vhodné výstupy v podobě grafů a tabulek. 
+Statistická část probíhala v prostředí R Studio (verze R 4.3.1). Importováno bylo celkem pět balíčků, a to _ggplot2, reshape2, gridExtra, dplyr_ a _tidyr_. Cílem bylo zpracovat _.csv_ tabulky, statisticky je analyzovat a vytvořit vhodné výstupy v podobě grafů a tabulek. 
 
 === Analýza maximálních hodnot NDVI z celé sezóny
-Po importu .csv tabulky byly jednotlivé sloupce rozděleny do vektorů, kde každý vektor obsahoval vždy tři sloupce z určité sezóny - Landsat 7, Landsat 8 a jejich kombinaci. 
-
-Poté byla vytvořena přehledová tabulka se základními metrikami, a to pro každý rok samostatně:
-- *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší hodnotu NDVI oproti druhému sensoru. 
-- *Kvartily:* Nejříve byly odečteny hodnoty NDVI Landsatu 7 od Landsatu 8 (L8 - L7). Nově získané hodnoty byly před výpočtem kvartilů sežazeny vzestupně.
+Po importu _.csv_ tabulky byly jednotlivé sloupce separovány do vektorů, kde každý vektor zahrnoval vždy tři sloupce z určité sezóny - Landsat 7, Landsat 8 a jejich kombinaci. Toto rozdělení umožnilo zpracovat každý vektor nezávisle na sobě. Prvním výstupem byla přehledová tabulka, která obsahovala:
+- *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší maximální hodnotu NDVI oproti druhému sensoru. Byly porovnány vždy pozičně shodné pixely. 
+- *Kvartily:* Nejříve byly odečteny hodnoty NDVI Landsatu 7 od Landsatu 8 (L8 - L7). Odečet byl proveden pouze na pozičně shodných pixelech. Výsledky byly před výpočtem kvartilů sežazeny vzestupně.
 - *Hodnocení přesnosti:* V podobě _RMSE_ (Root Mean Square Error) a _ME_ (Mean Error) přímo mezi hodnotami bodů z obou senzorů.
-- *lineární regrese:* Přes všechny body byl spočítán lineární regresní model. Do tabulky byly zahrnuty hodnoty _Slope_, _Intercept_ a _R2 - koeficient determinace_.
+- *Lineární regresi:* Přes všechny body byl spočítán lineární regresní model. Do tabulky byly zahrnuty hodnoty _Slope_, _Intercept_ a _R2 - koeficient determinace_.
 
 Následovala tvorba grafů. 
-- *Density Plot:* Tento graf zobrazuje rozložení hodnot NDVI. Pro lepší orientaci byl graf doplněn o kolmice, které reprezentují průměrné hodnoty.
-- *Scatter Plot:* Bodový graf, který zahrnuje také křivku regresního modelu pro vizuální porovnání naměřených dat mezi senzory.
+- *Density Plot:* Tento hustotní graf slouží jako vizualizační nástroj pro znázornění distribuce hodnot NDVI. Pro lepší přehlednost a interpretaci byly do grafu přidány kolmice, které znázorňují průměrné hodnoty pro oba senzory.
+- *Scatter Plot:* Jde o bodový graf, který zobrazuje vzájemný vztah obou senzorů. Každý bod reprezentuje pár hodnot NDVI. Pro lepší interpretaci dat je graf doplněn o křivku regresního modelu.
 
 === Analýza scén v rámci jedné sezóny
-Nejdříve byly hromadně načteny všechny .csv tabulky. Pokračovalo se tvorbou přehledových tabulek shrnující každý snímek v sezóně:
+Nejdříve byly hromadně načteny všechny _.csv_ tabulky. Pokračovalo se tvorbou přehledových tabulek shrnující každý snímek v sezóně, které zahrnovaly:
 - *Kvartily:* V tomto případě byly hodnoty zpracovány v neupravené podobě (na rozdíl od předchozí analýzy maximálních hodnot). 
-- *Pruměr:* Jako doplňující metrika ke kvartilům.
+- *Průměr:* Jako doplňující metrika ke kvartilům.
 
-Pro lepší porovnání jednotlivých scén v průběhu sezóny byl vytvořen následující graf:
-- *Box Plot:* Každý snímek z celé sezóny byl zobrazen formou Box Plotu na časové ose. Tento graf umožňuje nejen sledovat vývoj hodnot NDVI v průběhu vegetační sezóny, ale také porovnávat snímky z různých senzorů mezi sebou.
+Aby bylo možné lépe vykreslit jednotlivé scény v průběhu sezóny, byl vytvořen následující graf:
+- *Box Plot:* Tento graf zobrazuje každý snímek z celé vegetační sezóny formou Box Plotu na časové ose. To umožňuje sledovat nejen vývoj hodnot NDVI v průběhu vegetační sezóny, ale také porovnávat snímky z obou senzorů mezi sebou.
 
 === Analýza dvojic
-Po hromadném načtení všech .csv tabulek proběhlo jejich sjednocení.
+Po importu všech _.csv_ tabulek proběhlo sjednocení všech bodů do jednoho souboru. To umožnilo komplexní porovnání všech dostupných dvojic snímku v rámci celého studovaného období najenou. Následovala analýza a vizualizace ve formě přehledové tabulky, která obsahovala: 
+- *Hodnocení přesnosti:* Toto hodnocení bylo prezentováno pomocí dvou klíčových metrik: _RMSE (Root Mean Square Error)_ a _ME (Mean Error)_ přímo mezi hodnotami bodů z obou senzorů s různým přístupem k harmonizaci.
+- *Lineární regresi:* Pro všechny body byl spočítán lineární regresní model. Opět byly nezávisle na sobě testovány různé přístupy k harmonizci. Do tabulky byly zahrnuty parametry modelu: _Slope_, _Intercept_ a _R2 - koeficient determinace_.
+
+Pro další ilustraci výsledků byla data také přenesena do grafu:
+- *Scatter Plot:* Do bodového grafu byly zahrnuty křivky regresního modelu pro vizuální porovnání naměřených dat mezi senzory s různým přístupem k harmonizaci.
 
 = Výsledky
 
