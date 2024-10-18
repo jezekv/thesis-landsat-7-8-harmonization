@@ -91,15 +91,72 @@ V Praze dne xxx10 února 2025xxx
 == Mise Landsat
 Satelity Landsat snímají zemský povrch nepřetržitě již více než 50 let. Poskytují tak nejdélší časovou řadu pozorování ze všech globálních vesmírných misí @roy2014landsat. Již v prvních letech po zavedení programu začala vznikat nová metodika pro mapování změn krajiného pokryvu a vyhledávání přírodních zdroju @goward1997landsat. Většinu času však  bylo snímky možné získat pouze komerčně. Zlom nastal v roce 2008, kdy byla data poskytnuta zdarma online pro všechny uživatele. To způsobilo značné navýšení nejen v aplikační sféře, ale také ve vědeckém sektoru @wulder2012opening. Vzhledem k neustálemu rozšiřování mise se role Landsatu jako nástroje pro globální pozorování Země i nadále zvyšuje @zhu2019benefits. 
 
-Satelit Landsat 7 byl na oběžnou dráhu vypuštěn v roce 1999 jako nástupce Landsatu 5 a nesl s sebou několik vylepšení. Kromě zdokonaleného sensoru ETM+ i takzvaný _long-term acquisition plan (LTAP)_ a _image assessment system (IAS)_ @loveland2012landsat. Principem _LTAP_ bylo automatizovat výběr vhodných míst na Zemi pro pravidelnou aktualizaci globálního archivu bezoblačných a dobře osvětlených scén @arvidson2001landsat. Algoritmy metody _IAS_ zase vylepšily geometrickou a radiometrickou přesnost @basislandsat. V roce 2003 selhal na snímači _scan line corrector (SLC)_. Ten kompenzoval dopředný pohyb satelitu za účelem zpětného snímání sensoru. Z toho důvodu chybí na snímcích přibližně 22 % plochy ve formě pravidelných pruhů @scaramuzza2005landsat. Nominální mise Landsatu 7 byla ukončena v roce 2022 přechodem satelitu na nižší oběžnou dráhu @landsat7end.
+Satelit Landsat 7 byl na oběžnou dráhu vypuštěn v roce 1999 jako nástupce Landsatu 5. Měl opakovací cyklus 16 dní a nesl s sebou několik vylepšení. Kromě zdokonaleného sensoru ETM+ i takzvaný _long-term acquisition plan (LTAP)_ a _image assessment system (IAS)_ @loveland2012landsat. Principem _LTAP_ bylo automatizovat výběr vhodných míst na Zemi pro pravidelnou aktualizaci globálního archivu bezoblačných a dobře osvětlených scén @arvidson2001landsat. Algoritmy metody _IAS_ zase vylepšily geometrickou a radiometrickou přesnost @basislandsat. V roce 2003 selhal na snímači _scan line corrector (SLC)_. Ten kompenzoval dopředný pohyb satelitu za účelem zpětného snímání sensoru. Z toho důvodu chybí na snímcích přibližně 22 % plochy ve formě pravidelných pruhů @scaramuzza2005landsat. Nominální mise Landsatu 7 byla ukončena v roce 2022 přechodem satelitu na nižší oběžnou dráhu @landsat7end.
 
-Landsat 8
+Satelit Landsat 8 začal zaznamenávat povrch Země v roce 2013. Hlavní změnou oproti predchozím generacím satelitů byl nový vylepšený optický snímač OLI a termální infračervený sensor TIRS @roy2014landsat. Jak OLI, tak TIRS jsou senzory typu _pushbroom_, jejichž vlivem byla vylepšena geometrická přesnost a také poměr signálu k šumu @irons2012next. Landsat 8 má opakovací cyklus snímání 16 dní a je umístěn na stejné oběžné dráze jako již vyřazený Landsat 5 @roy2014landsat. V kombinaci s Landsatem 7 bylo tak umožněno zachytit každé místo na rovníku s intervalem 8 dní a ve vyšších zeměpisních šířkách, v důsledku tzv. _poleward convergence_, kdy se dráhy satelitů směrem k pólům sbíhají, i častěji @kovalskyy2013global.  
 
 Aktuálně na oběžné dráze aktivně snímají pouze dva satelity, a to Landsat 8 a Landsat 9. Kolem roku 2030 by měla být zahájena mise Landsat-Next, která nabídné lepší prostorové rozlišení s více specificky zaměřenými pásmy a díky konstelaci třech satelitů i šestidenní interval snímání  @wulder2022fifty @landsatnext.
 
 
-== Charakteristika sensorů a jejich rozdíly
+== Specifikace sensorů a jejich rozdíly
+=== Enhanced Thematic Mapper Plus (ETM+) 
+Sensor ETM+ je pevný osmipásmový multispektrální radiometr řadící se do skupiny _whiskbroom_ skenerů: aby v průběhu snímání pokryly detektory celou oblast záběru, tak se pohybovaly ze strany na stranu. Toto oscilování připomíná zametání. Snímač pracuje s 8bitovou hloubkou záznamu @SaylerL7. Oproti předchozí verzi představil ETM+ několik novinek. Primární inovací bylo přidání panchromatického pásmo s prostorovým rozlišením 15 metrů a výrazně lepší rozlišení u TIR pásma @nasaetm. Dále sensor obsahuje dva přístroje: _full aperture solar calibrator (FASC)_ a _partial aperture solar calibrator (PASC)_ zajištující solární kalibraci a řadu dalších vylepšení, které garantují maximální radiometrickou chybu měření do 5 % @markham1994radiometric.
 
+Jednotlivá pásma sensoru ETM+ a jejich vlnové délky jsou zobrazeny v tabulce x.
+
+#figure(
+   table(
+   columns: (4),
+   inset: 5pt,
+   align: center + horizon,
+   [*Pásmo*], [*Vlnová délka (µm)*], [*Název*], [*Rozlišení (m)*],
+   [1], [0.45 - 0.52], [Blue], [30],
+   [2], [0.52 - 0.60], [Green], [30],
+   [3], [0.63 - 0.69], [Red], [30],
+   [4], [0.77 - 0.90], [Near Infrared (NIR)], [30],
+   [5], [1.55 - 1.75], [Shortwave Infrared (SWIR1)], [30],
+   [6], [10.40 - 12.50], [Thermal Infrared (TIR)], [60],
+   [7], [2.08 - 2.35], [Shortwave Infrared (SWIR2)], [30],
+   [8], [0.52 - 0.90], [Panchromatic], [15],
+   ),
+   kind: "tab",
+   supplement: "tab.",
+   caption: "Spektrální pásma sensoru ETM+",
+)
+=== Operational Land Imager (OLI)
+Sensor OLI představoval významný technologický pokrok na poli radiometrů. Oproti ETM+, který používal oscilující zrcadla (_whiskbroom_) zde byly aplikovány dlouhé lineární řady detektorů zarovnané na ohniskové rovině přístroje společně se čtyřzrcadlovým astigmatickým teleskopem. Díky tomu bylo možné z architektury odstranit několik pohyblivých částí a zároveň zlepšit citlivost. Tato technologie se nazýva _pushbroom_ @VaughnL8. OLI je multispektrální radiometr snímající devět pásem ve 12bitové hloubce @irons2012next. Novinkou jsou dvě pásma. _Coastal Aerosol_ určené pro pozorování barvy oceánu v pobřežních zónách a _Cirrus_ pro detekci vysoké oblačnosti @nasaoli. Z hlediska radiometrické chybovosti byly požadavky na OLI srovnatelné s ETM+. Avšak u poměru signálu k šumu (_SNR_) byly stanoveny přísněji @VaughnL8.
+
+Jednotlivá pásma sensoru OLI a jejich vlnové délky jsou zobrazeny v tabulce x.
+
+#figure(
+   table(
+   columns: (4),
+   inset: 5pt,
+   align: center + horizon,
+   [*Pásmo*], [*Vlnová délka (µm)*], [*Název*], [*Rozlišení (m)*],
+   [1], [0.43 - 0.45], [Coastal Aerosol], [30],
+   [2], [0.45 - 0.51], [Blue], [30],
+   [3], [0.53 - 0.59], [Green], [30],
+   [4], [0.64 - 0.67], [Red], [30],
+   [5], [0.85 - 0.88], [Near Infrared (NIR)], [30],
+   [6], [1.57 - 1.65], [Shortwave Infrared (SWIR1)], [30],
+   [7], [2.11 - 2.29], [Shortwave Infrared (SWIR2)], [30],
+   [8], [0.50 - 0.68], [Panchromatic], [15],
+   [9], [1.36 - 1.38], [Cirrus], [30],
+   ),
+   kind: "tab",
+   supplement: "tab.",
+   caption: "Spektrální pásma sensoru OLI",
+)
+=== Rozdíly mezi sensory
+@flood2014continuity
+rozdíly@VaughnL8
+#figure(
+   image("images/OLI_ETM+.png", width: 100%),
+   kind: "img",
+   supplement: "obr.",
+   caption: " Relativní spektrální odezvy pro pásma Landsat 7 (ETM+) a Landsat 8 (OLI). Spektrální odezva pro každé pásmo je zobrazena s číslem pásma ve stejné barvě (Flood 2014).",
+)
 == Vliv šířky spektrálních pásem
 
 == Shrnutí aktuálních studií 
@@ -456,15 +513,6 @@ Pro další ilustraci výsledků byla data také přenesena do grafu:
    kind: "tab",
    supplement: "tab.",
    caption: "Výsledky analýzy sezón",
-)
-
-#lorem(100)
-
-#figure(
-   image("images/images.jpg", width: 60%),
-   kind: "img",
-   supplement: "obr.",
-   caption: " ježek",
 )
 
 #figure(
