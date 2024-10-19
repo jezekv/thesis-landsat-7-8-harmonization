@@ -149,15 +149,22 @@ Jednotlivá pásma sensoru OLI a jejich vlnové délky jsou zobrazeny v tabulce 
    caption: "Spektrální pásma sensoru OLI",
 )
 === Rozdíly mezi sensory
-@flood2014continuity
-rozdíly@VaughnL8
+Ačkoli byl senzor OLI navržen s ohledem na kompatibilitu se staršími snímači ETM+ a TM (Thematic Mapper), tak se vzhledem k inovacím mírně liší @irons2012next. Přidáním dalšího pásma na modrém konci spektra u OLI se změnilo číslování. Pásma TM a ETM+ označena jako 1, 2, 3, 4, 5, 7 odpovídají reflexním pásmům OLI 2, 3, 4, 5, 6, 7 v tomto pořadí @flood2014continuity. Několik pásem u OLI bylo zuženo, aby se vyhnuli atmosferickým absorbčním zónám. Největší změna se týká pásma 5 OLI, které bylo upraveno tak, aby vyloučilo absorpční pás vodní páry při 0,825 μm uprostřed pásma 4 ETM+. Upraveno bylo i panchromatické pásmo a SWIR1 se SWIR2 @VaughnL8. Spektrální odezvy jednotlivých pásem jsou zobrazeny na obrázku x.
+
 #figure(
    image("images/OLI_ETM+.png", width: 100%),
    kind: "img",
    supplement: "obr.",
    caption: " Relativní spektrální odezvy pro pásma Landsat 7 (ETM+) a Landsat 8 (OLI). Spektrální odezva pro každé pásmo je zobrazena s číslem pásma ve stejné barvě (Flood 2014).",
 )
-== Vliv šířky spektrálních pásem
+== Vliv šířky spektrálních pásem při výpočtu vegetačních indexů
+Běžně používané vegetační indexy jsou založeny na vztahu spektra červeného a blízkého infračerveného záření, a to z důvodu citlivosti na fotosyntetická barviva a morfologii listu @ELVIDGE199538. Navzdory snadné aplikaci mají tyto kombinace řadu nevýhod (např. nedostatek citlivosti a spektrální věrnosti k zachycení jemných variací) při použití nespecificky korigovaných a širokých spektrálních pásem. U satelitů Landsat snižuje citlivost také menší prostorové rozlišení 30 metrů @xue2017significant @huete2012vegetation. I přes tyto nedostatky jsou však sensory s hrubším prostorovým i spektrálním rozlišením dobrým zdrojem konzistentních a včasných informací o regionálních trendech @huete2012vegetation.
+
+Hodnoty vegetačních indexů odvozených ze snímků z různých satelitních sensorů se liší na základě nenapravitelných rozdílů mezi analogickými spektrálními pásmy používanými k jejich generování @teillet2008spectral.
+Při porovnání dat ze sensoru AVIRIS se spektrálními pásmy specifickými pro další satelitní sensory byly výsledky NDVI (Normalized Difference Vegetation Index) výrazně ovlivněny rozdíly ve spektrální šířce pásma, přičemž zvlášť důležité bylo červené pásmo @teillet1997effects.
+Sensor AVHRR byl vzhledem k šírším spektrálním pásmům citlivější na atmosférickou vodní páru, která ovlivnila výsledky NDVI oproti dalším porovnávaným sensorům @brown2006evaluation. Primárním důvodem nepřesností u výsledků NDVI byly mezi sensory MODIS a AVHRR označeny aerosoly a vodní páry. Ty ovlivňují pásma NIR a RED odlišnými způsoby v různých vlnových délkách. Finální shodu NDVI mezi sensory tak formuje šířka jejich pásem @van2006multi. Podobných výsledků bylo dosaženo při porovnání sensorů ETM+ a OLI, kde měla hlavní vliv na nekonzistenci výsledků NDVI šířka pásma NIR. To lze vysvětlit tím, že užší pásmo NIR u OLI je méně ovlivněno absorpcí vodní páry @ke2015characteristics. 
+
+Aktuální multisenzorové aplikace NDVI tak mohou dosáhnout největšího přínosu, pokud se efektivně vyřeší atmosférické korekce a použijí se translační rovnice @van2006multi.
 
 == Shrnutí aktuálních studií 
 
