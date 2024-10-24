@@ -6,7 +6,7 @@ set text(
   lang: "cs",
   font: "Arial",
   size: 11pt,
-  hyphenate: false, // dělení slov
+  hyphenate: true, // dělení slov
 
 )
 
