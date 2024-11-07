@@ -195,8 +195,17 @@ Hodnoty maximálního NDVI během sezóny jsou však citlivé na dostupnost sní
 Robustnější metodou oproti maximálním hodnotám NDVI může být jejich medián. Ten je odolnější vůči výkyvům v kvantitě dat a outlierům, ale nezachovává jejich integiru @ruefenacht2016comparison. Nicméně, jak upozorňuje @bayle2024landsat, i tato roční metrika může být postižena podobnými problémy a nemusí přesně zachytit časové změny vegetace. Pokud je k dispozici větší množství snímků za stejný časový úsek, zvyšuje se pravděpodobnost, že se zaznamenají vyšší hodnoty NDVI, což může ovlivnit nejen maximální hodnotu, ale i medián.
 
 = Charakteristika studijního území
-   něco o Léhu a typických znacích vysokohorského prostředí
-   obrázky scén landsat
+Studovali jsme oblast teritoria Ladakh v severní Indii (viz obrázek X). Průměrná nadmořská výška studovaného území je 4900 m n. m., přičemž nejvyšším bodem je hora Kangju Kangri, dosahující výšky 6725 m n. m., a nejnižším bodem je údolí řeky Chenab, ležící ve výšce 2100 m n. m.
+
+Jedná se o vysokohorskou aridní zónu, která je díky suchému kontinentálnímu klimatu nezaledněná až do nadmořské výšky 6200 až 6400 m n. m. Tato oblast je specifická pro relativně velké plochy rozvinutých půd mezi 5600 a 6000 m n. m., které pokrývá řídká subnivální vegetace @dvorsky2015vascular. Z klimatického hlediska je oblast kolem města Leh (severní část studovaného území, ve výšce 3500 m n. m.) charakterizována dynamicky se měnícími teplotami, které v průběhu roku kolísají mezi 34,8 °C v létě a až −27,9 °C v zimě. Průměrná denní teplota se pohybuje kolem 7,3 °C. Průměrné denní množství srážek se pohybuje v rozmezí 0,5 až 1,5 mm/den. Tyto klimatické podmínky činí region Leh chladným a suchým @chevuturi2018climate.
+
+
+#figure(
+   image("images/mapa.png", width: 100%),
+   kind: "img",
+   supplement: "obr.",
+   caption: "Mapa studovaného území s vyznačenými hranicemi scény (červený čtverec)",
+)
 
 = Metodika
 V této kapitole je popsána příprava dat z družic Landsat 7 a Landsat 8 pro analýzu vegetačního indexu NDVI. Data jsou nejprve kalibrována a filtrována pro odstranění oblačnosti. Následně je provedena harmonizace spektrálních pásem a výpočet NDVI. Výsledky jsou zpracovány ve dvou formách: jako sezónní maxima NDVI pro porovnání mezi sezónami a jako NDVI pro každý snímek, což umožňuje srovnání dvojic a scén v sezóně.
@@ -217,7 +226,7 @@ Byla použita atmosféricky korigovaná data v označení _Level 2, Collection 2
 Základní myšlenkou modelu LEDAPS je, v prvním kroku, kalibrace syrových dat na horní část atmosféry (TOA) a následně atmosferická korekce pomocí metody MODIS/6S @masek_2006. Metoda LaSRC využívá pro výpočet aerosolové pásmo a pomocná klimatická data MODIS nebo VIIRS CMG společně s modelem radiačního přenosu @VERMOTE2016.
 
 == Kalibrace dat a filtrace oblačnosti
-Informace o skutečné odrazivosti povrchu (tzv. surface reflectance) byly získány po kalibraci dat na základě přepočtu DN hodnot o _scale factor_ a tzv. _additive offset_. @Gee_migration. DN (Digital Number) je číselná hodnota, která udává intenzitu odraženého světla, ale ještě neodpovídá skutečné odrazivosti povrchu. Scale factor je násobící činitel, kterým se DN hodnota upraví, a additive offset je hodnota, která se k výsledku přičítá či odečítá pro přesnou interpretaci. Tento krok byl zásadním předpokladem pro správnou aplikaci harmonizačních koeficientů a výpočtu NDVI. Průběh kalibrace optických pásem je zobrazen na obrázku x.
+Informace o skutečné odrazivosti povrchu (tzv. surface reflectance) byly získány po kalibraci dat na základě přepočtu DN hodnot o _scale factor_ a tzv. _additive offset_. @Gee_migration. DN (Digital Number) je číselná hodnota, která udává intenzitu odraženého světla, ale ještě neodpovídá skutečné odrazivosti povrchu. Scale factor je násobící činitel, kterým se DN hodnota upraví a additive offset je konstanta, která se k výsledku následně přičítá či odečítá. Tento krok byl zásadním předpokladem pro správnou aplikaci harmonizačních koeficientů a výpočtu NDVI. Průběh kalibrace optických pásem je zobrazen na obrázku x.
 
 #figure(
 block()[
@@ -497,12 +506,12 @@ Byly vytvořeny souhrny pro každý snímek v sezóně, které zahrnovaly:
 - *Průměr:* Jako doplňující metrika ke kvartilům.
 
 === Analýza dvojic
-Proběhlo sjednocení všech bodů do jednoho souboru. To umožnilo komplexní porovnání všech dostupných dvojic snímku v rámci celého studovaného období najenou. Následovala analýza a vizualizace ve formě přehledové tabulky, která obsahovala: 
+Proběhlo sjednocení všech bodů do jednoho souboru. To umožnilo komplexní porovnání všech dostupných dvojic snímku v rámci celého studovaného období najenou. Následovala analýza, jejímž výstupem bylo:
 - *Hodnocení přesnosti:* Toto hodnocení bylo prezentováno pomocí dvou klíčových metrik: _RMSE_ (Root Mean Square Error) a _ME_ (Mean Error) přímo mezi hodnotami bodů z obou senzorů s různým přístupem k harmonizaci.
 - *Lineární regresi:* Pro všechny body byl spočítán lineární regresní model. Nezávisle na sobě byly testovány různé přístupy k harmonizci. Do tabulky byly zahrnuty parametry modelu: _Slope_, _Intercept_ a _R2 - koeficient determinace_.
 
 === Analýza maximálních hodnot NDVI z celé sezóny
-Jednotlivé sloupce byly separovány do vektorů, kde každý vektor zahrnoval vždy tři sloupce z určité sezóny - Landsat 7, Landsat 8 a jejich kombinaci. Toto rozdělení umožnilo zpracovat každý vektor nezávisle na sobě. Výstupem byla přehledová tabulka, která obsahovala:
+Jednotlivé sloupce byly separovány do vektorů, kde každý vektor zahrnoval vždy tři sloupce z určité sezóny - Landsat 7, Landsat 8 a jejich kombinaci. Toto rozdělení umožnilo zpracovat každý vektor nezávisle na sobě. Výstupem analýzy bylo:
 - *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší maximální hodnotu NDVI oproti druhému sensoru. Byly porovnány vždy pozičně shodné pixely. 
 - *Kvartily:* Nejříve byly odečteny hodnoty NDVI Landsatu 7 od Landsatu 8 (L8 - L7). Odečet byl proveden pouze na pozičně shodných pixelech. Výsledky byly před výpočtem kvartilů sežazeny vzestupně.
 - *Hodnocení přesnosti:* V podobě _RMSE_ (Root Mean Square Error) a _ME_ (Mean Error) přímo mezi hodnotami bodů z obou senzorů.
