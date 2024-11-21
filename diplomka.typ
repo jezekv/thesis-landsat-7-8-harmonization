@@ -96,7 +96,8 @@ Satelit Landsat 7 byl na oběžnou dráhu vypuštěn v roce 1999 jako nástupce 
 
 Satelit Landsat 8 začal zaznamenávat povrch Země v roce 2013. Hlavní změnou oproti predchozím generacím byl nový vylepšený optický snímač OLI a termální infračervený sensor TIRS @roy2014landsat. Jak OLI, tak TIRS jsou senzory typu _pushbroom_, jejichž vlivem byla vylepšena geometrická přesnost a také poměr signálu k šumu @irons2012next. Landsat 8 má opakovací cyklus snímání 16 dní a je umístěn na stejné oběžné dráze jako již vyřazený Landsat 5 @roy2014landsat. V kombinaci s Landsatem 7 bylo tak umožněno zachytit každé místo na rovníku s intervalem 8 dní a ve vyšších zeměpisních šířkách, v důsledku tzv. _poleward convergence_, kdy se dráhy satelitů směrem k pólům sbíhají, i častěji @kovalskyy2013global.  
 
-Aktuálně na oběžné dráze aktivně snímají pouze dva satelity, a to Landsat 8 a Landsat 9. Kompletní přehled jednotlivých misí Landsat a jejich období provozu je znázorněno na obrázku X. Kolem roku 2030 by měla být zahájena mise Landsat-Next, která nabídné lepší prostorové rozlišení s více specificky zaměřenými pásmy a díky konstelaci třech satelitů i šestidenní interval snímání  @wulder2022fifty @landsatnext.
+Aktuálně na oběžné dráze aktivně snímají pouze dva satelity, a to Landsat 8 a Landsat 9. Kompletní přehled jednotlivých misí Landsat a jejich období provozu je znázorněno na obrázku X. 
+První generace satelitů Landsat byla vybavena snímačem Multispectral Scanner (MSS), který měl ve srovnání s novějšími snímači (TM - Thematic Mapper, ETM+ a OLI) nejen horší prostorové rozlišení (60 metrů), ale také odlišná spektrální pásma, pokrývající jiné oblasti vlnových délek. Z tohoto důvodu je možné vytvářet konzistentní časové řady až od nástupu satelitu Landsat 4 @banskota2014forest. 
 
 #figure(
    image("images/landsat.png", width: 100%),
@@ -104,6 +105,8 @@ Aktuálně na oběžné dráze aktivně snímají pouze dva satelity, a to Lands
    supplement: "obr.",
    caption: " Časová osa misí Landsat",
 )
+
+Kolem roku 2030 by měla být zahájena mise Landsat-Next, která nabídné lepší prostorové rozlišení s více specificky zaměřenými pásmy a díky konstelaci třech satelitů i šestidenní interval snímání  @wulder2022fifty @landsatnext.
 
 == Specifikace sensorů
 === Enhanced Thematic Mapper Plus (ETM+) 
@@ -116,7 +119,10 @@ Jednotlivá pásma sensoru ETM+ a jejich vlnové délky jsou uvedeny v tabulce x
    columns: (4),
    inset: 5pt,
    align: center + horizon,
+   stroke: none,
+   table.hline(),
    [*Pásmo*], [*Vlnová délka (µm)*], [*Název*], [*Rozlišení (m)*],
+   table.hline(),
    [1], [0.45 - 0.52], [Blue], [30],
    [2], [0.52 - 0.60], [Green], [30],
    [3], [0.63 - 0.69], [Red], [30],
@@ -125,6 +131,7 @@ Jednotlivá pásma sensoru ETM+ a jejich vlnové délky jsou uvedeny v tabulce x
    [6], [10.40 - 12.50], [Thermal Infrared (TIR)], [60],
    [7], [2.08 - 2.35], [Shortwave Infrared (SWIR2)], [30],
    [8], [0.52 - 0.90], [Panchromatic], [15],
+   table.hline(),
    ),
    kind: "tab",
    supplement: "tab.",
@@ -140,7 +147,10 @@ Jednotlivá pásma sensoru OLI a jejich vlnové délky jsou uvedeny v tabulce x.
    columns: (4),
    inset: 5pt,
    align: center + horizon,
+   stroke: none,
+   table.hline(),
    [*Pásmo*], [*Vlnová délka (µm)*], [*Název*], [*Rozlišení (m)*],
+   table.hline(),
    [1], [0.43 - 0.45], [Coastal Aerosol], [30],
    [2], [0.45 - 0.51], [Blue], [30],
    [3], [0.53 - 0.59], [Green], [30],
@@ -150,11 +160,13 @@ Jednotlivá pásma sensoru OLI a jejich vlnové délky jsou uvedeny v tabulce x.
    [7], [2.11 - 2.29], [Shortwave Infrared (SWIR2)], [30],
    [8], [0.50 - 0.68], [Panchromatic], [15],
    [9], [1.36 - 1.38], [Cirrus], [30],
+   table.hline(),
    ),
    kind: "tab",
    supplement: "tab.",
    caption: "Spektrální pásma sensoru OLI",
 )
+
 === Rozdíly mezi sensory
 Ačkoli byl senzor OLI navržen s ohledem na kompatibilitu se staršími snímači ETM+ a TM (Thematic Mapper), tak se vzhledem k inovacím mírně liší @irons2012next. Přidáním dalšího pásma na modrém konci spektra u OLI se změnilo číslování. Pásma TM a ETM+ označena jako 1, 2, 3, 4, 5, 7 odpovídají reflexním pásmům OLI 2, 3, 4, 5, 6, 7 v tomto pořadí @flood2014continuity. Několik pásem u OLI bylo zuženo, aby se vyhnula atmosferickým absorpčním zónám. Největší změna se týká pásma 5 OLI, které bylo upraveno tak, aby vyloučilo absorpční pás vodní páry při 0,825 μm uprostřed pásma 4 ETM+. Upraveno bylo i panchromatické pásmo a SWIR1 se SWIR2 @VaughnL8. Spektrální odezvy jednotlivých pásem jsou zobrazeny na obrázku x.
 
@@ -308,14 +320,15 @@ Aplikace koeficientů byla provedena pouze na snímky ze sensoru OLI (Landsat 8)
    columns: (2),
    inset: 5pt,
    align: center + horizon,
+   stroke: none,
+   table.hline(),
 
 [*Pásmo*], [*Vzorec*],
+table.hline(),
 [RED], [ETM + = *0.0123* + *0.9372* OLI], 
 [NIR], [ETM + = *0.0448* + *0.8339* OLI],
 [NDVI], [ETM + = *0.0029* + *0.9589* OLI], 
-
-
-
+table.hline(),
    ),
    kind: "tab",
    supplement: "tab.",
@@ -343,10 +356,11 @@ function computeNdvi(image) {
   var ndvi = image.expression(
     '((NIR - RED) / (NIR +  RED))',
     {
-      'NIR': image.select('NIR').multiply(0.8339).add(0.0448),
-      'RED': image.select('RED').multiply(0.9372).add(0.0123),  
+      'NIR': image.select('NIR'),
+      'RED': image.select('RED'),  
     }
-  ).rename('NDVI');
+  ).rename('NDVI').multiply(0.9589).add(0.0029);
+
   var thresholdMask = ndvi.gt(thresholdValue);
   var updatedMask = ndvi.updateMask(thresholdMask);
   var addNDVI = image.addBands(updatedMask);
@@ -358,7 +372,7 @@ function computeNdvi(image) {
 
    kind: "img",
    supplement: "obr.",
-   caption: "Funkce pro výpočet NDVI a prahování s aplikací harmonizačních koeficientů na pásma RED a NIR (pro harmonizaci výsledků NDVI byl použit stejný postup pouze s jinými koeficienty)",)
+   caption: "Funkce pro výpočet NDVI a prahování s aplikací harmonizačních koeficientů na získaném NDVI (pro harmonizaci pasem NIR a RED byl použit stejný postup pouze s jinými koeficienty)",)
 
 Zpracování dat popsané výše bylo společné pro obě následující kapitoly. Tedy jak pro porovnání jednotlivých scén mezi sebou, tak i pro porovnání maximálních hodnot NDVI z celých sezón.
 
@@ -502,14 +516,13 @@ Statistická část probíhala v prostředí R Studio (verze R 4.3.1). Importov�
 
 === Analýza scén v rámci jedné sezóny
 Byly vytvořeny souhrny pro každý snímek v sezóně, které zahrnovaly:
-- *Kvartily:* V tomto případě byly hodnoty zpracovány v neupravené podobě (na rozdíl od kapitoly x.x.x.). 
+- *Kvartily:* V tomto případě byly hodnoty zpracovány ve standardní podobě (na rozdíl od kapitoly x.x.x.). 
 - *Průměr:* Jako doplňující metrika ke kvartilům.
 
 === Analýza dvojic
 Proběhlo sjednocení všech bodů do jednoho souboru. To umožnilo komplexní porovnání všech dostupných dvojic snímku v rámci celého studovaného období najenou. Následovala analýza, jejímž výstupem bylo:
 - *Hodnocení přesnosti:* Toto hodnocení bylo prezentováno pomocí dvou klíčových metrik: _RMSE_ (Root Mean Square Error) a _ME_ (Mean Error) přímo mezi hodnotami bodů z obou senzorů s různým přístupem k harmonizaci.
-- *Lineární regresi:* Pro všechny body byl spočítán lineární regresní model. Nezávisle na sobě byly testovány různé přístupy k harmonizci. Do tabulky byly zahrnuty parametry modelu: _Slope_, _Intercept_ a _R2 - koeficient determinace_.
-
+- *Lineární regresi:* Pro všechny body byl spočítán lineární regresní model. Nezávisle na sobě byly testovány různé přístupy k harmonizci. Do tabulky byly zahrnuty parametry modelu: _Slope_ (udává sklon přímky), _Intercept_ (určuje posun na ose y při hodnotě nezávislé proměnné 0) a _R2 - koeficient determinace_ (ukazuje, jak dobře model vysvětluje variabilitu dat).
 === Analýza maximálních hodnot NDVI z celé sezóny
 Jednotlivé sloupce byly separovány do vektorů, kde každý vektor zahrnoval vždy tři sloupce z určité sezóny - Landsat 7, Landsat 8 a jejich kombinaci. Toto rozdělení umožnilo zpracovat každý vektor nezávisle na sobě. Výstupem analýzy bylo:
 - *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší maximální hodnotu NDVI oproti druhému sensoru. Byly porovnány vždy pozičně shodné pixely. 
@@ -526,60 +539,379 @@ Jednotlivé sloupce byly separovány do vektorů, kde každý vektor zahrnoval v
 = Přehled literatury a použitých zdrojů
    #set par(first-line-indent: 0em, leading: 0.6em)
    #set block(spacing: 0.6em)
+   #show bibliography: set text(size: 10pt)
    #bibliography("zdroje.bib", title: none, style: "citace_czu.csl")
 
 = Přílohy
    #set par(first-line-indent: 2em, leading: 1em)
-   #set block(spacing: 2.5em)
+   #set block(spacing: 1.5em)
 
-== Test tabulky obrázky
+
+#set page(
+margin: (
+top: 1cm,
+bottom: 2.5cm,
+left: 3cm,
+right: 1cm 
+),
+)
+
+=== Příloha 
+#figure(
+   image("images/densita_1.svg", width: 100%)
+)
+
+#figure(
+   image("images/densita_2.svg", width: 100%)
+)
+
+=== Příloha 
+#figure(
+   image("images/maxscatter_1.svg", width: 100%)
+)
+
+#figure(
+   image("images/maxscatter_2.svg", width: 100%)
+)
+
+=== Příloha 1
+#figure(
+   image("images/sezony_1.svg", width: 100%)
+)
+
+#figure(
+   image("images/sezony_2.svg", width: 100%)
+)
+
+#show figure: set text(size: 6.5pt)
+#set page(columns: 2)
+
+=== Příloha 2
+
 #figure(
    table(
-   columns: (11),
-   inset: 5pt,
+   columns: (7),
+   inset: 3pt,
    align: center + horizon,
-
-   [*Year*], [*L7 %*], [*L8 %*], [*Q25*], [*Q50*], [*Q75*], [*RMSE*], [*ME*], [*Slp.*], [*Int.*], [*R2*],
-   [2013], [12.40], [87.60], [0.018], [0.037], [0.062], [0.064], [0.039], [0.893], [0.066], [0.723],
-   [2014], [9.64], [90.36], [0.020], [0.040], [0.064], [0.065], [0.046], [0.904], [0.070], [0.781],
-   [2015], [4.34], [95.66], [0.033], [0.055], [0.084], [0.078], [0.062], [0.947], [0.075], [0.753],
-   [2016], [10.24], [89.76], [0.026], [0.053], [0.086], [0.080], [0.058], [0.958], [0.067], [0.687],
-   [2017], [26.76], [73.24], [-0.002], [0.023], [0.048], [0.052], [0.023], [0.894], [0.051], [0.763],
-   [2018], [31.72], [68.28], [-0.009], [0.020], [0.051], [0.069], [0.021], [0.702], [0.093], [0.552],
-   [2019], [8.80], [91.20], [0.027], [0.052], [0.081], [0.077], [0.058], [0.885], [0.085], [0.698],
-   [2020], [16.70], [83.30], [0.010], [0.030], [0.049], [0.051], [0.030], [0.941], [0.045], [0.817],
-   [2021], [10.24], [89.76], [0.023], [0.050], [0.089], [0.086], [0.061], [0.893], [0.086], [0.624]
-
-   ),
-   kind: "tab",
-   supplement: "tab.",
-   caption: "Výsledky analýzy sezón",
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2013-05-04], [Landsat 8],[bez harmonizace], [0.259], [0.225], [0.161], [0.319],
+[2013-05-04], [Landsat 8],[NIR a RED], [0.264], [0.237], [0.175], [0.324],
+[2013-05-04], [Landsat 8],[NDVI], [0.252], [0.218], [0.158], [0.309],
+[2013-05-20], [Landsat 8],[bez harmonizace], [0.291], [0.266], [0.187], [0.364],
+[2013-05-20], [Landsat 8],[NIR a RED], [0.292], [0.272], [0.202], [0.358],
+[2013-05-20], [Landsat 8],[NDVI], [0.282], [0.258], [0.182], [0.352],
+[2013-06-05], [Landsat 8],[bez harmonizace], [0.378], [0.348], [0.244], [0.489],
+[2013-06-05], [Landsat 8],[NIR a RED], [0.368], [0.343], [0.251], [0.464],
+[2013-06-05], [Landsat 8],[NDVI], [0.366], [0.337], [0.237], [0.472],
+[2013-06-21], [Landsat 8],[bez harmonizace], [0.459], [0.435], [0.315], [0.602],
+[2013-06-21], [Landsat 8],[NIR a RED], [0.441], [0.418], [0.314], [0.564],
+[2013-06-21], [Landsat 8],[NDVI], [0.443], [0.420], [0.305], [0.580],
+[2013-06-29], [Landsat 7],[], [0.410], [0.383], [0.275], [0.545],
+[2013-07-23], [Landsat 8],[bez harmonizace], [0.495], [0.467], [0.328], [0.671],
+[2013-07-23], [Landsat 8],[NIR a RED], [0.473], [0.446], [0.323], [0.627],
+[2013-07-23], [Landsat 8],[NDVI], [0.478], [0.451], [0.317], [0.647],
+[2013-07-31], [Landsat 7],[], [0.405], [0.372], [0.253], [0.555],
+[2013-08-24], [Landsat 8],[bez harmonizace], [0.411], [0.372], [0.273], [0.521],
+[2013-08-24], [Landsat 8],[NIR a RED], [0.396], [0.364], [0.273], [0.494],
+[2013-08-24], [Landsat 8],[NDVI], [0.397], [0.360], [0.264], [0.503],
+[2013-09-01], [Landsat 7],[], [0.349], [0.312], [0.216], [0.454],
+[2013-09-17], [Landsat 7],[], [0.305], [0.269], [0.182], [0.395],
+   table.hline(),
+),
 )
 
 #figure(
    table(
-   columns: (6),
-   inset: 5pt,
+   columns: (7),
+   inset: 3pt,
    align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2014-05-07], [Landsat 8], [bez harmonizace], [0.271], [0.230], [0.172], [0.329],
+[2014-05-07], [Landsat 8], [NIR a RED], [0.280], [0.245], [0.194], [0.331],
+[2014-05-07], [Landsat 8], [NDVI], [0.263], [0.223], [0.168], [0.318],
+[2014-05-15], [Landsat 7], [], [0.238], [0.199], [0.145], [0.285],
+[2014-06-08], [Landsat 8], [bez harmonizace], [0.397], [0.362], [0.276], [0.487],
+[2014-06-08], [Landsat 8], [NIR a RED], [0.387], [0.358], [0.282], [0.464],
+[2014-06-08], [Landsat 8], [NDVI], [0.383], [0.350], [0.268], [0.470],
+[2014-06-24], [Landsat 8], [bez harmonizace], [0.458], [0.422], [0.324], [0.573],
+[2014-06-24], [Landsat 8], [NIR a RED], [0.437], [0.406], [0.319], [0.538],
+[2014-06-24], [Landsat 8], [NDVI], [0.443], [0.408], [0.313], [0.552],
+[2014-07-10], [Landsat 8], [bez harmonizace], [0.489], [0.454], [0.344], [0.630],
+[2014-07-10], [Landsat 8], [NIR a RED], [0.467], [0.437], [0.339], [0.590],
+[2014-07-10], [Landsat 8], [NDVI], [0.472], [0.439], [0.333], [0.607],
+[2014-07-26], [Landsat 8], [bez harmonizace], [0.515], [0.477], [0.361], [0.671],
+[2014-07-26], [Landsat 8], [NIR a RED], [0.489], [0.455], [0.354], [0.626],
+[2014-07-26], [Landsat 8], [NDVI], [0.497], [0.460], [0.349], [0.647],
+[2014-08-03], [Landsat 7], [], [0.433], [0.391], [0.296], [0.561],
+[2014-08-11], [Landsat 8], [bez harmonizace], [0.486], [0.449], [0.340], [0.627],
+[2014-08-11], [Landsat 8], [NIR a RED], [0.464], [0.432], [0.335], [0.587],
+[2014-08-11], [Landsat 8], [NDVI], [0.469], [0.433], [0.329], [0.605],
+[2014-08-19], [Landsat 7], [], [0.421], [0.380], [0.280], [0.548],
+[2014-08-27], [Landsat 8], [bez harmonizace], [0.435], [0.390], [0.299], [0.544],
+[2014-08-27], [Landsat 8], [NIR a RED], [0.416], [0.381], [0.296], [0.514],
+[2014-08-27], [Landsat 8], [NDVI], [0.420], [0.377], [0.289], [0.525],
+[2014-09-12], [Landsat 8], [bez harmonizace], [0.441], [0.403], [0.304], [0.567],
+[2014-09-12], [Landsat 8], [NIR a RED], [0.421], [0.395], [0.303], [0.535],
+[2014-09-12], [Landsat 8], [NDVI], [0.426], [0.390], [0.294], [0.547],
+[2014-09-20], [Landsat 7], [], [0.366], [0.326], [0.243], [0.461],
 
-[*Date*], [*Sensor*], [*Mean*], [*Median*], [*Q1*], [*Q3*],
-[2014-05-07], [Landsat 8], [0.168], [0.150], [0.126], [0.194],
-[2014-05-15], [Landsat 7], [0.160], [0.140], [0.117], [0.185],
-[2014-06-08], [Landsat 8], [0.244], [0.237], [0.187], [0.290],
-[2014-06-24], [Landsat 8], [0.281], [0.276], [0.208], [0.344],
-[2014-07-10], [Landsat 8], [0.295], [0.293], [0.214], [0.367],
-[2014-07-26], [Landsat 8], [0.303], [0.297], [0.220], [0.375],
-[2014-08-03], [Landsat 7], [0.265], [0.253], [0.184], [0.335],
-[2014-08-11], [Landsat 8], [0.289], [0.281], [0.208], [0.359],
-[2014-08-19], [Landsat 7], [0.252], [0.244], [0.177], [0.315],
-[2014-08-27], [Landsat 8], [0.249], [0.231], [0.181], [0.307],
-[2014-09-12], [Landsat 8], [0.226], [0.208], [0.174], [0.271],
-[2014-09-20], [Landsat 7], [0.212], [0.198], [0.153], [0.260]
-
-
-   ),
-   kind: "tab",
-   supplement: "tab.",
-   caption: "Cross Landsat 2014",
+   table.hline(),
+),
 )
 
+#figure(
+   table(
+   columns: (7),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2015-05-10], [Landsat 8], [bez harmonizace], [0.248], [0.199], [0.140], [0.313],
+[2015-05-10], [Landsat 8], [NIR a RED], [0.255], [0.216], [0.158], [0.315],
+[2015-05-10], [Landsat 8], [NDVI], [0.241], [0.194], [0.137], [0.303],
+[2015-06-19], [Landsat 7], [], [0.338], [0.297], [0.182], [0.472],
+[2015-06-27], [Landsat 8], [bez harmonizace], [0.442], [0.415], [0.262], [0.615],
+[2015-06-27], [Landsat 8], [NIR a RED], [0.424], [0.399], [0.266], [0.576],
+[2015-06-27], [Landsat 8], [NDVI], [0.427], [0.401], [0.254], [0.593],
+[2015-07-05], [Landsat 7], [], [0.395], [0.361], [0.222], [0.554],
+[2015-07-29], [Landsat 8], [bez harmonizace], [0.506], [0.484], [0.300], [0.727],
+[2015-07-29], [Landsat 8], [NIR a RED], [0.481], [0.461], [0.300], [0.676],
+[2015-07-29], [Landsat 8], [NDVI], [0.489], [0.467], [0.291], [0.700],
+[2015-08-30], [Landsat 8], [bez harmonizace], [0.463], [0.426], [0.278], [0.633],
+[2015-08-30], [Landsat 8], [NIR a RED], [0.442], [0.410], [0.283], [0.592],
+[2015-08-30], [Landsat 8], [NDVI], [0.447], [0.411], [0.270], [0.610],
+[2015-09-07], [Landsat 7], [], [0.374], [0.319], [0.208], [0.502],
+[2015-09-15], [Landsat 8], [bez harmonizace], [0.396], [0.346], [0.235], [0.527],
+[2015-09-15], [Landsat 8], [NIR a RED], [0.382], [0.341], [0.245], [0.500],
+[2015-09-15], [Landsat 8], [NDVI], [0.383], [0.334], [0.228], [0.508],
+   table.hline(),
+),
+)
+
+#figure(
+   table(
+   columns: (7),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2016-05-12], [Landsat 8], [bez harmonizace], [0.259], [0.210], [0.155], [0.313],
+[2016-05-12], [Landsat 8], [NIR a RED], [0.256], [0.216], [0.159], [0.314],
+[2016-05-12], [Landsat 8], [NDVI], [0.251], [0.204], [0.152], [0.303],
+[2016-05-20], [Landsat 7], [], [0.226], [0.194], [0.142], [0.269],
+[2016-05-28], [Landsat 8], [bez harmonizace], [0.313], [0.282], [0.212], [0.375],
+[2016-05-28], [Landsat 8], [NIR a RED], [0.304], [0.277], [0.212], [0.361],
+[2016-05-28], [Landsat 8], [NDVI], [0.303], [0.274], [0.206], [0.363],
+[2016-06-13], [Landsat 8], [bez harmonizace], [0.386], [0.349], [0.264], [0.488],
+[2016-06-13], [Landsat 8], [NIR a RED], [0.371], [0.339], [0.264], [0.460],
+[2016-06-13], [Landsat 8], [NDVI], [0.373], [0.338], [0.256], [0.470],
+[2016-07-07], [Landsat 7], [], [0.337], [0.291], [0.210], [0.447],
+[2016-07-23], [Landsat 7], [], [0.359], [0.310], [0.217], [0.485],
+[2016-07-31], [Landsat 8], [bez harmonizace], [0.418], [0.370], [0.265], [0.550],
+[2016-07-31], [Landsat 8], [NIR a RED], [0.400], [0.358], [0.265], [0.517],
+[2016-07-31], [Landsat 8], [NDVI], [0.404], [0.357], [0.257], [0.530],
+[2016-08-16], [Landsat 8], [bez harmonizace], [0.373], [0.330], [0.241], [0.470],
+[2016-08-16], [Landsat 8], [NIR a RED], [0.360], [0.324], [0.242], [0.446],
+[2016-08-16], [Landsat 8], [NDVI], [0.361], [0.320], [0.234], [0.453],
+[2016-09-09], [Landsat 7], [], [0.266], [0.219], [0.162], [0.326],
+[2016-09-17], [Landsat 8], [bez harmonizace], [0.302], [0.250], [0.187], [0.369],
+[2016-09-17], [Landsat 8], [NIR a RED], [0.297], [0.256], [0.192], [0.366],
+[2016-09-17], [Landsat 8], [NDVI], [0.292], [0.242], [0.182], [0.357],
+[2016-09-25], [Landsat 7], [], [0.222], [0.183], [0.137], [0.267],
+
+   table.hline(),
+),
+)
+
+#figure(
+   table(
+   columns: (7),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2017-05-15], [Landsat 8], [bez harmonizace], [0.287], [0.259], [0.172], [0.371],
+[2017-05-15], [Landsat 8], [NIR a RED], [0.287], [0.265], [0.188], [0.361],
+[2017-05-15], [Landsat 8], [NDVI], [0.278], [0.251], [0.168], [0.358],
+[2017-06-08], [Landsat 7], [], [0.326], [0.307], [0.203], [0.423],
+[2017-06-16], [Landsat 8], [bez harmonizace], [0.411], [0.391], [0.264], [0.538],
+[2017-06-16], [Landsat 8], [NIR a RED], [0.394], [0.377], [0.262], [0.508],
+[2017-06-16], [Landsat 8], [NDVI], [0.397], [0.378], [0.256], [0.519],
+[2017-06-24], [Landsat 7], [], [0.372], [0.351], [0.233], [0.495],
+[2017-07-02], [Landsat 8], [bez harmonizace], [0.484], [0.472], [0.327], [0.645],
+[2017-07-02], [Landsat 8], [NIR a RED], [0.464], [0.450], [0.322], [0.603],
+[2017-07-02], [Landsat 8], [NDVI], [0.467], [0.455], [0.317], [0.622],
+[2017-07-10], [Landsat 7], [], [0.427], [0.408], [0.285], [0.580],
+[2017-08-11], [Landsat 7], [], [0.347], [0.309], [0.222], [0.464],
+[2017-08-27], [Landsat 7], [], [0.351], [0.318], [0.225], [0.465],
+[2017-09-04], [Landsat 8], [bez harmonizace], [0.398], [0.358], [0.256], [0.526],
+[2017-09-04], [Landsat 8], [NIR a RED], [0.387], [0.351], [0.262], [0.497],
+[2017-09-04], [Landsat 8], [NDVI], [0.385], [0.346], [0.248], [0.508],
+[2017-09-12], [Landsat 7], [], [0.314], [0.278], [0.197], [0.413],
+[2017-09-20], [Landsat 8], [bez harmonizace], [0.357], [0.314], [0.227], [0.462],
+[2017-09-20], [Landsat 8], [NIR a RED], [0.352], [0.315], [0.244], [0.442],
+[2017-09-20], [Landsat 8], [NDVI], [0.346], [0.304], [0.221], [0.446],
+[2017-09-28], [Landsat 7], [], [0.277], [0.242], [0.170], [0.364],
+   table.hline(),
+),
+)
+
+#figure(
+   table(
+   columns: (7),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2018-05-02], [Landsat 8], [bez harmonizace], [0.219], [0.200], [0.154], [0.266],
+[2018-05-02], [Landsat 8], [NIR a RED], [0.218], [0.199], [0.159], [0.259],
+[2018-05-02], [Landsat 8], [NDVI], [0.213], [0.194], [0.150], [0.258],
+[2018-05-10], [Landsat 7], [], [0.215], [0.190], [0.135], [0.268],
+[2018-05-26], [Landsat 7], [], [0.272], [0.240], [0.170], [0.349],
+[2018-06-03], [Landsat 8], [bez harmonizace], [0.340], [0.308], [0.217], [0.441],
+[2018-06-03], [Landsat 8], [NIR a RED], [0.326], [0.296], [0.215], [0.416],
+[2018-06-03], [Landsat 8], [NDVI], [0.329], [0.298], [0.211], [0.426],
+[2018-06-11], [Landsat 7], [], [0.314], [0.291], [0.205], [0.402],
+[2018-06-19], [Landsat 8], [bez harmonizace], [0.404], [0.385], [0.264], [0.526],
+[2018-06-19], [Landsat 8], [NIR a RED], [0.385], [0.369], [0.259], [0.496],
+[2018-06-19], [Landsat 8], [NDVI], [0.390], [0.372], [0.256], [0.508],
+[2018-07-05], [Landsat 8], [bez harmonizace], [0.462], [0.462], [0.304], [0.607],
+[2018-07-05], [Landsat 8], [NIR a RED], [0.438], [0.435], [0.292], [0.569],
+[2018-07-05], [Landsat 8], [NDVI], [0.446], [0.445], [0.294], [0.585],
+[2018-07-29], [Landsat 7], [], [0.416], [0.413], [0.262], [0.565],
+[2018-08-22], [Landsat 8], [bez harmonizace], [0.423], [0.413], [0.287], [0.549],
+[2018-08-22], [Landsat 8], [NIR a RED], [0.403], [0.392], [0.279], [0.516],
+[2018-08-22], [Landsat 8], [NDVI], [0.409], [0.399], [0.278], [0.530],
+[2018-08-30], [Landsat 7], [], [0.373], [0.359], [0.250], [0.482],
+
+   table.hline(),
+),
+)
+
+#figure(
+   table(
+   columns: (7),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2019-05-05], [Landsat 8], [bez harmonizace], [0.303], [0.279], [0.205], [0.380],
+[2019-05-05], [Landsat 8], [NIR a RED], [0.312], [0.294], [0.229], [0.381],
+[2019-05-05], [Landsat 8], [NDVI], [0.294], [0.270], [0.200], [0.367],
+[2019-05-13], [Landsat 7], [], [0.247], [0.223], [0.165], [0.306],
+[2019-05-21], [Landsat 8], [bez harmonizace], [0.379], [0.354], [0.274], [0.469],
+[2019-05-21], [Landsat 8], [NIR a RED], [0.374], [0.354], [0.283], [0.452],
+[2019-05-21], [Landsat 8], [NDVI], [0.366], [0.342], [0.265], [0.452],
+[2019-05-29], [Landsat 7], [], [0.318], [0.292], [0.222], [0.396],
+[2019-06-14], [Landsat 7], [], [0.410], [0.386], [0.299], [0.513],
+[2019-06-22], [Landsat 8], [bez harmonizace], [0.481], [0.454], [0.348], [0.605],
+[2019-06-22], [Landsat 8], [NIR a RED], [0.458], [0.433], [0.342], [0.567],
+[2019-06-22], [Landsat 8], [NDVI], [0.464], [0.438], [0.337], [0.583],
+[2019-07-08], [Landsat 8], [bez harmonizace], [0.521], [0.495], [0.378], [0.660],
+[2019-07-08], [Landsat 8], [NIR a RED], [0.495], [0.470], [0.368], [0.616],
+[2019-07-08], [Landsat 8], [NDVI], [0.503], [0.477], [0.365], [0.636],
+[2019-07-24], [Landsat 8], [bez harmonizace], [0.526], [0.499], [0.377], [0.678],
+[2019-07-24], [Landsat 8], [NIR a RED], [0.500], [0.475], [0.368], [0.634],
+[2019-07-24], [Landsat 8], [NDVI], [0.508], [0.482], [0.365], [0.653],
+[2019-09-02], [Landsat 7], [], [0.406], [0.375], [0.286], [0.505],
+[2019-09-10], [Landsat 8], [bez harmonizace], [0.482], [0.459], [0.345], [0.610],
+[2019-09-10], [Landsat 8], [NIR a RED], [0.460], [0.441], [0.341], [0.572],
+[2019-09-10], [Landsat 8], [NDVI], [0.465], [0.443], [0.334], [0.588],
+[2019-09-18], [Landsat 7], [], [0.400], [0.378], [0.286], [0.499],
+   table.hline(),
+),
+)
+
+#figure(
+   table(
+   columns: (7),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2020-05-07], [Landsat 8], [bez harmonizace], [0.336], [0.315], [0.205], [0.437],
+[2020-05-07], [Landsat 8], [NIR a RED], [0.330], [0.319], [0.218], [0.424],
+[2020-05-07], [Landsat 8], [NDVI], [0.325], [0.305], [0.199], [0.422],
+[2020-05-15], [Landsat 7], [], [0.246], [0.224], [0.158], [0.317],
+[2020-05-23], [Landsat 8], [bez harmonizace], [0.346], [0.323], [0.239], [0.428],
+[2020-05-23], [Landsat 8], [NIR a RED], [0.337], [0.320], [0.244], [0.413],
+[2020-05-23], [Landsat 8], [NDVI], [0.335], [0.313], [0.232], [0.413],
+[2020-06-08], [Landsat 8], [bez harmonizace], [0.432], [0.412], [0.310], [0.535],
+[2020-06-08], [Landsat 8], [NIR a RED], [0.412], [0.398], [0.307], [0.507],
+[2020-06-08], [Landsat 8], [NDVI], [0.417], [0.398], [0.300], [0.516],
+[2020-06-16], [Landsat 7], [], [0.374], [0.355], [0.269], [0.467],
+[2020-06-24], [Landsat 8], [bez harmonizace], [0.472], [0.452], [0.345], [0.593],
+[2020-06-24], [Landsat 8], [NIR a RED], [0.450], [0.434], [0.338], [0.556],
+[2020-06-24], [Landsat 8], [NDVI], [0.456], [0.436], [0.333], [0.571],
+[2020-07-02], [Landsat 7], [], [0.422], [0.400], [0.302], [0.539],
+[2020-07-10], [Landsat 8], [bez harmonizace], [0.501], [0.481], [0.366], [0.632],
+[2020-07-10], [Landsat 8], [NIR a RED], [0.475], [0.457], [0.355], [0.591],
+[2020-07-10], [Landsat 8], [NDVI], [0.483], [0.464], [0.354], [0.608],
+[2020-07-18], [Landsat 7], [], [0.442], [0.419], [0.311], [0.571],
+[2020-08-03], [Landsat 7], [], [0.431], [0.411], [0.301], [0.556],
+[2020-08-11], [Landsat 8], [bez harmonizace], [0.475], [0.457], [0.340], [0.603],
+[2020-08-11], [Landsat 8], [NIR a RED], [0.452], [0.438], [0.336], [0.566],
+[2020-08-11], [Landsat 8], [NDVI], [0.459], [0.441], [0.329], [0.581],
+[2020-09-12], [Landsat 8], [bez harmonizace], [0.399], [0.380], [0.278], [0.502],
+[2020-09-12], [Landsat 8], [NIR a RED], [0.387], [0.375], [0.282], [0.481],
+[2020-09-12], [Landsat 8], [NDVI], [0.385], [0.367], [0.269], [0.484],
+[2020-09-20], [Landsat 7], [], [0.315], [0.298], [0.218], [0.394],
+   table.hline(),
+),
+)
+
+#figure(
+   table(
+   columns: (7),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+table.hline(),
+[2021-05-10],[Landsat 8], [bez harmonizace],[0.239],[0.219],[0.166],[0.290],
+[2021-05-10],[Landsat 8], [NIR a RED],[0.246],[0.232],[0.182],[0.293],
+[2021-05-10],[Landsat 8], [NDVI],[0.232],[0.213],[0.162],[0.281],
+[2021-05-18],[Landsat 7], [],[0.246],[0.222],[0.159],[0.312],
+[2021-05-26],[Landsat 8], [bez harmonizace],[0.341],[0.313],[0.233],[0.431],
+[2021-05-26],[Landsat 8], [NIR a RED],[0.337],[0.315],[0.245],[0.417],
+[2021-05-26],[Landsat 8], [NDVI],[0.330],[0.303],[0.226],[0.416],
+[2021-06-11],[Landsat 8], [bez harmonizace],[0.399],[0.370],[0.286],[0.495],
+[2021-06-11],[Landsat 8], [NIR a RED],[0.386],[0.362],[0.287],[0.470],
+[2021-06-11],[Landsat 8], [NDVI],[0.385],[0.358],[0.277],[0.478],
+[2021-06-19],[Landsat 7], [],[0.413],[0.390],[0.294],[0.525],
+[2021-06-27],[Landsat 8], [bez harmonizace],[0.457],[0.428],[0.326],[0.580],
+[2021-06-27],[Landsat 8], [NIR a RED],[0.437],[0.410],[0.320],[0.545],
+[2021-06-27],[Landsat 8], [NDVI],[0.441],[0.413],[0.315],[0.559],
+[2021-07-05],[Landsat 7], [],[0.430],[0.401],[0.301],[0.554],
+[2021-07-13],[Landsat 8], [bez harmonizace],[0.523],[0.496],[0.377],[0.672],
+[2021-07-13],[Landsat 8], [NIR a RED],[0.496],[0.472],[0.369],[0.626],
+[2021-07-13],[Landsat 8], [NDVI],[0.505],[0.478],[0.364],[0.647],
+[2021-08-30],[Landsat 8], [bez harmonizace],[0.459],[0.427],[0.325],[0.583],
+[2021-08-30],[Landsat 8], [NIR a RED],[0.439],[0.412],[0.321],[0.548],
+[2021-08-30],[Landsat 8], [NDVI],[0.443],[0.413],[0.315],[0.562],
+[2021-09-07],[Landsat 7], [],[0.334],[0.308],[0.233],[0.420],
+[2021-09-15],[Landsat 8], [bez harmonizace],[0.430],[0.396],[0.300],[0.549],
+[2021-09-15],[Landsat 8], [NIR a RED],[0.414],[0.387],[0.303],[0.520],
+[2021-09-15],[Landsat 8], [NDVI],[0.415],[0.383],[0.291],[0.530],
+   table.hline(),
+),
+)
