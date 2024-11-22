@@ -516,19 +516,46 @@ Statistická část probíhala v prostředí R Studio (verze R 4.3.1). Importov�
 
 === Analýza scén v rámci jedné sezóny
 Byly vytvořeny souhrny pro každý snímek v sezóně, které zahrnovaly:
-- *Kvartily:* V tomto případě byly hodnoty zpracovány ve standardní podobě (na rozdíl od kapitoly x.x.x.). 
-- *Průměr:* Jako doplňující metrika ke kvartilům.
+- *Kvartily:* Výpočet byl proveden jako vážený průměr mezi dvěma sousedními hodnotami v datech seřazených vzestupně pomocí algoritmu _type 7_ @quantile. 
 
-=== Analýza dvojic
+#align(center)[
+   #box[
+      #align(left)[
+         - *Q1* - 25. percentil 
+         - *Medián* - 50. percentil
+         - *Q3* - 75. percentil
+      ]
+   ]
+]
+
+- *Aritmetický průměr:* Jako doplňující metrika ke kvartilům dle @mean
+
+=== Analýza dvojic (čekám na vojtu)
 Proběhlo sjednocení všech bodů do jednoho souboru. To umožnilo komplexní porovnání všech dostupných dvojic snímku v rámci celého studovaného období najenou. Následovala analýza, jejímž výstupem bylo:
 - *Hodnocení přesnosti:* Toto hodnocení bylo prezentováno pomocí dvou klíčových metrik: _RMSE_ (Root Mean Square Error) a _ME_ (Mean Error) přímo mezi hodnotami bodů z obou senzorů s různým přístupem k harmonizaci.
 - *Lineární regresi:* Pro všechny body byl spočítán lineární regresní model. Nezávisle na sobě byly testovány různé přístupy k harmonizci. Do tabulky byly zahrnuty parametry modelu: _Slope_ (udává sklon přímky), _Intercept_ (určuje posun na ose y při hodnotě nezávislé proměnné 0) a _R2 - koeficient determinace_ (ukazuje, jak dobře model vysvětluje variabilitu dat).
 === Analýza maximálních hodnot NDVI z celé sezóny
 Jednotlivé sloupce byly separovány do vektorů, kde každý vektor zahrnoval vždy tři sloupce z určité sezóny - Landsat 7, Landsat 8 a jejich kombinaci. Toto rozdělení umožnilo zpracovat každý vektor nezávisle na sobě. Výstupem analýzy bylo:
-- *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší maximální hodnotu NDVI oproti druhému sensoru. Byly porovnány vždy pozičně shodné pixely. 
-- *Kvartily:* Nejříve byly odečteny hodnoty NDVI Landsatu 7 od Landsatu 8 (L8 - L7). Odečet byl proveden pouze na pozičně shodných pixelech. Výsledky byly před výpočtem kvartilů sežazeny vzestupně.
-- *Hodnocení přesnosti:* V podobě _RMSE_ (Root Mean Square Error) a _ME_ (Mean Error) přímo mezi hodnotami bodů z obou senzorů.
-- *Lineární regresi:* Přes všechny body byl spočítán lineární regresní model. Do tabulky byly zahrnuty hodnoty _Slope_, _Intercept_ a _R2 - koeficient determinace_.
+- *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší maximální hodnotu NDVI oproti druhému sensoru. Byly porovnány vždy pozičně shodné body. 
+- *Kvartily:* Nejříve byly odečteny hodnoty NDVI Landsatu 7 od Landsatu 8 (L8 - L7). Odečet byl proveden pouze na pozičně shodných bodech. Výsledky byly před výpočtem kvartilů sežazeny vzestupně. Výpočet proběhl dle algoritmu _type 7_ @quantile.
+- *Hodnocení přesnosti:* V podobě RMSE (Root Mean Square Error), která měří průměrnou velikost chyby mezi hodnotami, a ME (Mean Error), která udává jejich průměrnou odchylku. Zatímco RMSE poskytuje informaci o tom, jak velké jsou chyby v průměru, ME ukazuje, zda sensor systematicky nadhodnocuje nebo podhodnocuje. Výpočty byly provedeny dle stanovených vzorců níže:
+
+$ "RMSE"= sqrt(1/n sum_(i=1)^n k("L8" – "L7")^2) $
+
+$ "ME"= 1/n sum_(i=1)^n k("L8" – "L7")\ "kde L7 (Landsat 7) a L8 (Landsat 8) představují maximální hodnoty NDVI " $
+
+- *Lineární regresi:* Pro všechny pozorované hodnoty byl spočítán lineární regresní model kde:
+
+#align(center)[
+   #box[
+      #align(left)[
+         - Landsat 7 je *vysvětlující proměnná* (nezávislá)
+         - Landsat 8 je *vysvětlovaná proměnná* (závislá)
+      ]
+   ]
+]
+
+Do přehledu byly zahrnuty klíčové statistické hodnoty, včetně sklonu (Slope), který vyjadřuje míru změny závislé proměnné vzhledem k nezávislé; průsečíku (Intercept), který určuje hodnotu závislé proměnné, když je nezávislá proměnná rovna nule; korelačního koeficientu (R), který měří sílu a směr lineární závislosti mezi proměnnými; a koeficientu determinace (R2), který ukazuje, jak dobře model vysvětluje variabilitu dat.
 
 = Výsledky
 
@@ -556,37 +583,63 @@ right: 1cm
 ),
 )
 
-=== Příloha 
-#figure(
-   image("images/densita_1.svg", width: 100%)
-)
-
-#figure(
-   image("images/densita_2.svg", width: 100%)
-)
+#show figure: set text(size: 10pt)
 
 === Příloha 
 #figure(
-   image("images/maxscatter_1.svg", width: 100%)
+table(
+   columns: (12),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(),
+[*Rok*], [*Landsat 7 (%)*], [*Landsat 8 (%)*], [*Q1*], [*Medián*], [*Q3*], [*RMSE*], [*ME*], [*Slope*], [*Intercept*], [*R*], [*R2*],
+   table.hline(),
+[2013], [9.70], [90.30], [0.023], [0.043], [0.080], [0.111], [0.061], [0.983], [0.066], [0.912], [0.832],
+[2014], [10.36], [89.64], [0.018], [0.038], [0.073], [0.100], [0.057], [0.995], [0.058], [0.932], [0.869],
+[2015], [3.28], [96.72], [0.039], [0.072], [0.120], [0.124], [0.091], [1.012], [0.087], [0.925], [0.856],
+[2016], [11.14], [88.86], [0.021], [0.050], [0.099], [0.113], [0.070], [1.030], [0.062], [0.916], [0.840],
+[2017], [25.00], [75.00], [0.000], [0.028], [0.064], [0.090], [0.040], [0.979], [0.046], [0.928], [0.862],
+[2018], [24.62], [75.38], [0.001], [0.028], [0.075], [0.115], [0.045], [0.914], [0.071], [0.870], [0.757],
+[2019], [7.50], [92.50], [0.027], [0.057], [0.105], [0.116], [0.077], [1.016], [0.072], [0.920], [0.847],
+[2020], [20.06], [79.94], [0.006], [0.027], [0.057], [0.099], [0.042], [0.980], [0.049], [0.920], [0.847],
+[2021], [16.00], [84.00], [0.013], [0.041], [0.097], [0.134], [0.072], [1.032], [0.063], [0.882], [0.778],
+
+   table.hline(),
+),
+)
+
+=== Příloha
+#figure(
+   image("images/densita_1.png", width: 105%)
 )
 
 #figure(
-   image("images/maxscatter_2.svg", width: 100%)
+   image("images/densita_2.png", width: 105%)
 )
 
-=== Příloha 1
+=== Příloha 
 #figure(
-   image("images/sezony_1.svg", width: 100%)
+   image("images/maxscatter_1.png", width: 108%)
 )
 
 #figure(
-   image("images/sezony_2.svg", width: 100%)
+   image("images/maxscatter_2.png", width: 105%)
+)
+
+=== Příloha 
+#figure(
+   image("images/sezony_1.png", width: 105%)
+)
+
+#figure(
+   image("images/sezony_2.png", width: 105%)
 )
 
 #show figure: set text(size: 6.5pt)
 #set page(columns: 2)
 
-=== Příloha 2
+=== Příloha
 
 #figure(
    table(
