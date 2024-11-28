@@ -34,5 +34,5 @@ set heading(
 set block(spacing: 1.8em) // mezera mezi odstavci
 
 show figure.caption: emph // zkosení textu u figures
-
+show figure.caption: set text(11pt)
 doc}
