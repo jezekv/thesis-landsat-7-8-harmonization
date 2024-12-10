@@ -101,7 +101,7 @@ já mám rád výzkumné otázky, forma je na vás, ale psal bych a formuloval a
 
 = Literární rešerše
 == Mise Landsat
-Satelity Landsat snímají zemský povrch nepřetržitě již více než 50 let. Poskytují tak nejdélší časovou řadu pozorování ze všech globálních vesmírných misí @roy2014landsat. Již v prvních letech po zavedení programu začala vznikat nová metodika pro mapování změn krajiného pokryvu a vyhledávání přírodních zdroju @goward1997landsat. Většinu času však  bylo snímky možné získat pouze komerčně. Zlom nastal v roce 2008, kdy byla data poskytnuta zdarma online pro všechny uživatele. To způsobilo značné navýšení uplatnění nejen v aplikační sféře, ale také ve vědeckém sektoru @wulder2012opening. Vzhledem k neustálemu rozšiřování mise se role Landsatu jako nástroje pro globální pozorování Země i nadále zvyšuje @zhu2019benefits. 
+Satelity Landsat snímají zemský povrch nepřetržitě již více než 50 let. Poskytují tak nejdélší časovou řadu pozorování ze všech globálních vesmírných misí @roy2014landsat. Již v prvních letech po zavedení programu začala vznikat nová metodika pro mapování změn krajiného pokryvu a vyhledávání přírodních zdroju @goward1997landsat. Většinu času bylo snímky možné získat pouze komerčně. Zlom nastal v roce 2008, kdy byla data poskytnuta zdarma online pro všechny uživatele. To způsobilo značné navýšení uplatnění nejen v aplikační sféře, ale také ve vědeckém sektoru @wulder2012opening. Vzhledem k neustálemu rozšiřování mise se role Landsatu jako nástroje pro globální pozorování Země i nadále zvyšuje @zhu2019benefits. 
 
 Satelit Landsat 7 byl na oběžnou dráhu vypuštěn v roce 1999 jako nástupce Landsatu 5. Měl opakovací cyklus 16 dní a nesl s sebou několik vylepšení. Kromě zdokonaleného sensoru ETM+ i takzvaný _long-term acquisition plan (LTAP)_ a _image assessment system (IAS)_ @loveland2012landsat. Principem LTAP bylo automatizovat výběr vhodných míst na Zemi pro pravidelnou aktualizaci globálního archivu bezoblačných a dobře osvětlených scén @arvidson2001landsat. Algoritmy metody IAS zase vylepšily geometrickou a radiometrickou přesnost @basislandsat. V roce 2003 selhal na snímači _scan line corrector (SLC)_. Ten kompenzoval dopředný pohyb satelitu za účelem zpětného snímání sensoru. Z toho důvodu chybí na snímcích přibližně 22 % plochy ve formě pravidelných pruhů @scaramuzza2005landsat. Nominální mise Landsatu 7 byla ukončena v roce 2022 přechodem satelitu na nižší oběžnou dráhu @landsat7end.
 
@@ -203,23 +203,25 @@ AVHRR (Advanced Very High Resolution Radiometer) je senzor umístěný na druži
 
 MODIS (Moderate Resolution Imaging Spectroradiometer) je multispektrální senzor na družicích Terra a Aqua, který snímá Zemi ve 36 spektrálních pásmech, pokrývajících oblasti od viditelného po termální infračervené spektrum. Slouží k monitorování vegetace, oceánů, oblačnosti a dalších zemských a atmosférických podmínek s prostorovým rozlišením 250 až 1000 metrů @barnes2003status. Primárním důvodem nepřesností u výsledků NDVI byly mezi sensory MODIS a AVHRR označeny aerosoly a vodní páry. Ty ovlivňují pásma NIR a RED odlišnými způsoby v různých vlnových délkách. Finální shodu NDVI mezi sensory tak formuje šířka jejich pásem @van2006multi. 
 
-Podobných výsledků bylo dosaženo při porovnání sensorů ETM+ a OLI, kde měla hlavní vliv na nekonzistenci výsledků NDVI šířka pásma NIR. To lze vysvětlit tím, že užší pásmo NIR u OLI je méně ovlivněno absorpcí vodní páry @ke2015characteristics. 
+Podobných výsledků bylo dosaženo při porovnání sensorů ETM+ a OLI, kde měla hlavní vliv na nekonzistenci výsledků NDVI šířka pásma NIR. To lze vysvětlit tím, že užší pásmo NIR u OLI je méně ovlivněno absorpcí vodní páry @ke2015characteristics. Výsledky NDVI zároveň vykazují větší rozdíly než jednotlivá pásma. To je způsobeno tím, že zkreslení v pásmech NIR a RED má odchylky ve stejném směru @holden2016analysis.
 
 Aktuální multisenzorové aplikace NDVI tak mohou dosáhnout největšího přínosu, pokud se efektivně vyřeší atmosférické korekce a použijí se translační rovnice pro harmonizaci @van2006multi. 
 
-== Harmonizace dat ze sensorů OLI a ETM+
+== Harmonizace dat ze sensorů ETM+ a OLI
 Jako jeden z prvních, kdo řešil ucelený proces harmonizace senzorů OLI a ETM+ pro tvorbu časových řad, byl @flood2014continuity, který své analýzy prováděl na datech ze severovýchodní Austrálie. Podobný cíl sledoval také @roy2016characterization, který se zaměřil na snímky pokrývající celé kontinentální území Spojených států amerických. Stejnou problematikou se následně zabývalo několik dalších studií @perez2023landsat @cao2022harmonizing @chastain2019empirical. Ve všech těchto případech došlo k přímému porovnání jednotlivých spektrálních pásem, která byla následně statisticky analyzována prostřednictvím lineárních regresních modelů. 
 
 Přestože výsledky vykazují vysokou spolehlivost, lze v nich identifikovat několik nedostatků. Jedním z nich je například absence cílené úpravy koeficientů pro specifické povrchy. Důsledkem aproximace nemusí koeficienty optimálně fungovat pro snímky z konkrétních lokalit na Zemi, jak uvádí například @flood2014continuity, který upozorňuje na nutnost obezřetnosti při jejich aplikaci v oblastech s odlišnými typy vegetace a půdy, než jaké jsou zastoupené na analyzovaných snímcích. Kromě rozdílů ve spektrální odezvě mezi senzory je rovněž sporná důvěryhodnost koeficientů pro pásma kratších vlnových délek, což souvisí s nedostatky v algoritmech atmosférické korekce, jak zmínil @roy2016characterization. Atmosférická korekce je totiž u senzoru ETM+ pro zelené a modré pásmo méně přesná než u senzoru OLI @VERMOTE2016.
 
 Podle studie @xu2014compare je NDVI získaný ze senzoru OLI nejvíce odlišný od NDVI ze senzoru ETM+ v oblastech s nižším pokryvem vegetací, přičemž tento rozdíl se s rostoucí hodnotou NDVI zmenšuje. Pro dosažení konzistence se doporučuje cílená harmonizace. Aplikace koeficientů získaných z dat ze strukturálně rozdílných krajinných typů nemusí fungovat optimálně. Je proto žádoucí použít harmonizační model přizpůsobený specifické studované oblasti, neboť každý region vykazuje unikátní odchylky ve spektrální odezvě @cao2022harmonizing @flood2017comparing.
 
+Alternativu představil @berner2023landsatts, který pro harmonizaci snímků použil polynomickou regresi. Tento přístup dokážě reagovat na potenciální nelinearity a lépe se přizpůsobuje datové sadě uživatele. Koeficienty jsou navíc přizpůsobeny prostředí arktické tundry a boreálním lesům. Tím se snižuje riziko chyby, na rozdíl od globálně aplikovatelných metod.
+
 == Problematika sezónních maxim NDVI při sledování greening trendu
 Optický dálkový průzkum Země je komplikován přítomností oblaků, sněhu, ledu či stínů, které zakrývají povrch. Pro zařazení kvalitních snímků do časových řad je nezbytné tyto vlivy maskovat @zhu2018cloud. V oblastech s náročnými povětrnostními podmínkami může během vegetační sezóny kvůli oblačnosti vznikat značný počet děr v dostupných datech @white2014landsat. Z toho důvodu je žádoucí aplikovat vhodný algoritmus skládání obrazu @white2014pixel.
 
 Tyto algoritmy se dělí na tři základní podskupiny, kdy je výpočet proveden na základě jednoho pravidla (maximum či median), kombinace více pravidel nebo spektrální podobnosti. Metody založené na jednom pravidle jsou oblíbené nejen pro svou snadnou implementaci, ale i díky možnosti aplikace na rozsáhlé datové sady @qiu2023evaluation. Algoritmus výběru maximálního NDVI byl původně vyvinut pro senzor AVHRR @holben1986characteristics, avšak rychle našel uplatnění i v časových řadách Landsat a dodnes se používá v současných studiích @qiu2023evaluation.
 
-Hodnoty maximálního NDVI během sezóny jsou však citlivé na dostupnost snímků a jejich načasování v rámci fenologického cyklu vegetace. S rostoucím počtem bezoblačných snímků tak dochází k asymptotickému nárůstu maxim NDVI @berner2020summer. To potvrdil i @bayle2024landsat, který tvrdí, že zvýšení dostupnosti pozorování v průběhu času může výrazně zkreslit greening trend, pokud se jako metrika používá maximální hodnota NDVI. K tomu mimo jiné dochází právě i vlivem překrývání satelitních platforem Landsat v čase.
+Hodnoty maximálního NDVI během sezóny jsou citlivé na dostupnost snímků a jejich načasování v rámci fenologického cyklu vegetace. S rostoucím počtem bezoblačných snímků tak dochází k asymptotickému nárůstu maxim NDVI @berner2020summer. To potvrdil i @bayle2024landsat, který tvrdí, že zvýšení dostupnosti pozorování v průběhu času může výrazně zkreslit greening trend, pokud se jako metrika používá maximální hodnota NDVI. K tomu mimo jiné dochází právě i vlivem překrývání satelitních platforem Landsat v čase.
 
 Robustnější metodou oproti maximálním hodnotám NDVI může být jejich medián. Ten je odolnější vůči výkyvům v kvantitě dat a outlierům, ale nezachovává jejich integiru @ruefenacht2016comparison. Nicméně, jak upozorňuje @bayle2024landsat, i tato roční metrika může být postižena podobnými problémy a nemusí přesně zachytit časové změny vegetace. Pokud je k dispozici větší množství snímků za stejný časový úsek, zvyšuje se pravděpodobnost, že se zaznamenají vyšší hodnoty NDVI, což může ovlivnit nejen maximální hodnotu, ale i medián.
 
@@ -536,7 +538,7 @@ var maskImage = maskImage.select(0).multiply(0).int();
 Nově vytvořené pásmo _mask_, které definuje pozičně stejné pixely pro všechny snímky v sezóně, bylo použito pro zisk 5000 společných bodů pro všechny sezóny. Každý bod nesl informaci o maximální hodnotě NDVI pro všechny sezóny i větve zároveň.
 
 == Statistická analýza
-Statistická část probíhala v prostředí R Studio (verze R 4.3.1). Importováno bylo celkem pět balíčků, a to _ggplot2, reshape2, gridExtra, dplyr_ a _tidyr_. Cílem této kapitoly bylo statisticky vyhodnotit rozdíly mezi jednotlivými dvojicemi snímků pořízených během celé sezóny s různými přístupy k harmonizaci. Zaměřili jsme se také na porovnání maximálních hodnot indexu NDVI mezi sezónami, přičemž zvláštní pozornost byla věnována nárůstu množství dat způsobeného překryvem snímání mezi satelity Landsat 7 a Landsat 8. 
+Statistická část probíhala v prostředí R Studio (verze R 4.3.1). Importováno bylo celkem pět balíčků, a to _ggplot2, reshape2, gridExtra, dplyr_, _tidyr_ a _purrr_. Cílem této kapitoly bylo statisticky vyhodnotit rozdíly mezi jednotlivými dvojicemi snímků pořízených během celé sezóny s různými přístupy k harmonizaci. Zaměřili jsme se také na porovnání maximálních hodnot indexu NDVI mezi sezónami, přičemž zvláštní pozornost byla věnována nárůstu množství dat způsobeného překryvem snímání mezi satelity Landsat 7 a Landsat 8. 
 
 === Analýza scén v rámci jedné sezóny
 Byly vytvořeny souhrny pro každou scénu v sezóně, které zahrnovaly:
@@ -585,9 +587,11 @@ Do přehledu byly zahrnuty klíčové statistické hodnoty, včetně sklonu (Slo
 
 = Výsledky
 == Výsledky porovnání scén v rámci jedné sezóny
-V této kapitole popisujeme ilustrační sezónu 2020. Výsledky ostatních sezón jsou k dispozici v příloze x. Tabulky s číselnými hodnotami jsou v příloze x. 
+Ve všech analyzovaných sezónách je patrné systematické nadhodnocení naměřených hodnot NDVI u senzoru Landsat 8, a to i po aplikaci harmonizačních koeficientů (viz příloha X, grafy). Tento trend je nejzřetelnější na ilustrační sezóně 2020 (obr. X). Harmonizace má na začátku a na konci studovaného období téměř nulový vliv, zatímco její efekt se zvyšuje v období vegetačního maxima v červenci.
 
-V průběhu celé vegetační sezóny 2020 je znatelné systematické nadhodnocení naměřených hodnot NDVI u Landsatu 8, a to i po aplikaci harmonizačních koeficientů (obrázek x). Harmonizace má na začátku a konci studovaného období téměř nulový vliv. Ten se stupňuje v období vegetačního maxima v červenci. Harmonizace pásem NIR a RED vykazuje oproti harmonizaci NDVI nepatrně lepší výsledky. I přesto je rozdíl mezi aritmetickými průměry a mediány mezi oběma senzory výrazný.     
+Harmonizace pásem NIR a RED vykazuje ve srovnání s harmonizací NDVI stejné výsledky při porovnání rozdílů mezi průměry vybraných dvojic scén (celkový rozdíl: 0.033). Při porovnání mediánů však harmonizace NDVI dosahuje lepších výsledků (0.034 oproti 0.038). V obou případech je patrný progres oproti variantě bez harmonizace (průměr: 0.047; medián: 0.046). Přesto zůstává rozdíl mezi aritmetickými průměry a mediány hodnot NDVI mezi oběma senzory výrazný (viz tabulka X).
+
+Ve všech zkoumaných sezónách je také pozorován sezónní trend vývoje NDVI podle měsíce v roce, přičemž maximálních hodnot dosahuje obvykle v průběhu července. Za zmínku stojí anomálie v chování srpnových snímků ze sezóny 2017. Snímek z Landsatu 7 pořízený 11. srpna vykazuje nižší hodnoty průměru (0.347; 0.351) i mediánu (0.309; 0.318) než snímek pořízený později, 27. srpna (viz příloha X, tabulky), což neodpovídá obvyklému sezónnímu vývoji NDVI v ostatních letech.
 
 #show figure.caption: set align(left)
 #figure(
@@ -596,24 +600,119 @@ V průběhu celé vegetační sezóny 2020 je znatelné systematické nadhodnoce
    supplement: "obr.",
    caption: "Boxploty vizualizují hodnoty NDVI stratifikovaných bodů jednotlivých scén ze sezóny 2020. V případě trojice boxplotů u Landsatu 8 se jedná o stejnou scénu, ale s různým přístupem k harmonizaci (Roy et al. 2016). Barevné body spojené čarami představují aritmetický průměr. Jednotlivá měření jsou seřazena na časové ose podle data snímání (osa x)",
 )
+\
+#show figure: set text(size: 10pt)
+#let pru = [*Průměr*]
+#let clk = [*průměr celkem*]
+#let med = [*Medián*]
+#figure(
+table(
+   row-gutter: -2pt,
+   columns: (8),
+   inset: 5pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(stroke: 0.7pt),
 
+   table.hline(y: 1, start: 2, end: 8, stroke: 0.7pt),
+[*Rok*],   [*Počet dvojic*],  table.cell(colspan: 3, pru),  table.cell(colspan: 3, med),
+
+[],   [],   [*bez harm.*], [*NIR a RED*], [*NDVI*],[*bez harm.*], [*NIR a RED*], [*NDVI*],
+table.hline(stroke: 0.7pt),
+[2013],  [3],           [0.067],   [0.049],   [0.051],   [0.069],   [0.054],   [0.055],
+[2014],  [4],           [0.044],   [0.031],   [0.030],   [0.044],   [0.039],   [0.032],
+[2015],  [2],           [0.035],   [0.019],   [0.021],   [0.041],   [0.030],   [0.028],
+[2016],  [3],           [0.043],   [0.034],   [0.032],   [0.036],   [0.036],   [0.027],
+[2017],  [4],           [0.047],   [0.033],   [0.033],   [0.045],   [0.035],   [0.032],
+[2018],  [3],           [0.027],   [0.015],   [0.016],   [0.027],   [0.016],   [0.017],
+[2019],  [4],           [0.068],   [0.057],   [0.054],   [0.067],   [0.061],   [0.054],
+[2020],  [6],           [0.064],   [0.046],   [0.049],   [0.065],   [0.052],   [0.051],
+[2021],  [4],           [0.026],   [0.015],   [0.013],   [0.023],   [0.018],   [0.012],
+   table.hline(stroke: 0.7pt),
+table.cell(colspan: 2, clk, align:left), [*0.047*],   [*0.033*],   [*0.033*],   [*0.046*],   [*0.038*],   [*0.034*],
+table.hline(stroke: 0.7pt),
+),
+kind: "tab",
+   supplement: "tab.",
+   caption: "Tabulka zobrazuje průměrné rozdíly průměrů a mediánů NDVI mezi dvojicemi scén Landsat 7 a Landsat 8 s různým přístupem k harmonizaci (Roy et al. 2016). V každé analyzované sezóně byly vybrány všechny dostupné, časově přímo navazující, dvojice scén. Pokud bylo u stejné scény k dispozici více možných dvojic, byla vybrána ta s menším rozdílem hodnot NDVI.",
+)
 
 == Výsledky hromadného porovnání dvojic scén
-Celkem 59 dvojic z let 2013 až 2021
+Analyzovali jsme celkem 59 dvojic scén z let 2013 až 2021. Při hodnocení dat pomocí metriky RMSE je na obrázku x patrné zlepšení směrem k ideálnímu výsledku, který představuje absolutní konzistenci mezi sensory. Nicméně při detailnějším pohledu je toto zlepšení relativně malé. Konkrétně hodnota mediánu se snížila z 0.097 na 0.088 (harmonizace pásem NIR a RED), respektive na 0.090 (harmonizace NDVI). U metriky ME je situace podobná. K nepatrnému přiblížení se stavu konzistence mezi sensory došlo pouze po harmonizaci NDVI (medián z 0.047 na 0.036) viz tabulka x. 
+
 #figure(
    image("images/dvojice.png", width: 90%),
    kind: "img",
    supplement: "obr.",
-   caption: "Boxploty znázorňují výsledky RMSE a ME ze všech analyzovaných dvojic scén. Každá trojice je vytvořena stejným způsobem, ale s různými metodami harmonizace (Roy et al. 2016). Červená čára vyznačuje linii úplné shody mezi body",
+   caption: "Boxploty znázorňují výsledky RMSE a ME ze všech analyzovaných dvojic scén. Všechny boxploty v trojici jsou vytvořeny stejným způsobem, ale s různými metodami harmonizace (Roy et al. 2016). Červená čára vyznačuje linii úplné shody mezi sensory",
+)
+\
+#show figure: set text(size: 10pt)
+#figure(
+table(
+   row-gutter: -2pt,
+   columns: (5),
+   inset: 5pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(stroke: 0.7pt),
+[*Metoda*],[*Harmonizace*], [*Q1*], [*Medián*], [*Q3*], 
+   table.hline(stroke: 0.7pt),
+[RMSE], [bez harmonizace], [0.080], [0.097], [0.116],
+[RMSE], [pásma NIR a RED], [0.076], [0.088], [0.106],
+[RMSE], [NDVI], [0.074], [0.090], [0.108],
+[ME], [bez harmonizace], [0.032], [0.047], [0.062],
+[ME], [pásma NIR a RE], [0.028], [0.046], [0.062],
+[ME], [NDVI], [0.024], [0.036], [0.053],
+   table.hline(stroke: 0.7pt),
+),
+kind: "tab",
+   supplement: "tab.",
+   caption: "Tabulka obsahuje hodnoty statistických parametrů zobrazených v boxplotech na obrázku x",
 )
 
 == Výsledky porovnání maximálních hodnot NDVI z celé sezóny
+Maximální hodnoty NDVI naměřené pomocí Landsatu 8 byly ve srovnání s Landsatem 7 vyšší (příloha x, density). Rozdíly jsou patrné nejen u modální hodnoty, ale také u aritmetického průměru. Tvar grafů pro kategorii "Maximum celkově" odpovídá tvarům křivky Landsatu 8, což naznačuje, že u většiny bodů byly hodnoty naměřené Landsatem 8 vyšší. V sezóně 2015 to bylo dokonce 96.72 % bodů (tabulka x). Vyjímkami jsou sezóny 2017 a 2018 (75 %). 
+
+Většina měření napříč všemi sezónami se koncentruje v nízkých hodnotách NDVI (přibližně do 0.3), které odpovídají horské řídké vegetaci. Lokální maximum je patrné v intervalu hodnot 0.75 až 0.8, což je dobře viditelné v sezóně 2019 (obrázek x). Pravděpodobně se jedná o meření z drobných zemědělských polí. 
+
+Z analýzy scatter plotu vyplývá, že Landsat 8 systematicky nadhodnocuje hodnoty NDVI i přes aplikaci harmonizačních koeficientů, a to v celém jeho rozsahu (příloha x, scatter). Zajímavým výsledkem je také skutečnost, že u Landsatu 8 bylo opakovaně dosaženo submaximálních hodnot NDVI blížících se hodnotě 1, což se u Landsatu 7 neobjevilo. Na ilustrační sezóně 2019 (obrázek x) je dobře viditelný také větší rozptyl meření od regresní křivky směrem k vyšším hodnotám NDVI u Landsatu 8. To značí prohlubování rozdílu mezi oběma sensory, ale pouze jedním směrem.
+
+Přímky lineárních modelů prochází souběžně s přímkami absolutní shody. Specifickým příkladem je sezóna 2018, kde došlo k protnutí obou přímek (příloha x, scatter). Všimněte si zároveň výsledků R2, který ale v této sezóně dosahuje nejhoršího výsledku (0.757) ze všech vytvořených regresních modelů. 
+
+
 
 #figure(
    image("images/max_2019_2.png", width: 75%),
    kind: "img",
    supplement: "obr.",
    caption: "Grafy zobrazují výsledky za rok 2019. (a) Density plot znázorňuje rozložení stratifikovaných bodů maximálních hodnot NDVI. Kategorie ''Maximum celkově'' představuje vyšší z maximálních hodnot NDVI mezi snímky z Landsatu 7 a Landsatu 8 v prostorově shodných pixelech. Svislé přímky vizualizují pozici aritmetického průměru. (b) Scatter plot ilustruje rozdíly v maximálních hodnotách NDVI mezi Landsatem 7 a Landsatem 8. Červená čára představuje linii absolutní shody. Modrá čára zobrazuje výsledek lineární regrese",
+)
+#show figure: set text(size: 8.2pt)
+#figure(
+table(
+   columns: (12),
+   inset: 3pt,
+   align: center + horizon,
+   stroke: none,
+   table.hline(stroke: 0.7pt),
+[*Rok*], [*Landsat 7 (%)*], [*Landsat 8 (%)*], [*Q1*], [*Medián*], [*Q3*], [*RMSE*], [*ME*], [*Slope*], [*Intercept*], [*R*], [*R2*],
+   table.hline(stroke: 0.7pt),
+[2013], [9.70], [90.30], [0.023], [0.043], [0.080], [0.111], [0.061], [0.983], [0.066], [0.912], [0.832],
+[2014], [10.36], [89.64], [0.018], [0.038], [0.073], [0.100], [0.057], [0.995], [0.058], [0.932], [0.869],
+[2015], [3.28], [96.72], [0.039], [0.072], [0.120], [0.124], [0.091], [1.012], [0.087], [0.925], [0.856],
+[2016], [11.14], [88.86], [0.021], [0.050], [0.099], [0.113], [0.070], [1.030], [0.062], [0.916], [0.840],
+[2017], [25.00], [75.00], [0.000], [0.028], [0.064], [0.090], [0.040], [0.979], [0.046], [0.928], [0.862],
+[2018], [24.62], [75.38], [0.001], [0.028], [0.075], [0.115], [0.045], [0.914], [0.071], [0.870], [0.757],
+[2019], [7.50], [92.50], [0.027], [0.057], [0.105], [0.116], [0.077], [1.016], [0.072], [0.920], [0.847],
+[2020], [20.06], [79.94], [0.006], [0.027], [0.057], [0.099], [0.042], [0.980], [0.049], [0.920], [0.847],
+[2021], [16.00], [84.00], [0.013], [0.041], [0.097], [0.134], [0.072], [1.032], [0.063], [0.882], [0.778],
+
+   table.hline(stroke: 0.7pt),
+),
+kind: "tab",
+   supplement: "tab.",
+   caption: "Tabulka zobrazuje hodnoty statistických parametrů z analýzy maximálních hodnot NDVI. Sloupce Landsat 7 a Landsat 8 vyjadřují procento bodů, u nichž měl daný senzor vyšší maximální hodnotu NDVI ve srovnání s druhým senzorem.",
 )
 
 = Diskuse
@@ -660,9 +759,9 @@ right: 1cm
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2013-05-04], [Landsat 8],[bez harmonizace], [0.259], [0.225], [0.161], [0.319],
 [2013-05-04], [Landsat 8],[NIR a RED], [0.264], [0.237], [0.175], [0.324],
 [2013-05-04], [Landsat 8],[NDVI], [0.252], [0.218], [0.158], [0.309],
@@ -685,7 +784,7 @@ table.hline(),
 [2013-08-24], [Landsat 8],[NDVI], [0.397], [0.360], [0.264], [0.503],
 [2013-09-01], [Landsat 7],[], [0.349], [0.312], [0.216], [0.454],
 [2013-09-17], [Landsat 7],[], [0.305], [0.269], [0.182], [0.395],
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -695,9 +794,9 @@ table.hline(),
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2014-05-07], [Landsat 8], [bez harmonizace], [0.271], [0.230], [0.172], [0.329],
 [2014-05-07], [Landsat 8], [NIR a RED], [0.280], [0.245], [0.194], [0.331],
 [2014-05-07], [Landsat 8], [NDVI], [0.263], [0.223], [0.168], [0.318],
@@ -727,7 +826,7 @@ table.hline(),
 [2014-09-12], [Landsat 8], [NDVI], [0.426], [0.390], [0.294], [0.547],
 [2014-09-20], [Landsat 7], [], [0.366], [0.326], [0.243], [0.461],
 
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -737,9 +836,9 @@ table.hline(),
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2015-05-10], [Landsat 8], [bez harmonizace], [0.248], [0.199], [0.140], [0.313],
 [2015-05-10], [Landsat 8], [NIR a RED], [0.255], [0.216], [0.158], [0.315],
 [2015-05-10], [Landsat 8], [NDVI], [0.241], [0.194], [0.137], [0.303],
@@ -758,7 +857,7 @@ table.hline(),
 [2015-09-15], [Landsat 8], [bez harmonizace], [0.396], [0.346], [0.235], [0.527],
 [2015-09-15], [Landsat 8], [NIR a RED], [0.382], [0.341], [0.245], [0.500],
 [2015-09-15], [Landsat 8], [NDVI], [0.383], [0.334], [0.228], [0.508],
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -768,9 +867,9 @@ table.hline(),
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2016-05-12], [Landsat 8], [bez harmonizace], [0.259], [0.210], [0.155], [0.313],
 [2016-05-12], [Landsat 8], [NIR a RED], [0.256], [0.216], [0.159], [0.314],
 [2016-05-12], [Landsat 8], [NDVI], [0.251], [0.204], [0.152], [0.303],
@@ -795,7 +894,7 @@ table.hline(),
 [2016-09-17], [Landsat 8], [NDVI], [0.292], [0.242], [0.182], [0.357],
 [2016-09-25], [Landsat 7], [], [0.222], [0.183], [0.137], [0.267],
 
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -805,9 +904,9 @@ table.hline(),
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2017-05-15], [Landsat 8], [bez harmonizace], [0.287], [0.259], [0.172], [0.371],
 [2017-05-15], [Landsat 8], [NIR a RED], [0.287], [0.265], [0.188], [0.361],
 [2017-05-15], [Landsat 8], [NDVI], [0.278], [0.251], [0.168], [0.358],
@@ -830,7 +929,7 @@ table.hline(),
 [2017-09-20], [Landsat 8], [NIR a RED], [0.352], [0.315], [0.244], [0.442],
 [2017-09-20], [Landsat 8], [NDVI], [0.346], [0.304], [0.221], [0.446],
 [2017-09-28], [Landsat 7], [], [0.277], [0.242], [0.170], [0.364],
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -840,9 +939,9 @@ table.hline(),
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2018-05-02], [Landsat 8], [bez harmonizace], [0.219], [0.200], [0.154], [0.266],
 [2018-05-02], [Landsat 8], [NIR a RED], [0.218], [0.199], [0.159], [0.259],
 [2018-05-02], [Landsat 8], [NDVI], [0.213], [0.194], [0.150], [0.258],
@@ -864,7 +963,7 @@ table.hline(),
 [2018-08-22], [Landsat 8], [NDVI], [0.409], [0.399], [0.278], [0.530],
 [2018-08-30], [Landsat 7], [], [0.373], [0.359], [0.250], [0.482],
 
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -874,9 +973,9 @@ table.hline(),
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2019-05-05], [Landsat 8], [bez harmonizace], [0.303], [0.279], [0.205], [0.380],
 [2019-05-05], [Landsat 8], [NIR a RED], [0.312], [0.294], [0.229], [0.381],
 [2019-05-05], [Landsat 8], [NDVI], [0.294], [0.270], [0.200], [0.367],
@@ -900,7 +999,7 @@ table.hline(),
 [2019-09-10], [Landsat 8], [NIR a RED], [0.460], [0.441], [0.341], [0.572],
 [2019-09-10], [Landsat 8], [NDVI], [0.465], [0.443], [0.334], [0.588],
 [2019-09-18], [Landsat 7], [], [0.400], [0.378], [0.286], [0.499],
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -910,9 +1009,9 @@ table.hline(),
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2020-05-07], [Landsat 8], [bez harmonizace], [0.336], [0.315], [0.205], [0.437],
 [2020-05-07], [Landsat 8], [NIR a RED], [0.330], [0.319], [0.218], [0.424],
 [2020-05-07], [Landsat 8], [NDVI], [0.325], [0.305], [0.199], [0.422],
@@ -940,7 +1039,7 @@ table.hline(),
 [2020-09-12], [Landsat 8], [NIR a RED], [0.387], [0.375], [0.282], [0.481],
 [2020-09-12], [Landsat 8], [NDVI], [0.385], [0.367], [0.269], [0.484],
 [2020-09-20], [Landsat 7], [], [0.315], [0.298], [0.218], [0.394],
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -950,9 +1049,9 @@ table.hline(),
    inset: 3pt,
    align: center + horizon,
    stroke: none,
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 [*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
-table.hline(),
+table.hline(stroke: 0.7pt),
 [2021-05-10],[Landsat 8], [bez harmonizace],[0.239],[0.219],[0.166],[0.290],
 [2021-05-10],[Landsat 8], [NIR a RED],[0.246],[0.232],[0.182],[0.293],
 [2021-05-10],[Landsat 8], [NDVI],[0.232],[0.213],[0.162],[0.281],
@@ -978,7 +1077,7 @@ table.hline(),
 [2021-09-15],[Landsat 8], [bez harmonizace],[0.430],[0.396],[0.300],[0.549],
 [2021-09-15],[Landsat 8], [NIR a RED],[0.414],[0.387],[0.303],[0.520],
 [2021-09-15],[Landsat 8], [NDVI],[0.415],[0.383],[0.291],[0.530],
-   table.hline(),
+   table.hline(stroke: 0.7pt),
 ),
 )
 
@@ -1002,48 +1101,4 @@ table.hline(),
    image("images/maxscatter_2.png", width: 105%)
 )
 
-#show figure: set text(size: 8pt)
-=== Příloha
-#figure(
-table(
-   columns: (12),
-   inset: 3pt,
-   align: center + horizon,
-   stroke: none,
-   table.hline(),
-[*Rok*], [*Landsat 7 (%)*], [*Landsat 8 (%)*], [*Q1*], [*Medián*], [*Q3*], [*RMSE*], [*ME*], [*Slope*], [*Intercept*], [*R*], [*R2*],
-   table.hline(),
-[2013], [9.70], [90.30], [0.023], [0.043], [0.080], [0.111], [0.061], [0.983], [0.066], [0.912], [0.832],
-[2014], [10.36], [89.64], [0.018], [0.038], [0.073], [0.100], [0.057], [0.995], [0.058], [0.932], [0.869],
-[2015], [3.28], [96.72], [0.039], [0.072], [0.120], [0.124], [0.091], [1.012], [0.087], [0.925], [0.856],
-[2016], [11.14], [88.86], [0.021], [0.050], [0.099], [0.113], [0.070], [1.030], [0.062], [0.916], [0.840],
-[2017], [25.00], [75.00], [0.000], [0.028], [0.064], [0.090], [0.040], [0.979], [0.046], [0.928], [0.862],
-[2018], [24.62], [75.38], [0.001], [0.028], [0.075], [0.115], [0.045], [0.914], [0.071], [0.870], [0.757],
-[2019], [7.50], [92.50], [0.027], [0.057], [0.105], [0.116], [0.077], [1.016], [0.072], [0.920], [0.847],
-[2020], [20.06], [79.94], [0.006], [0.027], [0.057], [0.099], [0.042], [0.980], [0.049], [0.920], [0.847],
-[2021], [16.00], [84.00], [0.013], [0.041], [0.097], [0.134], [0.072], [1.032], [0.063], [0.882], [0.778],
 
-   table.hline(),
-),
-)
-
-=== Příloha
-
-#figure(
-table(
-   columns: (5),
-   inset: 3pt,
-   align: center + horizon,
-   stroke: none,
-   table.hline(),
-[*Metoda*],[*Harmonizace*], [*Q1*], [*Medián*], [*Q3*], 
-   table.hline(),
-[RMSE], [bez harmonizace], [0.080], [0.097], [0.116],
-[RMSE], [pásma NIR a RED], [0.076], [0.088], [0.106],
-[RMSE], [NDVI], [0.074], [0.090], [0.108],
-[ME], [bez harmonizace], [0.032], [0.047], [0.062],
-[ME], [pásma NIR a RE], [0.028], [0.046], [0.062],
-[ME], [NDVI], [0.024], [0.036], [0.053],
-   table.hline(),
-),
-)
