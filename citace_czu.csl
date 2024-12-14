@@ -103,7 +103,7 @@
       </if>
       <else-if type="webpage">
         <group delimiter=" ">
-          <group prefix="(online) [cit." suffix="] dostupné z">
+          <group prefix="(online) [cit. " suffix="] dostupné z">
             <date variable="accessed">
               <date-part name="day" suffix=". "/>
               <date-part name="month" form="numeric" suffix=". "/>
