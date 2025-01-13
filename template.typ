@@ -4,7 +4,7 @@ doc,
 
 set text(
   lang: "cs",
-  font: "Arial",
+  font: "Libertinus Serif",
   size: 11pt,
   hyphenate: true, // dělení slov
 
