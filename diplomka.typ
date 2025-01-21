@@ -123,28 +123,28 @@ Rád bych upřímně poděkoval panu Ing. Jiřímu Proškovi, Ph.D., nejen za od
 = Úvod
 Globální trend zvyšujícího se nárůstu vegetačního pokryvu na Zemi, známý jako greening trend, nabývá v posledních desetiletích na důležitosti @GUTIERREZHERNANDEZ2025101377 @CHEN2024e02791 @Chen_2019 @ZHAO2018198. Jednou z postižených oblastí jsou horské subnivální ekosystémy (oblast mezi horní hranicí lesa a sněžnou čárou), kde může greening trend vyvolat strukturální ekologické změny specifických druhů nízké vegetace, které mohou vést k dlouhodobým environmentálním dopadům @choler2024waning @anderson2020vegetation @fassnacht2019landsat @filippa2019climatic @liu2021continuous.
 
-Vzhledem k tomu, že tyto změny probíhají na rozsáhlých územích, představují satelitní data z dálkového průzkumu Země cenný nástroj pro jejich monitorování, a to z důvodu pravidelného intervalu snímání, globálního pokrytí a možnosti tvorby časových řad. V případě družic Landsat 7 a Landsat 8 je pro konzistentní chování naměřených hodnot normalizovaného vegetačního indexu (NDVI) nezbytná jejich harmonizace způsobena různou šířkou jednotlivých spektrálních pásem a různou citlivostí sensorů @holden2016analysis @roy2016characterization @li2013cross @flood2014continuity.
+Vzhledem k tomu, že tyto změny probíhají na rozsáhlých územích, představují satelitní data z dálkového průzkumu Země cenný nástroj pro jejich monitorování, a to z důvodu pravidelného intervalu snímání, globálního pokrytí a možnosti tvorby časových řad. V případě družic Landsat 7 a Landsat 8 je pro konzistentní chování naměřených hodnot normalizovaného vegetačního indexu (NDVI) nezbytná jejich harmonizace způsobena různou šířkou jednotlivých spektrálních pásem a různou citlivostí senzorů @holden2016analysis @roy2016characterization @li2013cross @flood2014continuity.
 
-Tato práce se věnuje výše popsanému fenoménu z hlediska omezení a správnosti aplikací harmonizačních koeficientů od @roy2016characterization právě v oblastech aridních horských ekosystémů. Při chybném použití mohou výsledky vykazovat nesprávné trendy, které mylně popisují reálné chování změny vegetace.
+Jen málo studií se dosud zabývalo greening trendem a jeho ovlivněním rostoucím počtem dostupných snímků během sezóny konkrétně u vysokohorské aridní vegetace. Studie @bayle2024landsat zároveň doporučuje další cílený výzkum v těchto specifických oblastech.
 
-Kromě toho se tato práce zaměřuje na význam dvojnásobného časového rozlišení (8 dní) získaného díky překryvu snímání platforem Landsat 7 a Landsat 8. Je analyzováno, jak vyšší kvantita snímků ovlivňuje celosezónní charakteristiky NDVI a jak mohou tyto změny vést ke zkreslení odhadů při dlouhodobém monitorování vegetace.
+Tato práce se věnuje výše popsaným fenoménům z hlediska omezení a správnosti aplikací harmonizačních koeficientů od @roy2016characterization právě v oblastech aridních horských ekosystémů. Při chybném použití mohou výsledky vykazovat nesprávné trendy, které mylně popisují reálné chování změny vegetace.
+
+Kromě toho se tato práce zaměřuje na význam dvojnásobného časového rozlišení (8 dní) získaného díky překryvu snímání platforem Landsat 7 a Landsat 8. Je analyzováno, jak vyšší kvantita snímků ovlivňuje celosezónní charakteristiky NDVI a jak mohou tyto změny vést ke zkreslení odhadů při dlouhodobém monitorování vegetace. 
 
 = Cíle práce
-Cílem diplomové práce je prozkoumat klíčové aspekty konzistence naměřených hodnot NDVI získaných ze senzorů Landsat 7 (ETM+) a Landsat 8 (OLI) v aridní vysokohorské oblasti Ladakh v letech 2013 až 2021. Vzhledem k rozdílům v senzorových charakteristikách obou platforem a možnostem využití harmonizace dat se zaměřím na následující výzkumné otázky:
+Cílem diplomové práce je prozkoumat klíčové aspekty konzistence naměřených hodnot NDVI získaných ze senzorů Landsat 7 (ETM+) a Landsat 8 (OLI) v aridní vysokohorské oblasti Ladakh v letech 2013 až 2021. Vzhledem k rozdílům v charakteristikách senzorů obou platforem a možnostem využití harmonizace dat se zaměřím na následující výzkumné otázky:
 
-+ Jak ovlivňují rozdíly v senzorových charakteristikách (zejména šířka spektrálních pásem) hodnoty NDVI mezi platformami Landsat 7 (ETM+) a Landsat 8 (OLI), a do jaké míry lze tyto rozdíly minimalizovat pomocí harmonizace dat?
++ Jak ovlivňují rozdíly v charakteristikách senzorů (zejména šířka spektrálních pásem) hodnoty NDVI mezi platformami Landsat 7 (ETM+) a Landsat 8 (OLI), a do jaké míry lze tyto rozdíly minimalizovat pomocí harmonizace dat?
 
-+ Jaký vliv má dostupnost většího množství snímků během překryvu platforem Landsat 7 a Landsat 8 na přesnost a spolehlivost identifikace sezónních maxim NDVI ve specifických časových obdobích?
-
-+ Do jaké míry lze pomocí časových řad NDVI z platforem Landsat 7 a Landsat 8 spolehlivě analyzovat dlouhodobé vegetační trendy v aridních vysokohorských oblastech, s ohledem na regionální odlišnosti, limity harmonizačních metod a volbu vhodné celosezónní metriky?
++ Jaký vliv má dostupnost většího množství snímků během překryvu platforem Landsat 7 a Landsat 8 na přesnost a spolehlivost identifikace sezónních maxim NDVI ve specifických časových obdobích s ohledem na volbu vhodné celosezónní metriky?
 
 = Literární rešerše
 == Mise Landsat
 Satelity Landsat snímají zemský povrch nepřetržitě již více než 50 let. Poskytují tak nejdelší časovou řadu pozorování ze všech globálních vesmírných misí @roy2014landsat. Již v prvních letech po zavedení programu začala vznikat nová metodika pro mapování změn krajinného pokryvu a vyhledávání přírodních zdrojů @goward1997landsat. Většinu času bylo snímky možné získat pouze komerčně. Zlom nastal v roce 2008, kdy byla data poskytnuta zdarma online pro všechny uživatele. To způsobilo značné navýšení uplatnění nejen v aplikační sféře, ale také ve vědeckém sektoru @wulder2012opening @woodcock2008free. Vzhledem k neustálému rozšiřování mise se role Landsatu jako nástroje pro globální pozorování Země i nadále zvyšuje @zhu2019benefits. 
 
-Satelit Landsat 7 byl na oběžnou dráhu vypuštěn v roce 1999 jako nástupce Landsatu 5. Měl opakovací cyklus 16 dní a nesl s sebou několik vylepšení. Kromě zdokonaleného sensoru ETM+ i takzvaný _long-term acquisition plan (LTAP)_ a _image assessment system (IAS)_ @loveland2012landsat. Principem LTAP bylo automatizovat výběr vhodných míst na Zemi pro pravidelnou aktualizaci globálního archivu bezoblačných a dobře osvětlených scén @arvidson2001landsat. Algoritmy metody IAS zase vylepšily geometrickou a radiometrickou přesnost @basislandsat. V roce 2003 selhal na snímači _scan line corrector (SLC)_. Ten kompenzoval dopředný pohyb satelitu za účelem zpětného snímání sensoru. Z toho důvodu chybí na snímcích přibližně 22 % plochy ve formě pravidelných pruhů @scaramuzza2005landsat. Nominální mise Landsat 7 byla ukončena v roce 2022 přechodem satelitu na nižší oběžnou dráhu @landsat7end.
+Satelit Landsat 7 byl na oběžnou dráhu vypuštěn v roce 1999 jako nástupce Landsatu 5. Měl opakovací cyklus 16 dní a nesl s sebou několik vylepšení. Kromě zdokonaleného senzoru ETM+ i takzvaný _long-term acquisition plan (LTAP)_ a _image assessment system (IAS)_ @loveland2012landsat. Principem LTAP bylo automatizovat výběr vhodných míst na Zemi pro pravidelnou aktualizaci globálního archivu bezoblačných a dobře osvětlených scén @arvidson2001landsat. Algoritmy metody IAS zase vylepšily geometrickou a radiometrickou přesnost @basislandsat. V roce 2003 selhal na snímači _scan line corrector (SLC)_. Ten kompenzoval dopředný pohyb satelitu za účelem zpětného snímání senzoru. Z toho důvodu chybí na snímcích přibližně 22 % plochy ve formě pravidelných pruhů @scaramuzza2005landsat. Nominální mise Landsat 7 byla ukončena v roce 2022 přechodem satelitu na nižší oběžnou dráhu @landsat7end.
 
-Satelit Landsat 8 začal zaznamenávat povrch Země v roce 2013. Hlavní změnou oproti předchozím generacím byl nový vylepšený optický snímač OLI a termální infračervený sensor TIRS @roy2014landsat. Jak OLI, tak TIRS jsou senzory typu _pushbroom_, jejichž vlivem byla vylepšena geometrická přesnost a také poměr signálu k šumu @irons2012next. Landsat 8 má opakovací cyklus snímání 16 dní a je umístěn na stejné oběžné dráze jako již vyřazený Landsat 5 @roy2014landsat. V kombinaci s Landsatem 7 bylo tak umožněno zachytit každé místo na rovníku s intervalem 8 dní a ve vyšších zeměpisných šířkách, v důsledku tzv. _poleward convergence_, kdy se dráhy satelitů směrem k pólům sbíhají, i častěji @kovalskyy2013global.  
+Satelit Landsat 8 začal zaznamenávat povrch Země v roce 2013. Hlavní změnou oproti předchozím generacím byl nový vylepšený optický snímač OLI a termální infračervený senzor TIRS @roy2014landsat. Jak OLI, tak TIRS jsou senzory typu _pushbroom_, jejichž vlivem byla vylepšena geometrická přesnost a také poměr signálu k šumu @irons2012next. Landsat 8 má opakovací cyklus snímání 16 dní a je umístěn na stejné oběžné dráze jako již vyřazený Landsat 5 @roy2014landsat. V kombinaci s Landsatem 7 bylo tak umožněno zachytit každé místo na rovníku s intervalem 8 dní a ve vyšších zeměpisných šířkách, v důsledku tzv. _poleward convergence_, kdy se dráhy satelitů směrem k pólům sbíhají, i častěji @kovalskyy2013global.  
 
 Aktuálně na oběžné dráze aktivně snímají pouze dva satelity, a to Landsat 8 a Landsat 9. Kompletní přehled jednotlivých misí Landsat a jejich období provozu je znázorněno na obrázku X. 
 První generace satelitů Landsat byla vybavena snímačem _Multispectral Scanner (MSS)_, který měl ve srovnání s novějšími snímači (TM - _Thematic Mapper_, ETM+ a OLI) nejen horší prostorové rozlišení (60 metrů), ale také odlišná spektrální pásma, pokrývající jiné oblasti vlnových délek. Z tohoto důvodu je možné vytvářet konzistentní časové řady až od nástupu satelitu Landsat 4 @banskota2014forest. 
@@ -158,11 +158,11 @@ První generace satelitů Landsat byla vybavena snímačem _Multispectral Scanne
 
 Kolem roku 2030 by měla být zahájena mise Landsat-Next, která nabídne lepší prostorové rozlišení s více specificky zaměřenými pásmy a díky konstelaci třech satelitů i šestidenní interval snímání  @wulder2022fifty @landsatnext.
 
-== Specifikace sensorů
+== Specifikace senzorů
 === Enhanced Thematic Mapper Plus (ETM+) 
-Sensor ETM+ je pevný osmipásmový multispektrální radiometr řadící se do skupiny _whiskbroom_ skenerů: aby v průběhu snímání pokryly detektory celou oblast záběru, tak se pohybovaly ze strany na stranu. Toto oscilování připomínalo zametání. Snímač pracuje s 8bitovou hloubkou záznamu @SaylerL7. Oproti předchozí verzi představil ETM+ několik novinek. Primární inovací bylo přidání panchromatického pásma s prostorovým rozlišením 15 metrů a výrazně lepší rozlišení u TIR pásma @nasaetm. Dále sensor obsahuje dva přístroje: _full aperture solar calibrator (FASC)_ a _partial aperture solar calibrator (PASC)_ zajištující solární kalibraci a řadu dalších vylepšení, která garantují maximální radiometrickou chybu měření do 5 % @markham1994radiometric.
+Senzor ETM+ je pevný osmipásmový multispektrální radiometr řadící se do skupiny _whiskbroom_ skenerů: aby v průběhu snímání pokryly detektory celou oblast záběru, tak se pohybovaly ze strany na stranu. Toto oscilování připomínalo zametání. Snímač pracuje s 8bitovou hloubkou záznamu @SaylerL7. Oproti předchozí verzi představil ETM+ několik novinek. Primární inovací bylo přidání panchromatického pásma s prostorovým rozlišením 15 metrů a výrazně lepší rozlišení u TIR pásma @nasaetm. Dále senzor obsahuje dva přístroje: _full aperture solar calibrator (FASC)_ a _partial aperture solar calibrator (PASC)_ zajištující solární kalibraci a řadu dalších vylepšení, která garantují maximální radiometrickou chybu měření do 5 % @markham1994radiometric.
 
-Jednotlivá pásma sensoru ETM+ a jejich vlnové délky jsou uvedeny v tabulce x.
+Jednotlivá pásma senzoru ETM+ a jejich vlnové délky jsou uvedeny v tabulce x.
 
 #figure(
    table(
@@ -186,13 +186,13 @@ Jednotlivá pásma sensoru ETM+ a jejich vlnové délky jsou uvedeny v tabulce x
    ),
    kind: "tab",
    supplement: "tab.",
-   caption: "Spektrální pásma sensoru ETM+ (Landsat 7).",
+   caption: "Spektrální pásma senzoru ETM+ (Landsat 7).",
 )
 
 === Operational Land Imager (OLI)
-Sensor OLI představoval významný technologický pokrok na poli radiometrů. Oproti ETM+, který používal oscilující zrcadla (_whiskbroom_) zde byly aplikovány dlouhé lineární řady detektorů zarovnané na ohniskové rovině přístroje společně se čtyřzrcadlovým astigmatickým teleskopem. Díky tomu bylo možné z architektury odstranit několik pohyblivých částí a zároveň zlepšit citlivost. Tato technologie se nazývá _pushbroom_ @VaughnL8. OLI je multispektrální radiometr snímající devět pásem ve 12bitové hloubce @irons2012next. Novinkou jsou dvě pásma. _Coastal Aerosol_ určené pro pozorování atmosférických podmínek v pobřežních zónách a _Cirrus_ pro detekci vysoké oblačnosti @nasaoli. Z hlediska radiometrické chybovosti byly požadavky na OLI srovnatelné s ETM+. Avšak u poměru signálu k šumu (SNR) byly stanoveny přísněji @VaughnL8.
+Senzor OLI představoval významný technologický pokrok na poli radiometrů. Oproti ETM+, který používal oscilující zrcadla (_whiskbroom_) zde byly aplikovány dlouhé lineární řady detektorů zarovnané na ohniskové rovině přístroje společně se čtyřzrcadlovým astigmatickým teleskopem. Díky tomu bylo možné z architektury odstranit několik pohyblivých částí a zároveň zlepšit citlivost. Tato technologie se nazývá _pushbroom_ @VaughnL8. OLI je multispektrální radiometr snímající devět pásem ve 12bitové hloubce @irons2012next. Novinkou jsou dvě pásma. _Coastal Aerosol_ určené pro pozorování atmosférických podmínek v pobřežních zónách a _Cirrus_ pro detekci vysoké oblačnosti @nasaoli. Z hlediska radiometrické chybovosti byly požadavky na OLI srovnatelné s ETM+. Avšak u poměru signálu k šumu (SNR) byly stanoveny přísněji @VaughnL8.
 
-Jednotlivá pásma sensoru OLI a jejich vlnové délky jsou uvedeny v tabulce x.
+Jednotlivá pásma senzoru OLI a jejich vlnové délky jsou uvedeny v tabulce x.
 
 #figure(
    table(
@@ -217,10 +217,10 @@ Jednotlivá pásma sensoru OLI a jejich vlnové délky jsou uvedeny v tabulce x.
    ),
    kind: "tab",
    supplement: "tab.",
-   caption: "Spektrální pásma sensoru OLI (Landsat 8).",
+   caption: "Spektrální pásma senzoru OLI (Landsat 8).",
 )
 
-=== Rozdíly mezi sensory
+=== Rozdíly mezi senzory
 Ačkoli byl senzor OLI navržen s ohledem na kompatibilitu se staršími snímači ETM+ a TM (_Thematic Mapper_), tak se vzhledem k inovacím mírně liší @irons2012next. Přidáním dalšího pásma na modrém konci spektra u OLI se změnilo číslování. Pásma TM a ETM+ označena jako 1, 2, 3, 4, 5, 7 odpovídají reflexním pásmům OLI 2, 3, 4, 5, 6, 7 v tomto pořadí @flood2014continuity. Několik pásem u OLI bylo zúženo, aby se vyhnula atmosférickým absorpčním zónám. Největší změna se týká pásma 5 OLI, které bylo upraveno tak, aby vyloučilo absorpční pás vodní páry při 0,825 μm uprostřed pásma 4 ETM+. Upraveno bylo i panchromatické pásmo a SWIR1 se SWIR2 @VaughnL8. Spektrální odezvy jednotlivých pásem jsou zobrazeny na obrázku x.
 
 #show figure.caption: set align(left)
@@ -233,28 +233,28 @@ Ačkoli byl senzor OLI navržen s ohledem na kompatibilitu se staršími sníma�
 #show figure.caption: set align(center)
 
 == Spektrální rozdíly mezi pásmy a jejich dopad na vegetační indexy
-Běžně používané vegetační indexy jsou založeny na vztahu spektra červeného a blízkého infračerveného záření, a to z důvodu citlivosti na fotosyntetická barviva a morfologii listu @ELVIDGE199538. Navzdory snadné aplikaci mají tyto kombinace řadu nevýhod. Například nedostatek citlivosti a spektrální věrnosti k zachycení jemných variací při použití nespecificky korigovaných a širokých spektrálních pásem. U satelitů Landsat snižuje citlivost také menší prostorové rozlišení 30 metrů @xue2017significant @huete2012vegetation. I přes tyto nedostatky jsou však sensory s hrubším prostorovým i spektrálním rozlišením dobrým zdrojem konzistentních a včasných informací o regionálních trendech @huete2012vegetation.
+Běžně používané vegetační indexy jsou založeny na vztahu spektra červeného a blízkého infračerveného záření, a to z důvodu citlivosti na fotosyntetická barviva a morfologii listu @ELVIDGE199538. Navzdory snadné aplikaci mají tyto kombinace řadu nevýhod. Například nedostatek citlivosti a spektrální věrnosti k zachycení jemných variací při použití nespecificky korigovaných a širokých spektrálních pásem. U satelitů Landsat snižuje citlivost také menší prostorové rozlišení 30 metrů @xue2017significant @huete2012vegetation. I přes tyto nedostatky jsou však senzory s hrubším prostorovým i spektrálním rozlišením dobrým zdrojem konzistentních a včasných informací o regionálních trendech @huete2012vegetation.
 
-Hodnoty vegetačních indexů odvozených ze snímků z různých satelitních sensorů se liší na základě rozdílů mezi analogickými spektrálními pásmy používanými k jejich generování @teillet2008spectral.
+Hodnoty vegetačních indexů odvozených ze snímků z různých satelitních senzorů se liší na základě rozdílů mezi analogickými spektrálními pásmy používanými k jejich generování @teillet2008spectral.
 
-AVIRIS (_Airborne Visible/Infrared Imaging Spectrometer_) je hyperspektrální senzor umístěný na letadlech, který snímá odrazivost povrchu Země v celém viditelném a blízkém infračerveném spektru s prostorovým rozlišením 20 metrů @green1998imaging. Při porovnání dat ze senzoru AVIRIS se spektrálními pásmy specifickými pro další satelitní sensory byly výsledky NDVI (_Normalized Difference Vegetation Index_) výrazně ovlivněny rozdíly ve spektrální šířce pásem, přičemž zvlášť důležité bylo červené pásmo. @teillet1997effects.
+AVIRIS (_Airborne Visible/Infrared Imaging Spectrometer_) je hyperspektrální senzor umístěný na letadlech, který snímá odrazivost povrchu Země v celém viditelném a blízkém infračerveném spektru s prostorovým rozlišením 20 metrů @green1998imaging. Při porovnání dat ze senzoru AVIRIS se spektrálními pásmy specifickými pro další satelitní senzory byly výsledky NDVI výrazně ovlivněny rozdíly ve spektrální šířce pásem, přičemž zvlášť důležité bylo červené pásmo. @teillet1997effects.
 
 AVHRR (_Advanced Very High Resolution Radiometer_) je senzor umístěný na družicích NOAA, který snímá Zemi ve 4 až 6 (v závislosti na modelu) širokých spektrálních pásmech od viditelného až po infračervené spektrum a slouží zejména k monitorování vegetace, oceánů a atmosféry @kalluri2021advanced. Vzhledem k širším spektrálním pásmům byl AVHRR citlivější na atmosférickou vodní páru, která ovlivnila výsledky NDVI oproti dalším porovnávaným senzorům @brown2006evaluation. 
 
-MODIS (_Moderate Resolution Imaging Spectroradiometer_) je multispektrální senzor na družicích Terra a Aqua, který snímá Zemi ve 36 spektrálních pásmech, pokrývajících oblasti od viditelného po termální infračervené spektrum. Slouží k monitorování vegetace, oceánů, oblačnosti a dalších zemských a atmosférických podmínek s prostorovým rozlišením 250 až 1000 metrů @barnes2003status. Primárním důvodem nepřesností u výsledků NDVI byly mezi sensory MODIS a AVHRR označeny aerosoly a vodní páry. Ty ovlivňují pásma NIR a RED odlišnými způsoby v různých vlnových délkách. Finální shodu NDVI mezi sensory tak formuje šířka jejich pásem @van2006multi. 
+MODIS (_Moderate Resolution Imaging Spectroradiometer_) je multispektrální senzor na družicích Terra a Aqua, který snímá Zemi ve 36 spektrálních pásmech, pokrývajících oblasti od viditelného po termální infračervené spektrum. Slouží k monitorování vegetace, oceánů, oblačnosti a dalších zemských a atmosférických podmínek s prostorovým rozlišením 250 až 1000 metrů @barnes2003status. Primárním důvodem nepřesností u výsledků NDVI byly mezi senzory MODIS a AVHRR označeny aerosoly a vodní páry. Ty ovlivňují pásma NIR a RED odlišnými způsoby v různých vlnových délkách. Finální shodu NDVI mezi senzory tak formuje šířka jejich pásem @van2006multi. 
 
-Podobných výsledků bylo dosaženo při porovnání sensorů ETM+ a OLI, kde měla hlavní vliv na nekonzistenci výsledků NDVI šířka pásma NIR. To lze vysvětlit tím, že užší pásmo NIR u OLI je méně ovlivněno absorpcí vodní páry @ke2015characteristics. Získané vegetační indexy jsou mezi oběma sensory sice silně korelované, ale přesto mírně odlišné @li2013cross @mancino2020cross. Výsledky NDVI zároveň vykazují větší rozdíly ve srovnání s hodnotami odrazivosti jednotlivých pásem. To je způsobeno tím, že zkreslení v pásmech NIR a RED má odchylky systematicky ve stejném směru. Tento efekt se zvýrazní při výpočtu indexu @holden2016analysis.
+Podobných výsledků bylo dosaženo při porovnání senzorů ETM+ a OLI, kde měla hlavní vliv na nekonzistenci výsledků NDVI šířka pásma NIR. To lze vysvětlit tím, že užší pásmo NIR u OLI je méně ovlivněno absorpcí vodní páry @ke2015characteristics. Získané vegetační indexy jsou mezi oběma senzory sice silně korelované, ale přesto mírně odlišné @li2013cross @mancino2020cross. Výsledky NDVI zároveň vykazují větší rozdíly ve srovnání s hodnotami odrazivosti jednotlivých pásem. To je způsobeno tím, že zkreslení v pásmech NIR a RED má odchylky systematicky ve stejném směru. Tento efekt se zvýrazní při výpočtu indexu @holden2016analysis.
 
 Aktuální multisenzorové aplikace NDVI tak mohou dosáhnout největšího přínosu, pokud se efektivně vyřeší atmosférické korekce a použijí se translační rovnice pro harmonizaci @van2006multi @simms2013multisensor. 
 
-== Harmonizace dat ze sensorů ETM+ a OLI
+== Harmonizace dat ze senzorů ETM+ a OLI
 Jako jeden z prvních, kdo řešil ucelený proces harmonizace senzorů OLI a ETM+ pro tvorbu časových řad, byl @flood2014continuity, který své analýzy prováděl na datech ze severovýchodní Austrálie. Podobný cíl sledoval také @roy2016characterization, který se zaměřil na snímky pokrývající celé kontinentální území Spojených států amerických. Stejnou problematikou se následně zabývalo několik dalších studií @perez2023landsat @cao2022harmonizing @chastain2019empirical. Ve všech těchto případech došlo k přímému porovnání jednotlivých spektrálních pásem, která byla následně statisticky analyzována prostřednictvím lineárních regresních modelů. 
 
 Přestože výsledky vykazují vysokou spolehlivost, lze v nich identifikovat několik nedostatků. Jedním z nich je například absence cílené úpravy koeficientů pro specifické povrchy. Důsledkem aproximace nemusí koeficienty optimálně fungovat pro snímky z konkrétních lokalit na Zemi, jak uvádí například @flood2014continuity, který upozorňuje na nutnost obezřetnosti při jejich aplikaci v oblastech s odlišnými typy vegetace a půdy, než jaké jsou zastoupené na analyzovaných snímcích. Kromě rozdílů ve spektrální odezvě mezi senzory je rovněž sporná důvěryhodnost koeficientů pro pásma kratších vlnových délek, což souvisí s nedostatky v algoritmech atmosférické korekce, jak zmínil @roy2016characterization. Atmosférická korekce je totiž u senzoru ETM+ pro zelené a modré pásmo méně přesná než u senzoru OLI @VERMOTE2016.
 
 Podle studie @xu2014compare je NDVI získaný ze senzoru OLI nejvíce odlišný od NDVI ze senzoru ETM+ v oblastech s nižším pokryvem vegetací, přičemž tento rozdíl se s rostoucí hodnotou NDVI zmenšuje. Pro dosažení konzistence se doporučuje cílená harmonizace. Aplikace koeficientů získaných z dat ze strukturálně rozdílných krajinných typů nemusí fungovat optimálně. Je proto žádoucí použít harmonizační model přizpůsobený specifické studované oblasti, neboť každý region vykazuje unikátní odchylky ve spektrální odezvě @cao2022harmonizing @flood2017comparing.
 
-Alternativu představil @berner2023landsatts, který pro harmonizaci snímků použil polynomickou regresi. Tento přístup dokáže reagovat na potenciální nelinearity a lépe se přizpůsobuje datové sadě uživatele. Koeficienty jsou navíc přizpůsobeny prostředí arktické tundry a boreálním lesům. Tím se snižuje riziko chyby, na rozdíl od globálně aplikovatelných metod.
+Alternativu představil @berner2023landsatts, který pro harmonizaci snímků použil polynomickou regresi. Tento přístup dokáže reagovat na potenciální nelinearity a lépe se přizpůsobuje datové sadě uživatele. Koeficienty jsou navíc přizpůsobeny prostředí arktické tundry a boreálním lesům. Tím se snižuje riziko chyby, na rozdíl od globálně aplikovatelných metod. Tento model byl použit například ve studii od @choler2024waning. 
 
 == Problematika sezónních maxim NDVI při sledování greening trendu
 Optický dálkový průzkum Země je komplikován přítomností oblaků, sněhu, ledu či stínů, které zakrývají povrch. Pro zařazení kvalitních snímků do časových řad je nezbytné tyto vlivy maskovat @zhu2018cloud. V oblastech s náročnými povětrnostními podmínkami může během vegetační sezóny kvůli oblačnosti vznikat značný počet děr v dostupných datech @white2014landsat. Z toho důvodu je žádoucí aplikovat vhodný algoritmus skládání obrazu @white2014pixel.
@@ -279,7 +279,7 @@ Jedná se o vysokohorskou aridní zónu, která je díky suchému kontinentáln�
 )
 
 = Metodika
-V této kapitole je popsána příprava dat z družic Landsat 7 a Landsat 8 pro analýzu vegetačního indexu NDVI. Data jsou nejprve kalibrována a filtrována pro odstranění oblačnosti. Následně je provedena harmonizace společně s výpočtem NDVI. Výsledky jsou vyhodnoceny ve dvou formách: jako sezónní maxima NDVI pro porovnání mezi sezónami a jako NDVI pro každý snímek, což umožňuje srovnání dvojic scén v sezóně.
+V této kapitole je popsána příprava dat z platforem Landsat 7 a Landsat 8 pro analýzu vegetačního indexu NDVI. Data jsou nejprve kalibrována a filtrována pro odstranění oblačnosti. Následně je provedena harmonizace společně s výpočtem NDVI. Výsledky jsou vyhodnoceny ve dvou formách: jako sezónní maxima NDVI pro porovnání mezi sezónami a jako NDVI pro každý snímek, což umožňuje srovnání dvojic scén v sezóně.
 
 Proces zpracování je znázorněn v diagramu na obrázku x
 
@@ -372,7 +372,7 @@ var createMask = function(image) {
 == Aplikace harmonizačních koeficientů a výpočet NDVI
 Použité koeficienty byly získány metodou nejmenších čtverců (OLS) při přímém porovnání pásem ze snímků ze Severní Ameriky @roy2016characterization. Na základě těchto výsledků byly harmonizovány i studie zabývající se analýzou vysokohorské vegetace @anderson2020vegetation @fassnacht2019landsat @pastick2019spatiotemporal.
 
-Aplikace koeficientů byla provedena pouze na snímky ze sensoru OLI (Landsat 8), které byly sladěny s ETM + (Landsat 7). Důvodem bylo umožnit potenciální rozšíření časové řady i o data z Landsatu 5 při aplikaci metodiky popsané v této práci. Použité koeficienty jsou zobrazeny v tabulce x a jejich použití v kódu je ilustrováno na obrázku x.
+Aplikace koeficientů byla provedena pouze na snímky ze senzoru OLI (Landsat 8), které byly sladěny s ETM + (Landsat 7). Důvodem bylo umožnit potenciální rozšíření časové řady i o data z Landsatu 5 při aplikaci metodiky popsané v této práci. Použité koeficienty jsou zobrazeny v tabulce x a jejich použití v kódu je ilustrováno na obrázku x.
 
 #figure(
    table(
@@ -599,7 +599,7 @@ Byly vytvořeny souhrny pro každou scénu v sezóně, které zahrnovaly:
 
 === Analýza hromadného porovnání dvojic scén
 Pro každou dvojici scén bylo provedeno:
-- *Hodnocení přesnosti:* V podobě RMSE (_Root Mean Square Error_), která měří průměrnou velikost chyb (s ohledem na kvadratické odchylky, což znamená, že větší chyby jsou penalizovány více), a ME (_Mean Error_), která udává jejich průměrnou odchylku. Zatímco RMSE poskytuje informaci o tom, jak velké jsou chyby v průměru, ME ukazuje, zda sensor systematicky nadhodnocuje nebo podhodnocuje. Výpočty byly provedeny dle stanovených vzorců níže:
+- *Hodnocení přesnosti:* V podobě RMSE (_Root Mean Square Error_), která měří průměrnou velikost chyb (s ohledem na kvadratické odchylky, což znamená, že větší chyby jsou penalizovány více), a ME (_Mean Error_), která udává jejich průměrnou odchylku. Zatímco RMSE poskytuje informaci o tom, jak velké jsou chyby v průměru, ME ukazuje, zda senzor systematicky nadhodnocuje nebo podhodnocuje. Výpočty byly provedeny dle stanovených vzorců níže:
 
 $ "RMSE"= sqrt(1/n sum_(i=1)^n k("L8" – "L7")^2) $
 
@@ -607,7 +607,7 @@ $ "ME"= 1/n sum_(i=1)^n k("L8" – "L7")\ "kde L7 (Landsat 7) a L8 (Landsat 8) p
 
 === Analýza porovnání maximálních hodnot NDVI z celé sezóny
 Jednotlivé sloupce byly separovány do vektorů, kde každý vektor zahrnoval vždy tři sloupce z určité sezóny - Landsat 7, Landsat 8 a jejich kombinaci. Toto rozdělení umožnilo zpracovat každý vektor nezávisle na sobě. Výstupem analýzy bylo:
-- *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší maximální hodnotu NDVI oproti druhému sensoru. Porovnával jsem vždy pozičně shodné body. 
+- *Procentuální rozdělení bodů:* Bylo zjištěno kolik procent bodů mělo vyšší maximální hodnotu NDVI oproti druhému senzoru. Porovnával jsem vždy pozičně shodné body. 
 - *Kvartily:* Byly odečteny hodnoty NDVI Landsatu 7 od Landsatu 8 (L8 - L7). Odečet jsem provedl na pozičně shodných bodech. Výsledky byly před výpočtem kvartilů seřazeny vzestupně. Výpočet proběhl dle algoritmu _type 7_ @quantile.
 - *Hodnocení přesnosti:* V podobě RMSE (_Root Mean Square Error_) a ME (_Mean Error_) dle stejného postupu jako u kapitoly 5.6.2.
 
@@ -631,7 +631,7 @@ Analyzoval jsem vývoj NDVI během vegetačních sezón v letech 2013 až 2021 a
 
 Ve všech analyzovaných sezónách je patrné systematické nadhodnocení naměřených hodnot NDVI u senzoru Landsat 8, a to i po aplikaci harmonizačních koeficientů (viz příloha X, grafy). Tento trend je nejzřetelnější na ilustrační sezóně 2020 (obr. X). Harmonizace má na začátku a na konci této sezóny téměř nulový vliv, zatímco její efekt se zvyšuje v průběhu července.
 
-Harmonizace pásem NIR a RED vykazuje ve srovnání s harmonizací NDVI stejné výsledky při porovnání rozdílů mezi průměry vybraných dvojic scén (celkový rozdíl: 0.033). Při porovnání mediánů však harmonizace NDVI dosahuje lepších výsledků (0.034 oproti 0.038). V obou případech je patrný progres oproti variantě bez harmonizace (průměr: 0.047; medián: 0.046). Přesto zůstává rozdíl mezi aritmetickými průměry a mediány hodnot NDVI mezi oběma senzory výrazný (viz tabulka X).
+Harmonizace pásem NIR a RED vykazuje ve srovnání s harmonizací NDVI stejné výsledky při porovnání rozdílů mezi průměry vybraných dvojic scén (celkový rozdíl: 0.033). Při porovnání mediánů však harmonizace NDVI dosahuje lepších výsledků (0.034 oproti 0.038). V obou případech je patrný progres oproti variantě bez harmonizace (průměr: 0.047; medián: 0.046), jak je uvedeno v tabulce X.
 
 Ve všech zkoumaných sezónách je také pozorován sezónní trend vývoje NDVI podle měsíce v roce, přičemž maximálních hodnot dosahuje obvykle v průběhu druhé poloviny července. Za zmínku stojí anomálie v chování srpnových snímků ze sezóny 2017. Snímek z Landsatu 7 pořízený 11. srpna vykazuje nižší hodnoty průměru (0.347; 0.351) i mediánu (0.309; 0.318) než snímek pořízený později, 27. srpna (viz příloha X, tabulky), což neodpovídá obvyklému sezónnímu vývoji NDVI v ostatních letech. 
 
@@ -684,13 +684,13 @@ kind: "tab",
 == Výsledky hromadného porovnání dvojic scén
 Vliv harmonizačních koeficientů od @roy2016characterization byl studován na souhrnných datech ze všech dostupných dvojic scén. Pro analýzu byla vždy vybrána dvojice snímků z Landsatu 7 a Landsatu 8 s minimálním časovým odstupem snímání, konkrétně 8 dní.
 
-Analyzoval jsem celkem 59 dvojic scén z let 2013 až 2021. Při hodnocení dat pomocí metriky RMSE je na obrázku x patrné zlepšení směrem k ideálnímu výsledku, který představuje absolutní konzistenci mezi sensory. Nicméně při detailnějším pohledu je toto zlepšení relativně malé. Konkrétně se hodnota mediánu snížila z 0.097 na 0.088 (harmonizace pásem NIR a RED), respektive na 0.090 (harmonizace NDVI). U metriky ME je situace podobná. K nepatrnému přiblížení se stavu konzistence mezi sensory došlo pouze po harmonizaci NDVI (medián z 0.047 na 0.036) viz tabulka x. 
+Analyzoval jsem celkem 59 dvojic scén z let 2013 až 2021. Při hodnocení dat pomocí metriky RMSE je na obrázku x patrné zlepšení směrem k ideálnímu výsledku, který představuje absolutní konzistenci mezi senzory. Konkrétně se hodnota mediánu snížila z 0.097 na 0.088 (harmonizace pásem NIR a RED), respektive na 0.090 (harmonizace NDVI). U metriky ME je situace podobná. K přiblížení se stavu konzistence mezi senzory došlo pouze po harmonizaci NDVI (medián z 0.047 na 0.036). Nicméně 25 % bodů stále vykazovalo odchylku vyšší než 0.053 (viz tabulka X).
 
 #figure(
    image("images/dvojice.png", width: 90%),
    kind: "img",
    supplement: "obr.",
-   caption: "Boxploty znázorňují výsledky RMSE a ME ze všech analyzovaných dvojic scén. Všechny boxploty v trojici jsou vytvořeny stejným způsobem, ale s různými metodami harmonizace (Roy et al. 2016). Červená čára vyznačuje linii úplné shody mezi sensory.",
+   caption: "Boxploty znázorňují výsledky RMSE a ME ze všech analyzovaných dvojic scén. Všechny boxploty v trojici jsou vytvořeny stejným způsobem, ale s různými metodami harmonizace (Roy et al. 2016). Červená čára vyznačuje linii úplné shody mezi senzory.",
 )
 \
 #show figure: set text(size: 10pt)
@@ -718,17 +718,17 @@ kind: "tab",
 )
 
 == Výsledky porovnání maximálních hodnot NDVI z celé sezóny
-Bylo analyzováno chování metriky maxNDVI, která byla odvozena ze všech dostupných snímků během analyzované vegetační sezóny. Pozornost byla zaměřena na zhodnocení přínosu zvýšené frekvence snímání díky překryvu platforem Landsat 7 a Landsat 8 a na posouzení vlivu harmonizačních koeficientů podle metody @roy2016characterization.
+Bylo analyzováno chování metriky sezónního maxima NDVI, která byla odvozena ze všech dostupných snímků během analyzované vegetační sezóny. Pozornost byla zaměřena na zhodnocení přínosu zvýšené frekvence snímání díky překryvu platforem Landsat 7 a Landsat 8 a na posouzení vlivu harmonizačních koeficientů podle metody @roy2016characterization.
 
 Maximální hodnoty NDVI naměřené pomocí Landsatu 8 byly ve srovnání s Landsatem 7 vyšší (obr. !14!, příloha x, density). Rozdíly jsou patrné nejen u modální hodnoty, ale také u aritmetického průměru. Tvar křivek pro kategorii "Maximum celkově" odpovídá tvarům křivek Landsatu 8, což naznačuje, že u většiny bodů byly hodnoty naměřené Landsatem 8 vyšší. V sezóně 2015 to bylo dokonce 96.72 % bodů (tabulka x). Výjimkami jsou sezóny 2017 a 2018 (75 %). 
 
 Většina měření napříč všemi sezónami se koncentruje v nízkých hodnotách NDVI (přibližně do 0.3), které odpovídají horské řídké vegetaci. Lokální maximum je patrné v intervalu hodnot 0.75 až 0.8, což je dobře viditelné v sezóně 2019 (obrázek x). Pravděpodobně se jedná o měření z drobných zemědělských polí. 
 
-Z analýzy scatter plotu vyplývá, že Landsat 8 systematicky nadhodnocuje hodnoty NDVI i přes aplikaci harmonizačních koeficientů, a to v celém jeho rozsahu (příloha x, scatter). Zajímavým výsledkem je také skutečnost, že u Landsatu 8 bylo opakovaně dosaženo submaximálních hodnot NDVI blížících se hodnotě 1, což se u Landsatu 7 neobjevilo. Na ilustrační sezóně 2019 (obrázek x) je dobře viditelný také větší rozptyl měření od regresní přímky směrem k vyšším hodnotám NDVI u Landsatu 8. To značí prohlubování rozdílu mezi oběma sensory, ale pouze jedním směrem.
+Z analýzy scatter plotu vyplývá, že Landsat 8 systematicky nadhodnocuje hodnoty NDVI i přes aplikaci harmonizačních koeficientů, a to v celém jeho rozsahu (příloha x, scatter). Zajímavým výsledkem je také skutečnost, že u Landsatu 8 bylo opakovaně dosaženo submaximálních hodnot NDVI blížících se hodnotě 1, což se u Landsatu 7 neobjevilo. Na ilustrační sezóně 2019 (obrázek x) je dobře viditelný také větší rozptyl měření od regresní přímky směrem k vyšším hodnotám NDVI u Landsatu 8. To značí prohlubování rozdílu mezi oběma senzory, ale pouze jedním směrem.
 
 Přímky lineárních modelů prochází souběžně s přímkami absolutní shody. Specifickým příkladem je sezóna 2018, kde došlo k protnutí obou přímek (příloha x, scatter). Všimněte si zároveň výsledků R2, který ale v této sezóně dosahuje nejhoršího výsledku (0.757) ze všech vytvořených regresních modelů (tabulka x). 
 
-Při porovnání přímých rozdílů mezi sledovanými body z obou sensorů je viditelný systematický posun. Například na kvartilu Q3 ze sezóny 2016, 2019 a 2021 rozchází až o 0.1 NDVI a u sezóny 2015 dokonce o 0.12 NDVI. Na kvartilu Q1 se body v sezóně 2015 odchylují o 0.039 NDVI, což je zároveň i nejvyšší naměřený rozdíl v této kategorii (tabulka x).
+Při porovnání přímých rozdílů mezi sledovanými body z obou senzorů je viditelný systematický posun. Například na kvartilu Q3 ze sezóny 2016, 2019 a 2021 rozchází až o 0.1 NDVI a u sezóny 2015 dokonce o 0.12 NDVI. Na kvartilu Q1 se body v sezóně 2015 odchylují o 0.039 NDVI, což je zároveň i nejvyšší naměřený rozdíl v této kategorii (tabulka x).
 
 Kompletní výsledky jednotlivých vegetačních sezón z této kapitoly jsou k dispozici v přílohách x density a x scatter.
 
@@ -766,23 +766,23 @@ kind: "tab",
 )
 
 = Diskuse
-Sensory ETM+ a OLI se v kontextu výpočtu vegetačních indexů liší primárně ve snímání pásma NIR, které je u OLI spektrálně užší, aby se vyhnulo absorpčnímu pásu vodní páry při 0,825 μm @VaughnL8. Pásmo NIR je tak pravděpodobně hlavní příčinou nekonzistence mezi senzory při výpočtu NDVI @ke2015characteristics @li2013cross @mancino2020cross @holden2016analysis. Z toho vyplývá, že pro zajištění podmínek umožňujících srovnání snímků z obou senzorů je klíčové provést harmonizaci. Pokud k harmonizaci nedojde, hrozí, že do analýzy budou zavedeny systematické chyby.
+Senzory ETM+ a OLI se v kontextu výpočtu vegetačních indexů liší primárně ve snímání pásma NIR, které je u OLI spektrálně užší, aby se vyhnulo absorpčnímu pásu vodní páry při 0,825 μm @VaughnL8. Pásmo NIR je tak pravděpodobně hlavní příčinou nekonzistence mezi senzory při výpočtu NDVI @ke2015characteristics @li2013cross @mancino2020cross @holden2016analysis. Z toho vyplývá, že pro zajištění podmínek umožňujících srovnání snímků z obou senzorů je klíčové provést harmonizaci. Pokud k harmonizaci nedojde, hrozí, že do analýzy budou zavedeny systematické chyby.
 
 == Harmonizace snímků
 
-V této práci jsem použil harmonizační koeficienty od @roy2016characterization. Výsledky ukázaly, že jejich vliv je při aplikaci na snímky z těchto specifických horských oblastí nedostatečný. Účinek harmonizace byl sice vyšší v době fenologického maxima při nárůstu hodnot NDVI, ale i tak nebylo možné očekávat úplnou shodu mezi senzory. To odpovídá předpokladům od @flood2014continuity, který tvrdí, že koeficienty nemusí fungovat optimálně v oblastech, jež se strukturálně liší od snímků použitých pro jejich tvorbu. Ve studii od @roy2016characterization byly použity snímky z kontinentálního území Spojených států amerických. Lze tak předpokládat, že nasazené harmonizační koeficienty nejsou pro účely této práce optimálně zvolené.
+V této práci jsem použil harmonizační koeficienty od @roy2016characterization. Výsledky ukázaly, že jejich vliv je při aplikaci na snímky z těchto specifických horských oblastí nedostatečný. Účinek harmonizace byl sice vyšší v době vegetačního maxima při nárůstu hodnot NDVI, ale i tak nebylo možné očekávat úplnou shodu mezi senzory. To odpovídá předpokladům od @flood2014continuity, který tvrdí, že koeficienty nemusí fungovat optimálně v oblastech, jež se strukturálně liší od snímků použitých pro jejich tvorbu. Ve studii od @roy2016characterization byly použity snímky z kontinentálního území Spojených států amerických. Lze tak předpokládat, že nasazené harmonizační koeficienty nejsou pro účely této práce optimálně zvolené.
 
-Pro aplikaci harmonizačních koeficientů od @roy2016characterization jsem se rozhodl na základě jejich použití ve studiích od @anderson2020vegetation a @fassnacht2019landsat. Analyzují totiž strukturálně velmi podobné oblasti. Dle výstupů z této práce lze předpokládat, že výsledky zmíněných studií mohou být zatížené chybou. 
+Pro aplikaci harmonizačních koeficientů od @roy2016characterization jsem se rozhodl na základě jejich použití ve studiích od @anderson2020vegetation a @fassnacht2019landsat. Analyzují totiž strukturálně velmi podobné oblasti. Dle výstupů z této práce lze předpokládat, že výsledky zmíněných studií mohou být zatíženy chybou. 
 
 Testoval jsem dva různé přístupy k harmonizaci. Prvním byla harmonizace pásem NIR a RED, ze kterých byl následně vypočítán index NDVI. Druhý přístup spočíval v harmonizaci již vypočítaného NDVI. Na základě výsledků této práce se ukazuje, že je výhodnější aplikovat koeficienty na již vypočítaný index NDVI. Nicméně zlepšení bylo minimální a projevilo se pouze při analýze mediánu.
 
-Použité harmonizační koeficienty pravděpodobně ovlivnily i analýzu maximálních hodnot NDVI. Výsledky jednoznačně ukazují, že Landsat 8 naměřil v převážné většině případů vyšší sezónní maxima NDVI ve srovnání s Landsatem 7. Tento trend potvrzuje i studie od @xu2014compare, která zdůraznila, že nejvýraznější rozdíly mezi senzory byly zaznamenány především při nízkých hodnotách NDVI (vyšší hodnoty naměřil sensor OLI). Vzhledem k charakteru vegetace studované v této práci, kde většina naměřených hodnot NDVI dosahovala přibližně hodnoty do 0.3 (příloha x, density), je pravděpodobné, že právě v tomto rozsahu došlo k největším rozdílům v měření. Tomu odpovídá i trend, který jsem zmínil výše, kdy účinek harmonizace byl nejvyšší v době fenologického maxima při nárůstu hodnot NDVI. Z toho lze usuzovat, že efektivita koeficientů podle @roy2016characterization se zvyšuje s rostoucími hodnotami NDVI. 
+Použité harmonizační koeficienty pravděpodobně ovlivnily i analýzu maximálních hodnot NDVI. Výsledky jednoznačně ukazují, že Landsat 8 naměřil v převážné většině případů vyšší sezónní maxima NDVI ve srovnání s Landsatem 7. Tento trend potvrzuje i studie od @xu2014compare, která zdůraznila, že nejvýraznější rozdíly mezi senzory byly zaznamenány především při nízkých hodnotách NDVI (vyšší hodnoty naměřil senzor OLI). Vzhledem k charakteru vegetace studované v této práci, kde většina naměřených hodnot NDVI dosahovala přibližně do 0.3 (příloha x, density), je pravděpodobné, že právě v tomto rozsahu došlo k největším rozdílům v měření. Tomu odpovídá i trend, který jsem zmínil výše, kdy účinek harmonizace byl nejvyšší v době vegetačního maxima při nárůstu hodnot NDVI. Z toho lze usuzovat, že efektivita koeficientů podle @roy2016characterization se zvyšuje s rostoucími hodnotami NDVI. 
 
 == Kvantita snímání
 
 @bayle2024landsat uvádí, že roční odhady maximální hodnoty NDVI se systematicky zvyšují s počtem dostupných snímků za vegetační sezónu. K podobnému závěru dospěl i @berner2020summer. Při srovnání výsledků analýzy greening trendu v alpínské zóně (nad 2400 m n. m.) v Alpách, jak je uvedeno ve studiích @bayle2024landsat a @rumpf2022white, mohou zkreslené odhady maximálních sezónních hodnot NDVI odvozené ze snímku Landsat odpovídat až 50 % celkového pozorovaného greening trendu. Za hlavní příčinu byl označen omezený, ale postupně rostoucí počet dostupných pozorování během krátké vegetační sezóny.
 
-Tato práce studovala období překryvu platforem Landsat 7 a Landsat 8 (2013 až 2021), aby mohla problematiku zvýšené kvantity snímání popsat. Na základě pozorování sezón 2014 a 2019 se zdá, že zásadním snímkem pro výběr maximálních hodnot NDVI je snímek Landsatu 8 z druhé poloviny července (příloha x, boxploty). Vykazuje totiž nejvyšší hodnoty. Studie od @phenolo a @rajan2019understanding, které studovaly vegetaci nacházející se ve studovaném území této práce, odhadly vegetační maximum v podobném termínu. Všimněte si například grafu pro sezónu 2017 (příloha x, boxploty). Vzhledem k nedostupnosti bezoblačného snímků Landsatu 8 z tohoto období pravděpodobně nebyla v roce 2017 zachycena skutečná maximální hodnota NDVI. I přes to, že popisované výsledky byly analyzovány odlišným způsobem, vstupní data zůstala nezměněná a tím se snížila šance, že z oblačného snímku bude vybrán větší podíl bodů pro hledání sezónního maxima NDVI.
+Tato práce studovala období překryvu platforem Landsat 7 a Landsat 8 (2013 až 2021), aby mohla problematiku zvýšené kvantity snímání popsat. Na základě pozorování sezón 2014 a 2019 se zdá, že zásadním snímkem pro výběr maximálních hodnot NDVI je snímek Landsatu 8 z druhé poloviny července (příloha x, boxploty). Vykazuje totiž nejvyšší hodnoty. Studie od @phenolo a @rajan2019understanding, které studovaly vegetaci nacházející se ve studovaném území této práce, odhadly vegetační maximum v podobném termínu. Všimněte si například grafu pro sezónu 2017 (příloha x, boxploty). Vzhledem k nedostupnosti bezoblačného snímků Landsatu 8 z tohoto období pravděpodobně nebyla v roce 2017 zachycena skutečná maximální hodnota NDVI. I přes to, že popisované výsledky byly analyzovány odlišným způsobem, vstupní data zůstala nezměněná a tím se snížila šance, že z oblačného snímku byl vybrán větší podíl bodů pro hledání sezónního maxima NDVI.
 
 Na grafu ze sezóny 2017 (grafy x, scatter) je patrné, že křivka lineární regrese se blíží přímce absolutní shody, což naznačuje absenci klíčového snímků z Landsatu 8: již jsem popisoval, že použitá harmonizace nedokáže nadhodnocení Landsatu 8 dobře regulovat, a proto je v tomto případě pro výběr maxima důležitější než Landsat 7. Tento jev se potvrzuje i vyšším poměrem maximálních hodnot NDVI naměřených z Landsatu 7 ve srovnání s Landsatem 8, který dosahuje 25 % (tabulka x). Zmíněný výsledek představuje největší podíl bodů z Landsatu 7 ze všech zkoumaných sezón. Stejný trend nastal pravděpodobně i v letech 2018 a 2020, u kterých byl klíčový snímek z Landsatu 8 taktéž oblačný. Vykazují totiž podobné výkyvy.
 
@@ -790,31 +790,23 @@ Na základě těchto poznatků lze usoudit, že pro výběr sezónního maxima N
 
 Lze uvažovat například o dodatečném doplnění dat ze satelitu Sentinel-2. Jejich křížovému porovnání se satelity Landsat 7 a Landsat 8 se již věnovalo několik prací @cao2022harmonizing @perez2023landsat @chastain2019empirical @flood2017comparing. Podle závěrů zmíněných studií byly navrženy metody harmonizace. Další z alternativních možností je použití datasetu HLS - Harmonized Landsat and Sentinel-2 @claverie2018harmonized. Lze ale předpokládat, že i v těchto případech bude klíčové postup dobře optimalizovat pro specifické vysokohorské aridní oblasti. 
 
-Pro hledání sezónního maxima NDVI použil @bayle2024landsat jako další zdroj produkt MODIS MOD09QA/Terra s denní akvizicí a 250metrovým rozlišením. Byly použity osmidenní kompozity pro rozšíření dostupných snímků z platforem Landsat 7 a Landsat 8. I přes to, že vzhledem k časovému rozlišení mohla být mezera v období vegetačního maxima vyplněna, je nezbytné zmínit fakt, že tak výrazně odlišné prostorové rozlišení u sensoru MODIS může výslednou hodnotu NDVI zkreslit. Tento jev popsali kupříkladu @rs4010160 a @jiang2006analysis ve svých studiích.
+Pro hledání sezónního maxima NDVI použil @bayle2024landsat jako další zdroj produkt MODIS MOD09QA/Terra s denní akvizicí a 250metrovým rozlišením. Byly použity osmidenní kompozity pro rozšíření dostupných snímků z platforem Landsat 7 a Landsat 8. I přes to, že vzhledem k časovému rozlišení mohla být mezera v období vegetačního maxima vyplněna, je nezbytné zmínit fakt, že tak výrazně odlišné prostorové rozlišení u senzoru MODIS může výslednou hodnotu NDVI zkreslit. Tento jev popsali kupříkladu @rs4010160 a @jiang2006analysis ve svých studiích.
 
-Dostupnost klíčového snímku během vegetačního maxima je pravděpodobně hlavním omezujícím faktorem pro sezónní metriku maxNDVI. Jako alternativu lze použít sezónní medián NDVI, který je odolnější vůči extrémním hodnotám, ale podle studie @bayle2024landsat může být také ovlivněn dostupností snímků v průběhu vegetační sezóny. Pro odstranění nepřesností by mohly být využity další metody analýzy vývoje vegetace v dlouhodobém měřítku, které pracují s dostupnými měřeními NDVI komplexněji @Khalefa02092024 @forkel2013trend @bashir2020spatio.  
+== Výhledy pro budoucí výzkum
 
-Na závěr bych chtěl opět zdůraznit důležitost správně provedené harmonizace. Pokud budou měření z jednoho ze sensorů vykazovat systematicky rozdílné hodnoty NDVI, budou finální odhady sezónního maxima NDVI zatíženy nejistotou. Dle výsledků této práce je výsledek NDVI z Landsatu 8 oproti Landsatu 7 nadhodnocen, i přes aplikaci koeficientů (obrázek x, rmse boxploty). Pro dosažení přesných výsledků, které nebudou ovlivněny nevhodnou harmonizací, doporučuji pro aridní vysokohorské zóny, které jsem studoval v této práci, použít jinou sadu koeficientů získanou z charakteristicky podobných oblastí, nebo zvážit postup založený na použití polynomické regrese od @berner2023landsatts, který poskytuje vyšší míru přizpůsobení.
+Dostupnost klíčového snímku během vegetačního maxima je pravděpodobně hlavním omezujícím faktorem pro metriku sezónního maxima NDVI. Jako alternativu lze použít sezónní medián NDVI, který je odolnější vůči extrémním hodnotám, ale podle studie @bayle2024landsat může být také ovlivněn dostupností snímků v průběhu vegetační sezóny. To platí zejména v letech s vysokou oblačností, kdy nedostatek dat může významně ovlivnit jeho spolehlivost. Pro odstranění nepřesností by mohly být využity další metody analýzy vývoje vegetace v dlouhodobém měřítku, které pracují s dostupnými měřeními NDVI komplexněji @Khalefa02092024 @forkel2013trend @bashir2020spatio.  
+
+Na závěr bych chtěl opět zdůraznit důležitost správně provedené harmonizace. Pokud budou měření z jednoho ze senzorů vykazovat systematicky rozdílné hodnoty NDVI, budou finální odhady sezónního maxima NDVI zatíženy nejistotou. Dle výsledků této práce je výsledek NDVI z Landsatu 8 oproti Landsatu 7 nadhodnocen, i přes aplikaci koeficientů (obrázek x, rmse boxploty). Pro dosažení přesných výsledků, které nebudou ovlivněny nevhodnou harmonizací, doporučuji pro aridní vysokohorské zóny, které jsem studoval v této práci, použít jinou sadu koeficientů získanou z charakteristicky podobných oblastí, nebo zvážit postup založený na použití polynomické regrese od @berner2023landsatts, který poskytuje vyšší míru přizpůsobení.
 
 = Závěr a přínos práce
 Tato práce se zaměřila na zhodnocení vlivu harmonizace naměřených hodnot NDVI ze senzorů Landsat 7 (ETM+) a Landsat 8 (OLI) při sledování vegetace ve vysokohorské aridní oblasti Ladakh a na analýzu vlivu překryvu těchto satelitních platforem z pohledu vyšší kvantity dat pro sledování sezónních maxim NDVI. Byla provedena hromadná příprava a analýza scén na úrovni _Surface Reflectance_ v cloudovém prostředí Google Earth Engine. Datové sady zahrnovaly časově blízké snímky pořízené v intervalu dvou přeletů (16 dnů) z obou družicových platforem a souhrnné charakteristiky reprezentované nejvyšší hodnotou indexu NDVI za vegetační sezónu. 
 
-V úvodu této práce byly formulovány tři vědecké otázky, na které nyní, na základě analýzy a získaných výsledků, odpovídám.
+Senzory ETM+ a OLI vykazují rozdíly ve výpočtu NDVI primárně kvůli užší šířce spektrálního pásma NIR u senzoru OLI. Tato odlišnost vede k nadhodnocení NDVI u Landsatu 8, zejména v oblastech s nízkými naměřenými hodnotami NDVI. Proces harmonizace dat je zásadní pro minimalizaci těchto rozdílů. Harmonizační koeficienty od @roy2016characterization nemusí být pro aridní vysokohorské oblasti dostatečně přesné, protože byly původně kalibrovány na snímky z jiných regionů. Efekt harmonizace byl výraznější zejména v obdobích vegetačního maxima. Při hromadném porovnání všech dvojic pomocí ME a RMSE dosahovala harmonizace na úrovni již vypočítaného NDVI hodnoty mediánu 0,036 (ME) a 0.090 (RMSE). Účinnost harmonizace je tedy závislá na vhodném výběru koeficientů, které by měly být optimálně přizpůsobeny konkrétnímu prostředí.
 
-#set enum(numbering: (it => emph[#it.]))
-1. _Jak ovlivňují rozdíly v senzorových charakteristikách (zejména šířka spektrálních pásem) hodnoty NDVI mezi platformami Landsat 7 (ETM+) a Landsat 8 (OLI), a do jaké míry lze tyto rozdíly minimalizovat pomocí harmonizace dat?_
+Vyšší množství dostupných snímků během překryvu platforem zvyšuje šanci na zachycení skutečných sezónních maximálních hodnot NDVI, což potvrzují i studie @bayle2024landsat. Nicméně zásadní je, aby snímky pokrývaly období vegetačního maxima a byly vhodně harmonizovány. Výsledky této práce ukazují, že absence klíčového snímku z druhé poloviny července, jak uvádí výsledky z let 2017, 2018 a 2020, může zkreslit odhad maximální hodnoty NDVI, i když je k dispozici větší množství dat. Medián NDVI, jako sezónní metrika, na rozdíl od sezónního maxima NDVI zmírňuje citlivost na extrémní hodnoty, avšak stále podléhá omezením spojených s harmonizací a časovým pokrytím.
+Použití dalších zdrojů, jako jsou snímky Sentinel-2 nebo MODIS, by mohlo zvýšit dostupnost dat, ale rozdíly ve spektrálním a prostorovém rozlišení mohou způsobit další nejistoty.
 
-Senzory ETM+ a OLI vykazují rozdíly ve výpočtu NDVI primárně kvůli užší šířce spektrálního pásma NIR u sensoru OLI. Tato odlišnost vede k nadhodnocení NDVI u Landsatu 8, zejména v oblastech s nízkými naměřenými hodnotami NDVI @xu2014compare @VaughnL8. Proces harmonizace dat je zásadní pro minimalizaci těchto rozdílů. Harmonizační koeficienty od @roy2016characterization však nemusí být dostatečně přesné pro aridní vysokohorské oblasti, protože byly původně kalibrovány na snímky z jiných regionů. Harmonizace na úrovni již vypočítaného NDVI vedla k mírným zlepšením, zejména v obdobích fenologického maxima, ale rozdíly mezi senzory zůstaly i nadále významné. Účinnost harmonizace tedy závisí na výběru koeficientů, které by měly být optimálně přizpůsobeny konkrétnímu prostředí.
-
-2. _Jaký vliv má dostupnost většího množství snímků během překryvu platforem Landsat 7 a Landsat 8 na přesnost a spolehlivost identifikace sezónních maxim NDVI ve specifických časových obdobích?_
-
-Vyšší množství dostupných snímků během překryvu platforem zvyšuje šanci na zachycení skutečných sezónních maxim hodnot NDVI, což potvrzují i studie @bayle2024landsat a @berner2020summer. Nicméně zásadní je, aby snímky pokrývaly období vegetačního maxima a byly vhodně harmonizovány. Výsledky této práce ukazují, že absence klíčového snímku z druhé poloviny července, jak uvádí výsledky z let 2017, 2018 a 2020, může zkreslit odhad maximální hodnoty NDVI, i když je k dispozici větší množství dat. Použití dalších zdrojů, jako jsou snímky Sentinel-2 nebo MODIS, by mohlo zvýšit dostupnost dat, ale rozdíly ve spektrálním a prostorovém rozlišení mohou způsobit další nejistoty.
-
-3. _Do jaké míry lze pomocí časových řad NDVI z platforem Landsat 7 a Landsat 8 spolehlivě analyzovat dlouhodobé vegetační trendy v aridních vysokohorských oblastech, s ohledem na regionální odlišnosti, limity harmonizačních metod a volbu vhodné celosezónní metriky?_
-
-Harmonizované časové řady NDVI z platforem Landsat 7 a Landsat 8 jsou užitečné pro analýzu dlouhodobých vegetačních trendů v aridních vysokohorských oblastech, avšak jejich spolehlivost omezuje několik faktorů. Regionální odlišnosti mohou snížit účinnost harmonizačních koeficientů, které často nejsou optimalizovány pro specifika těchto oblastí. Maximum NDVI jako sezónní metrika může být zkresleno oblačností nebo absencí dat z klíčových období, zatímco medián NDVI sice zmírňuje citlivost na extrémní hodnoty, ale stále podléhá omezením harmonizace a časového pokrytí. Pro přesnější analýzu je vhodné řešit problematiku z pohledu fenologického cyklu komplexně, optimalizovat harmonizační metody a integrovat doplňkové datové zdroje. Tento přístup však vyžaduje přizpůsobení metodologie specifickým podmínkám daných oblastí. Na základě těchto změn ale mohou být eliminovány i nedostatky zmíněných sezónních metrik.
-
-Tato práce svým zaměřením přispěla k rozšíření povědomí o problematice sledování vegetace v horských aridních oblastech s využitím dat dálkového průzkumu Země. ...něco dalšího... 
+Tato práce přispěla k rozšíření povědomí o problematice sledování vegetace v horských aridních oblastech s využitím dat dálkového průzkumu Země. Harmonizované časové řady NDVI z platforem Landsat 7 a Landsat 8 mohou být užitečné pro analýzu dlouhodobých vegetačních trendů v aridních vysokohorských oblastech při splnění nekolika omezujících faktorů. Pro přesnější sezónní analýzy je vhodné řešit problematiku z pohledu fenologického cyklu komplexně, optimalizovat harmonizační metody a integrovat doplňkové datové zdroje. Tento přístup však vyžaduje přizpůsobení metodologie specifickým podmínkám daných oblastí. Na základě těchto změn ale mohou být eliminovány i nedostatky zmíněných sezónních metrik.
 
 = Přehled literatury a použitých zdrojů
    #set par(first-line-indent: 0em, leading: 0.6em)
@@ -833,10 +825,12 @@ right: 1cm
 )
 
 = Přílohy
-   #set par(first-line-indent: 2em, leading: 1em)
+   #set par(first-line-indent: 0em, leading: 1em)
    #set block(spacing: 1.5em)
 
-*Příloha 1*
+*Příloha 1*\
+_Boxploty vizualizují hodnoty NDVI stratifikovaných bodů jednotlivých scén v sezóně. V případě trojice boxplotů u Landsatu 8 se jedná o stejnou scénu, ale s různým přístupem k harmonizaci (Roy et al. 2016). Barevné body spojené čarami představují aritmetický průměr. Jednotlivá měření jsou seřazena na časové ose podle data snímání (osa x)._
+
 #figure(
    image("images/sezona_1.png", width: 105%)
 )
@@ -848,7 +842,14 @@ right: 1cm
 #show figure: set text(size: 6.5pt)
 #set page(columns: 2)
 
-*Příloha 2*
+#place(
+top + left,
+float: true,
+scope: "parent",
+)[
+*Příloha 2*\
+_Tabulky obsahují hodnoty statistických parametrů zobrazených v boxplotech v příloze 1._
+]
 
 #figure(
    table(
@@ -857,7 +858,7 @@ right: 1cm
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2013-05-04], [Landsat 8],[bez harmonizace], [0.259], [0.225], [0.161], [0.319],
 [2013-05-04], [Landsat 8],[NIR a RED], [0.264], [0.237], [0.175], [0.324],
@@ -892,7 +893,7 @@ table.hline(stroke: 0.7pt),
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2014-05-07], [Landsat 8], [bez harmonizace], [0.271], [0.230], [0.172], [0.329],
 [2014-05-07], [Landsat 8], [NIR a RED], [0.280], [0.245], [0.194], [0.331],
@@ -934,9 +935,6 @@ table.hline(stroke: 0.7pt),
 \
 \
 \
-\
-\
-\
 #figure(
    table(
    columns: (7),
@@ -944,7 +942,7 @@ table.hline(stroke: 0.7pt),
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2015-05-10], [Landsat 8], [bez harmonizace], [0.248], [0.199], [0.140], [0.313],
 [2015-05-10], [Landsat 8], [NIR a RED], [0.255], [0.216], [0.158], [0.315],
@@ -975,7 +973,7 @@ table.hline(stroke: 0.7pt),
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2016-05-12], [Landsat 8], [bez harmonizace], [0.259], [0.210], [0.155], [0.313],
 [2016-05-12], [Landsat 8], [NIR a RED], [0.256], [0.216], [0.159], [0.314],
@@ -1012,7 +1010,7 @@ table.hline(stroke: 0.7pt),
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2017-05-15], [Landsat 8], [bez harmonizace], [0.287], [0.259], [0.172], [0.371],
 [2017-05-15], [Landsat 8], [NIR a RED], [0.287], [0.265], [0.188], [0.361],
@@ -1047,7 +1045,7 @@ table.hline(stroke: 0.7pt),
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2018-05-02], [Landsat 8], [bez harmonizace], [0.219], [0.200], [0.154], [0.266],
 [2018-05-02], [Landsat 8], [NIR a RED], [0.218], [0.199], [0.159], [0.259],
@@ -1081,7 +1079,7 @@ table.hline(stroke: 0.7pt),
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2019-05-05], [Landsat 8], [bez harmonizace], [0.303], [0.279], [0.205], [0.380],
 [2019-05-05], [Landsat 8], [NIR a RED], [0.312], [0.294], [0.229], [0.381],
@@ -1117,7 +1115,7 @@ table.hline(stroke: 0.7pt),
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2020-05-07], [Landsat 8], [bez harmonizace], [0.336], [0.315], [0.205], [0.437],
 [2020-05-07], [Landsat 8], [NIR a RED], [0.330], [0.319], [0.218], [0.424],
@@ -1157,7 +1155,7 @@ table.hline(stroke: 0.7pt),
    align: center + horizon,
    stroke: none,
    table.hline(stroke: 0.7pt),
-[*Datum*], [*Sensor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
+[*Datum*], [*Senzor*],[*Harmonizace*], [*Průměr*], [*Medián*], [*Q1*], [*Q3*],
 table.hline(stroke: 0.7pt),
 [2021-05-10],[Landsat 8], [bez harmonizace],[0.239],[0.219],[0.166],[0.290],
 [2021-05-10],[Landsat 8], [NIR a RED],[0.246],[0.232],[0.182],[0.293],
@@ -1190,7 +1188,9 @@ table.hline(stroke: 0.7pt),
 
 #set page(columns: 1)
 
-*Příloha 3*
+*Příloha 3*\
+_Grafy hustoty znázorňují rozložení stratifikovaných bodů maximálních hodnot NDVI. Kategorie ''Maximum celkově'' představuje vyšší z maximálních hodnot NDVI mezi snímky z Landsatu 7 a Landsatu 8 v prostorově shodných pixelech. Svislé přímky vizualizují pozici aritmetického průměru._
+
 #figure(
    image("images/densita_1.png", width: 105%)
 )
@@ -1201,7 +1201,9 @@ table.hline(stroke: 0.7pt),
 
 #pagebreak()
 
-*Příloha 4*
+*Příloha 4*\
+_Bodové grafy ilustrují rozdíly v maximálních hodnotách NDVI mezi Landsatem 7 a Landsatem 8. Červená čára představuje linii absolutní shody. Modrá čára zobrazuje výsledek lineární regrese._
+
 #figure(
    image("images/maxscatter_1.png", width: 108%)
 )
