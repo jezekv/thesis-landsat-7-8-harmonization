@@ -17,6 +17,17 @@
     <updated>2018-08-07T19:35:38+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
+
+  <locale xml:lang="cs">
+    <terms>
+      <term name="and">
+        <!-- Za „a“ je přidána nezalomitelná mezera -->
+        <single>a&#160;</single>
+        <multiple>a&#160;</multiple>
+      </term>
+    </terms>
+  </locale>
+
   <macro name="container">
     <choose>
       <if type="chapter paper-conference" match="any">
